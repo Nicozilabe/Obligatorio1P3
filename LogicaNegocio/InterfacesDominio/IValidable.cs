@@ -8,5 +8,6 @@ namespace LogicaNegocio.InterfacesDominio
 {
     public interface IValidable
     {
+        public void Validar();
     }
 }
