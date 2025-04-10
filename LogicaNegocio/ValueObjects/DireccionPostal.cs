@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObjects
 {
-    public class DireccionPostal
+    public record DireccionPostal
     {
     }
 }
