@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.InterfacesDominio;
+﻿using ExcepcionesPropias;
+using LogicaNegocio.InterfacesDominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,18 @@ namespace LogicaNegocio.ValueObjects
         public void Validar()
         {
             if (string.IsNullOrEmpty(Nombre)) {
-               
-                
+                throw new DatosInvalidosException("El nombre no debe ser nulo o vacio.");
+            }
+            if (string.IsNullOrEmpty(Apellido)) { 
+                throw new DatosInvalidosException("El apellido no debe ser nulo o vacio.");
+            }
+            if(Nombre.Length > 25)
+            {
+                throw new DatosInvalidosException("El nombre debe tener hasta 25 letras.");
+            }
+            if (Apellido.Length > 25)
+            {
+                throw new DatosInvalidosException("El apellido debe tener hasta 25 letras.");
             }
         }
     }
