@@ -13,6 +13,13 @@ namespace LogicaNegocio.ValueObjects
         public double Latitud { get; init; }
         public double Longitud { get; init; }
 
+        public Ubicacion() { }
+        public Ubicacion(double lat, double lon)
+        {
+            Latitud = lat;
+            Longitud= lon;
+            Validar();
+        }
         public void Validar()
         {
             if (Latitud < -90 || Latitud > 90)
