@@ -15,7 +15,9 @@ namespace LogicaNegocio.ValueObjects
         public Ciudad(string nombre)
         {
             Nombre = nombre;
+            Validar();
         }
+        public Ciudad() { }
 
         public void Validar() {
             if (string.IsNullOrEmpty(Nombre))

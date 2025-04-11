@@ -14,8 +14,19 @@ namespace LogicaNegocio.ValueObjects
 
         public string Calle { get; init; }
         public int Numero { get; init; }
-        public TipoCiudad Ciudad { get; init; }
+        public Ciudad Ciudad { get; init; }
         public int CodigoPostal { get; init; }
+
+        public DireccionPostal() { 
+            
+        }
+        public DireccionPostal(string calle, int numero, Ciudad ciudad, int cp) {
+            Calle = calle;
+            Numero = numero;
+            Ciudad = ciudad;
+            CodigoPostal = cp;
+            Validar();
+        }
         public void Validar()
         {
             if (string.IsNullOrEmpty(Calle)) {
