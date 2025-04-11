@@ -17,5 +17,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public double Peso { get; set; }
         public TipoEstadoEnvio EstadoEnvio { get; set; }
         public TipoSeguimiento Seguimiento { get; set; }
+
+
     }
 }
