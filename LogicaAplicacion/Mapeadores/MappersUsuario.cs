@@ -56,5 +56,16 @@ namespace LogicaAplicacion.Mapeadores
             }
             return ret;
         }
+
+        public static List<UsuarioDTO> ToListaUsuarioDTO(List<Usuario> usuarios)
+        {
+            List<UsuarioDTO> DTOs = new List<UsuarioDTO>();
+            foreach (Usuario usuario in usuarios)
+            {
+                UsuarioDTO dto = ToUsuarioDTO(usuario);
+                DTOs.Add(dto);
+            }
+            return DTOs;
+        }
     }
 }
