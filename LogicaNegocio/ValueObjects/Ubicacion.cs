@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.InterfacesDominio;
+﻿using ExcepcionesPropias;
+using LogicaNegocio.InterfacesDominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,15 @@ namespace LogicaNegocio.ValueObjects
 
         public void Validar()
         {
-            throw new NotImplementedException();
+            if (Latitud < -90 || Latitud > 90)
+            {
+                throw new DatosInvalidosException("Latitud no válida");
+            }
+            if (Longitud < -180 || Longitud > 180) 
+            {
+                throw new DatosInvalidosException("Longitud no válida");
+            }
+            
         }
     }
 }
