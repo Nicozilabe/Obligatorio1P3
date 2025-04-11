@@ -8,5 +8,10 @@ namespace LogicaNegocio.Enums
 {
     public enum TipoSeguimiento
     {
+        RecibidoCliente,
+        Enviado_Cliente,
+        En_Agencia,
+        Enviado_Agencia,
+        En_Preparacion
     }
 }
