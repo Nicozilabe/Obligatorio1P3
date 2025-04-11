@@ -31,5 +31,30 @@ namespace LogicaAplicacion.Mapeadores
             ret.Password = new UsuarioPassword(dto.Password);
             return ret;
         }
+
+        public static UsuarioDTO ToUsuarioDTO(Usuario usuario) { 
+            UsuarioDTO ret = null;
+            if (usuario != null) {
+                ret = new UsuarioDTO();
+                if (usuario is Administrador)
+                {
+                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Administrador;
+                }
+                else if (usuario is Cliente)
+                {
+                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Cliente;
+                }
+                else if (usuario is Empleado) 
+                { 
+                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Empleado;
+                }
+                ret.Id = usuario.Id;
+                ret.Nombre = usuario.Nombre.Nombre;
+                ret.Apellido = usuario.Nombre.Apellido;
+                ret.Email = usuario.Email.Email;
+                ret.Password = usuario.Password.Password;
+            }
+            return ret;
+        }
     }
 }
