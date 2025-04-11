@@ -8,5 +8,7 @@ namespace LogicaNegocio.Enums
 {
     public enum TipoEstadoEnvio
     {
+        En_Proceso,
+        Finalizado
     }
 }
