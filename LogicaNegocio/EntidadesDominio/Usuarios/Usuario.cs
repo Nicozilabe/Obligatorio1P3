@@ -11,7 +11,7 @@ namespace LogicaNegocio.EntidadesDominio.Usuarios
 {
     public abstract class Usuario
     {
-        public int Id { get; }
+        public int Id { get; set; }
         
         public UsuarioNombre Nombre { get; set; }
         public UsuarioEmail Email { get; set; }

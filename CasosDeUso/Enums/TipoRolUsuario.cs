@@ -10,6 +10,6 @@ namespace CasosDeUso.Enums
     {
         Cliente,
         Administrador,
-        Funcionario
+        Empleado
     }
 }
