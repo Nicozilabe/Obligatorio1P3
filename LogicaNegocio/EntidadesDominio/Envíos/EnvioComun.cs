@@ -8,5 +8,12 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 {
     public class EnvioComun:Envio
     {
+        public Agencia Agencia { get; set; }
+
+        public EnvioComun(Agencia agencia)
+        {
+            Agencia = agencia;
+        }
+        public EnvioComun() { }
     }
 }
