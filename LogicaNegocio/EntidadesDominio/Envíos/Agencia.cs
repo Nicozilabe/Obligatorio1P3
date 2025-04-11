@@ -16,6 +16,15 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public DireccionPostal Direccion { get; set; }
         public Ubicacion Ubicacion { get; set; }
 
+        public Agencia() { }
+
+        public Agencia(string nombre, DireccionPostal dir, Ubicacion ubi) {
+            Nombre = nombre;
+            Direccion = dir;
+            Ubicacion = ubi;
+        }
+
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(Nombre))
