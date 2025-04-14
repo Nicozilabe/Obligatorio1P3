@@ -8,5 +8,10 @@ namespace LogicaNegocio.InterfacesRepositorio
 {
     public interface IRepositorio<T> where T : class
     {
+        void Add(T obj);
+        void Remove(int id);
+        void Update(T obj);
+        T FindById(int id);
+        List<T> FindAll();
     }
 }

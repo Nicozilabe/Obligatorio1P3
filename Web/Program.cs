@@ -1,3 +1,6 @@
+using LogicaAccesoADatos.EF;
+using Microsoft.EntityFrameworkCore;
+
 namespace Web
 {
     public class Program
@@ -8,6 +11,12 @@ namespace Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Inyecciones
+
+
+            //
+            builder.Services.AddDbContext<EmpresaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Empresa")));
 
             var app = builder.Build();
 
