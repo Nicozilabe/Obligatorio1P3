@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+﻿using LogicaAccesoADatos.EF;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAccesoADatos
+namespace LogicaAccesoADatos.Repos
 {
     public class RepositorioUsuarios : IRepositorioUsuarios
     {
+        public EmpresaContext Context { get; set; }
+
+        public RepositorioUsuarios(EmpresaContext context) {
+        
+            Context = context;
+        
+        } 
+
         public void Add(Usuario obj)
         {
             throw new NotImplementedException();
