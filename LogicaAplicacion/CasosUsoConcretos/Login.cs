@@ -1,4 +1,7 @@
 ﻿using CasosDeUso.DTOs;
+using ExcepcionesPropias;
+using LogicaAplicacion.Mapeadores;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -14,11 +17,23 @@ namespace LogicaAplicacion.CasosUsoConcretos
 
         public Login(IRepositorioEmpleados repo) {  Repo = repo; }
 
-        public UsuarioDTO Login(LoginDTO datos)
+        public UsuarioDTO? RealizarLogin(LoginDTO datos)
         {
+            UsuarioDTO? ret = null;
+            Usuario buscado = Repo.FindByEmail(datos.Email);
+            if (buscado != null)
+            {
+                ret = MappersUsuario.ToUsuarioDTO(buscado);
+            }
+            else
+            {
+                
+                    throw new DatosInvalidosException("Email o Contraseña no válidos");
+                
 
+            }
+            return ret;
         }
-
 
     }
 }
