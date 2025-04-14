@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.DTOs;
+using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.EntidadesDominio.Usuarios;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUsoConcretos
 {
-    public class Login
+    public class Login:ILogin
     {
         public IRepositorioEmpleados Repo { get; set; }
 
@@ -26,11 +27,8 @@ namespace LogicaAplicacion.CasosUsoConcretos
                 ret = MappersUsuario.ToUsuarioDTO(buscado);
             }
             else
-            {
-                
-                    throw new DatosInvalidosException("Email o Contraseña no válidos");
-                
-
+            {     
+                    throw new DatosInvalidosException("Email o Contraseña no válidos");   
             }
             return ret;
         }
