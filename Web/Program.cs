@@ -1,4 +1,6 @@
 using LogicaAccesoADatos.EF;
+using LogicaAccesoADatos.Repos;
+using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 
 namespace Web
@@ -13,9 +15,9 @@ namespace Web
             builder.Services.AddControllersWithViews();
 
             //Inyecciones
+            builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
 
-
-            //
+            //DB
             builder.Services.AddDbContext<EmpresaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Empresa")));
 
             var app = builder.Build();
