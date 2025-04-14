@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorio
 {
-    public class IRepositorioAgencias:IRepositorio<Agencia>
+    public interface IRepositorioAgencias:IRepositorio<Agencia>
     {
     }
 }
