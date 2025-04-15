@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.DTOs;
+using ExcepcionesPropias;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.ValueObjects.Usuario;
 using System;
@@ -13,15 +14,15 @@ namespace LogicaAplicacion.Mapeadores
     {
         public static Usuario ToUsuario(UsuarioDTO dto) {
             Usuario ret = null;
-            if(dto.rol == CasosDeUso.Enums.TipoRolUsuario.Cliente)
+            if(dto.Rol == "Cliente")
             {
                 ret = new Cliente();
             } 
-            else if(dto.rol == CasosDeUso.Enums.TipoRolUsuario.Administrador)
+            else if(dto.Rol == "Administrador")
             {
                 ret = new Administrador();
             } 
-            else if(dto.rol == CasosDeUso.Enums.TipoRolUsuario.Empleado)
+            else if(dto.Rol == "Empleado")
             {
                 ret = new Empleado();
             }
@@ -38,15 +39,19 @@ namespace LogicaAplicacion.Mapeadores
                 ret = new UsuarioDTO();
                 if (usuario is Administrador)
                 {
-                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Administrador;
+                    ret.Rol = "Administrador";
                 }
                 else if (usuario is Cliente)
                 {
-                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Cliente;
+                    ret.Rol = "Cliente";
                 }
                 else if (usuario is Empleado) 
                 { 
-                    ret.rol = CasosDeUso.Enums.TipoRolUsuario.Empleado;
+                    ret.Rol = "Empleado";
+                }
+                else
+                {
+                    throw new DatosInvalidosException("Rol usuario to DTO Inválido");
                 }
                 ret.Id = usuario.Id;
                 ret.Nombre = usuario.Nombre.Nombre;

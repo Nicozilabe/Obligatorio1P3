@@ -29,7 +29,10 @@ namespace Web.Controllers
         public ActionResult Login(LoginDTO datos)
         {
             try{
-                CULogin.RealizarLogin(datos);
+                UsuarioDTO user = CULogin.RealizarLogin(datos);
+                HttpContext.Session.SetInt32("LogeadoId", user.Id);
+                HttpContext.Session.SetString("LogeadoRol", user.Rol);
+                ViewBag.ErrorMessage = (user.Nombre+user.Apellido+user.Email+user.Rol+user.Id);
             }
             catch (Exception ex) { 
                 ViewBag.ErrorMessage = ex.Message;
