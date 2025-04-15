@@ -16,12 +16,21 @@ namespace Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            //Mine
+            builder.Services.AddSession();
+
+
             //Inyecciones
             builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
             builder.Services.AddScoped<ILogin, Login>();
 
             //DB
-            builder.Services.AddDbContext<EmpresaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Empresa")));
+            builder.Services.AddDbContext<EmpresaContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("Empresa"),
+                    sql => sql.EnableRetryOnFailure()
+                )
+            );
 
             var app = builder.Build();
 
@@ -37,6 +46,9 @@ namespace Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //Mine
+            app.UseSession();
 
             app.UseAuthorization();
 
