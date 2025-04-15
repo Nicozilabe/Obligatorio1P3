@@ -24,7 +24,14 @@ namespace LogicaAplicacion.CasosUsoConcretos
             Usuario buscado = Repo.FindByEmail(datos.Email);
             if (buscado != null)
             {
-                ret = MappersUsuario.ToUsuarioDTO(buscado);
+               if(buscado.Password.Password == datos.Pass)
+                {
+                    ret = MappersUsuario.ToUsuarioDTO(buscado);
+                }
+                else
+                {
+                    throw new DatosInvalidosException("Email o Contraseña no válidos");
+                }
             }
             else
             {     
