@@ -8,6 +8,7 @@ namespace Web.Controllers
     public class UsuariosController : Controller
     {
         public ILogin CULogin { get; set; }
+        public IRegistroEmpleado CuRegistroEmpleado { get; set; }
 
         public UsuariosController(ILogin cULogin)
         {
@@ -36,6 +37,34 @@ namespace Web.Controllers
             }
             catch (Exception ex) { 
                 ViewBag.ErrorMessage = ex.Message;
+            }
+            return View();
+        }
+
+        public ActionResult Registro()
+        {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador") { 
+                ViewBag.IdAdmin = HttpContext.Session.GetInt32("LogeadoId");
+                return View();
+            }
+            else
+            {    
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+           
+            
+        }
+
+        [HttpPost]
+        public ActionResult Registro(RegistroEmpleadoDTO datos)
+        {
+            try
+            {
+                datos.Validar();
+                CuRegistroEmpleado.RegistrarEmpleado(datos);
+            }
+            catch (Exception ex) { 
+                ViewBag.ErrorInfo = ex.Message;
             }
             return View();
         }
