@@ -25,6 +25,7 @@ namespace Web
             builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
             builder.Services.AddScoped<IRepositorioAcciones, RepositorioAcciones>();
             builder.Services.AddScoped<ILogin, Login>();
+            builder.Services.AddScoped<IRegistroEmpleado, RegistroEmpleado>();
 
             //DB
             builder.Services.AddDbContext<EmpresaContext>(options =>
