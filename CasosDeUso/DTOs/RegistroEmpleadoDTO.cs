@@ -1,5 +1,5 @@
-﻿using ExcepcionesPropias;
-using LogicaNegocio.InterfacesDominio;
+﻿using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
