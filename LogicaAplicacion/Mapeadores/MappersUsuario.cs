@@ -28,7 +28,7 @@ namespace LogicaAplicacion.Mapeadores
             ret.Id = dto.Id;
             ret.Nombre = new UsuarioNombre(dto.Nombre, dto.Apellido);
             ret.Email = new UsuarioEmail(dto.Email);
-            ret.Password = new UsuarioPassword(dto.Password);
+            ret.Password = null;
             return ret;
         }
 
@@ -52,7 +52,6 @@ namespace LogicaAplicacion.Mapeadores
                 ret.Nombre = usuario.Nombre.Nombre;
                 ret.Apellido = usuario.Nombre.Apellido;
                 ret.Email = usuario.Email.Email;
-                ret.Password = usuario.Password.Password;
             }
             return ret;
         }

@@ -1,4 +1,8 @@
+using CasosDeUso.InterfacesCasosUso;
 using LogicaAccesoADatos.EF;
+using LogicaAccesoADatos.Repos;
+using LogicaAplicacion.CasosUsoConcretos;
+using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 
 namespace Web
@@ -13,9 +17,10 @@ namespace Web
             builder.Services.AddControllersWithViews();
 
             //Inyecciones
+            builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
+            builder.Services.AddScoped<ILogin, Login>();
 
-
-            //
+            //DB
             builder.Services.AddDbContext<EmpresaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Empresa")));
 
             var app = builder.Build();
