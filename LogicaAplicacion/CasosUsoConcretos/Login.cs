@@ -14,9 +14,9 @@ namespace LogicaAplicacion.CasosUsoConcretos
 {
     public class Login:ILogin
     {
-        public IRepositorioEmpleados Repo { get; set; }
+        public IRepositorioUsuarios Repo { get; set; }
 
-        public Login(IRepositorioEmpleados repo) {  Repo = repo; }
+        public Login(IRepositorioUsuarios repo) {  Repo = repo; }
 
         public UsuarioDTO? RealizarLogin(LoginDTO datos)
         {
@@ -24,9 +24,17 @@ namespace LogicaAplicacion.CasosUsoConcretos
             Usuario buscado = Repo.FindByEmail(datos.Email);
             if (buscado != null)
             {
-               if(buscado.Password.Password == datos.Pass)
+                if (buscado.Password.Password == datos.Pass)
                 {
-                    ret = MappersUsuario.ToUsuarioDTO(buscado);
+                    if (buscado is Empleado || buscado is Administrador)
+                    {
+                        ret = MappersUsuario.ToUsuarioDTO(buscado);
+                    }
+                    else
+                    {
+                        throw new PermisosException("El usuario no cuenta con los permisos para iniciar sesión.");
+                    }
+                        
                 }
                 else
                 {
