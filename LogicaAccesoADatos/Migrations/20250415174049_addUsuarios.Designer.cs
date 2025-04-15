@@ -3,6 +3,7 @@ using LogicaAccesoADatos.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoADatos.Migrations
 {
     [DbContext(typeof(EmpresaContext))]
-    partial class EmpresaContextModelSnapshot : ModelSnapshot
+    [Migration("20250415174049_addUsuarios")]
+    partial class addUsuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,8 +34,8 @@ namespace LogicaAccesoADatos.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.HasKey("Id");
 
@@ -43,25 +46,11 @@ namespace LogicaAccesoADatos.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Usuarios.Cliente", b =>
-                {
-                    b.HasBaseType("LogicaNegocio.EntidadesDominio.Usuarios.Usuario");
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Usuarios.Empleado", b =>
                 {
                     b.HasBaseType("LogicaNegocio.EntidadesDominio.Usuarios.Usuario");
 
                     b.HasDiscriminator().HasValue("Empleado");
-                });
-
-            modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Usuarios.Administrador", b =>
-                {
-                    b.HasBaseType("LogicaNegocio.EntidadesDominio.Usuarios.Empleado");
-
-                    b.HasDiscriminator().HasValue("Administrador");
                 });
 
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Usuarios.Usuario", b =>
