@@ -8,5 +8,6 @@ namespace LogicaNegocio.Enums
 {
     public enum TipoAccionEnvio
     {
+        Agregar_Comentario,
     }
 }
