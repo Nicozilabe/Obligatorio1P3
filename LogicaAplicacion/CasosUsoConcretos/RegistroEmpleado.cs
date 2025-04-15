@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.DTOs;
+using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.EntidadesDominio.Acciones;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUsoConcretos
 {
-    public class RegistroEmpleado
+    public class RegistroEmpleado:IRegistroEmpleado
     {
         public IRepositorioUsuarios RepoUsuarios { get; set; }
         public IRepositorioAcciones RepoAcciones { get; set; }
