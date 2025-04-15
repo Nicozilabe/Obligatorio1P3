@@ -48,7 +48,6 @@ namespace LogicaAccesoADatos.Repos
 
         public Usuario FindByEmail(string email)
         {
-
             Usuario? buscado = Context.Usuarios.Where(Usuario => Usuario.Email.Email == email).SingleOrDefault();
             return buscado;
         }
