@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.EntidadesDominio.Envíos
+namespace LogicaNegocio.Acciones
 {
-    public class AccionEnvio
+    public class AccionEnvio:Accion
     {
     }
 }
