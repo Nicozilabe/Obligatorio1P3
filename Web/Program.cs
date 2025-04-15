@@ -23,6 +23,7 @@ namespace Web
             //Inyecciones
             builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
             builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
+            builder.Services.AddScoped<IRepositorioAcciones, RepositorioAcciones>();
             builder.Services.AddScoped<ILogin, Login>();
 
             //DB
