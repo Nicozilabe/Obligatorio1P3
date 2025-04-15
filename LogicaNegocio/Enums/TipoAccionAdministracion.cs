@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Enums
 {
-    public class TipoAccionAdministracion
+    public enum TipoAccionAdministracion
     {
-
+        Registro,
     }
 }
