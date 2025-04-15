@@ -31,7 +31,7 @@ namespace LogicaAccesoADatos.Repos
             }
             obj.Validar();
 
-            Usuario buscado = null;
+            Usuario buscado = FindByEmail(obj.Email.Email);
 
             if (buscado != null)
             {
@@ -48,6 +48,7 @@ namespace LogicaAccesoADatos.Repos
 
         public Usuario FindByEmail(string email)
         {
+
             Usuario? buscado = Context.Usuarios.Where(Usuario => Usuario.Email.Email == email).SingleOrDefault();
             return buscado;
         }
