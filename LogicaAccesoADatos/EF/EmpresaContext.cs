@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+﻿using LogicaNegocio.EntidadesDominio.Acciones;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace LogicaAccesoADatos.EF
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Accion> Acciones { get; set; }
 
 
         public EmpresaContext(DbContextOptions options): base(options) { }

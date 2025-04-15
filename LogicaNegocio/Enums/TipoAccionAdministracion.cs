@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.EntidadesDominio.Envíos
+namespace LogicaNegocio.Enums
 {
-    public class AccionEnvio
+    public class TipoAccionAdministracion
     {
+
     }
 }

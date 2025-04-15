@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Enums
 {
-    public enum TipoAccion
+    public enum TipoComentarioEnvio
     {
+        Listo_para_retirar,
+        En_camino,
+        Ingresado_en_agencia_de_origen
     }
 }

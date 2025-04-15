@@ -1,4 +1,4 @@
-﻿using LogicaNegocio.EntidadesDominio;
+﻿using LogicaNegocio.EntidadesDominio.Acciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +9,6 @@ namespace LogicaNegocio.InterfacesRepositorio
 {
     public interface IRepositorioAcciones:IRepositorio<Accion>
     {
+
     }
 }
