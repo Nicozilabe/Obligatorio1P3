@@ -1,5 +1,6 @@
 ﻿using ExcepcionesPropias;
 using LogicaNegocio.ValueObjects.Usuario;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.EntidadesDominio.Usuarios
 {
+    
     public abstract class Usuario
     {
         public int Id { get; set; }
         
         public UsuarioNombre Nombre { get; set; }
+
         public UsuarioEmail Email { get; set; }
         public UsuarioPassword Password { get; set; }
 
