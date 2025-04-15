@@ -11,15 +11,12 @@ namespace LogicaNegocio.EntidadesDominio.Acciones
     public abstract class Accion
     {
         public int Id { get; set; }
-        public Empleado Realizador { get; set; }
         public FechaAccion Fecha { get; set; }
 
         public Accion() { }
 
-        public Accion( Empleado realizador, FechaAccion fecha)
+        public Accion( FechaAccion fecha)
         {
-          
-            Realizador = realizador;
             Fecha = fecha;
         }
     }
