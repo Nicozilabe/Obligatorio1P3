@@ -2,6 +2,7 @@
 using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace LogicaAccesoADatos.Repos
             }
             obj.Validar();
 
-            Empleado buscado = null;
+            Empleado buscado = FindByEmail(obj.Email.Email);
 
             if(buscado != null)
             {
@@ -64,5 +65,7 @@ namespace LogicaAccesoADatos.Repos
             Empleado? buscado = Context.Empleados.Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
             return buscado;
         }
+       
+        
     }
 }
