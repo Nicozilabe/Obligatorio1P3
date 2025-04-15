@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.EntidadesDominio.Envíos;
+﻿using ExcepcionesPropias;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.Enums;
 using LogicaNegocio.ValueObjects;
@@ -25,6 +26,27 @@ namespace LogicaNegocio.EntidadesDominio.Acciones
             TipoAccion = tipoAccion;
             Envio = envio;
             ComentarioEnvio = comentarioEnvio;
+        }
+
+        public override void Validar()
+        {
+            base.Validar();
+            if(TipoAccion == null)
+            {
+                throw new DatosInvalidosException("Tipo Acción no válida");
+            }
+            if (Envio == null) {
+                throw new DatosInvalidosException("Envío no válido");
+            }
+            Envio.Validar();
+            if (Realizador == null)
+            {
+                throw new DatosInvalidosException("Usuario Realizador no válido");
+            }
+            if (ComentarioEnvio == null)
+            {
+                throw new DatosInvalidosException("Comentario Énvío no válido");
+            }
         }
     }
 }

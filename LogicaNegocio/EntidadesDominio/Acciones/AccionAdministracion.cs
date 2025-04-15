@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+﻿using ExcepcionesPropias;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.Enums;
 using LogicaNegocio.ValueObjects;
 using System;
@@ -22,6 +23,19 @@ namespace LogicaNegocio.EntidadesDominio.Acciones
             Afectado = afectado;
             Realizador = realizador;
             TipoAccion = tipoAccion;
+        }
+        public override void Validar()
+        {
+            base.Validar();
+            if(TipoAccion == null){
+                throw new DatosInvalidosException("Tipo acción no válida");
+            }
+            if (Afectado == null) {
+                throw new DatosInvalidosException("Usuario afectado no válido");
+            }
+            if (Realizador == null) {
+                throw new DatosInvalidosException("Usuario Realizador no válido");
+            }
         }
     }
 }
