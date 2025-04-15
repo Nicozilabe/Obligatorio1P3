@@ -28,7 +28,7 @@ namespace LogicaNegocio.ValueObjects
             {
                 throw new DatosInvalidosException("Fecha no válida");
             }
-            if(Fecha > new DateTime)
+            if(Fecha > new DateTime())
             {
                 throw new DatosInvalidosException("Fecha/Acción no puede ser superior a la fecha actual");
             }

@@ -16,6 +16,8 @@ namespace CasosDeUso.DTOs
         public string Rol { get; set; }
         public string Pass {  get; set; }
 
+        public int IdRealizador { get; set; }
+
         public void Validar()
         {
             if(Rol != "Empleado" || Rol != "Administrador" || Rol != "Cliente") {
@@ -33,6 +35,9 @@ namespace CasosDeUso.DTOs
             if (string.IsNullOrEmpty(Pass) || Pass.Length > 32)
             {
                 throw new DatosInvalidosException("Nombre no válido DTO->Usuario");
+            }
+            if (IdRealizador < 0) {
+                throw new DatosInvalidosException("Id Realizador no válido");
             }
         }
 
