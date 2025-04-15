@@ -11,6 +11,7 @@ namespace LogicaAccesoADatos.EF
     public class EmpresaContext:DbContext
     {
         public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         public EmpresaContext(DbContextOptions options): base(options) { }
         
