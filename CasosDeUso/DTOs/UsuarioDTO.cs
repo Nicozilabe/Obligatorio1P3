@@ -13,6 +13,6 @@ namespace CasosDeUso.DTOs
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
-        public TipoRolUsuario rol { get; set; }
+        public String Rol { get; set; }
     }
 }
