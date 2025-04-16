@@ -54,7 +54,8 @@ namespace LogicaAccesoADatos.Repos
 
         public Usuario FindById(int id)
         {
-            throw new NotImplementedException();
+            Usuario? buscado = Context.Usuarios.Where(Usuario => Usuario.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public void Remove(int id)
