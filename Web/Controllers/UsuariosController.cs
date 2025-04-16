@@ -60,10 +60,12 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Registro(RegistroEmpleadoDTO datos)
         {
+            ViewBag.IdAdmin = HttpContext.Session.GetInt32("LogeadoId");
             try
             {
                 datos.Validar();
-                CuRegistroEmpleado.RegistrarEmpleado(datos);
+                UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
+                ViewBag.ErrorInfo = "Usuario creado exitosamente.";
             }
             catch (Exception ex) { 
                 ViewBag.ErrorInfo = ex.Message;
