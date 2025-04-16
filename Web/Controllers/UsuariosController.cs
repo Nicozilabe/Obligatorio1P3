@@ -10,9 +10,10 @@ namespace Web.Controllers
         public ILogin CULogin { get; set; }
         public IRegistroEmpleado CuRegistroEmpleado { get; set; }
 
-        public UsuariosController(ILogin cULogin)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado)
         {
             CULogin = cULogin;
+            CuRegistroEmpleado = cUregistroEmpleado;
         }
 
 
@@ -34,6 +35,7 @@ namespace Web.Controllers
                 HttpContext.Session.SetInt32("LogeadoId", user.Id);
                 HttpContext.Session.SetString("LogeadoRol", user.Rol);
                 ViewBag.ErrorMessage = (user.Nombre+user.Apellido+user.Email+user.Rol+user.Id);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex) { 
                 ViewBag.ErrorMessage = ex.Message;

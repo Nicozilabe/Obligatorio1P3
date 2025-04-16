@@ -20,7 +20,7 @@ namespace CasosDeUso.DTOs
 
         public void Validar()
         {
-            if(Rol != "Empleado" || Rol != "Administrador" || Rol != "Cliente") {
+            if(Rol != "Empleado" && Rol != "Administrador" && Rol != "Cliente") {
                 throw new DatosInvalidosException("Tipo Usuario no válido");
             }
 
