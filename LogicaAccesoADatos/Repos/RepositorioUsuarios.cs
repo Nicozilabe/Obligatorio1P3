@@ -48,14 +48,14 @@ namespace LogicaAccesoADatos.Repos
 
         public Usuario FindByEmail(string email)
         {
-
             Usuario? buscado = Context.Usuarios.Where(Usuario => Usuario.Email.Email == email).SingleOrDefault();
             return buscado;
         }
 
         public Usuario FindById(int id)
         {
-            throw new NotImplementedException();
+            Usuario? buscado = Context.Usuarios.Where(Usuario => Usuario.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public void Remove(int id)

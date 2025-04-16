@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace LogicaAccesoADatos.Repos
 {
-    public class RepoAcciones:IRepositorioAcciones
+    public class RepositorioAcciones:IRepositorioAcciones
     {
         public EmpresaContext Context { get; set; }
 
-        public RepoAcciones(EmpresaContext context)
+        public RepositorioAcciones(EmpresaContext context)
         {
 
             Context = context;

@@ -16,9 +16,28 @@ namespace LogicaAccesoADatos.EF
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Accion> Acciones { get; set; }
+        public DbSet<AccionAdministracion> AccionesAdministracion { get; set; }
+
 
 
         public EmpresaContext(DbContextOptions options): base(options) { }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); // opcional, pero recomendado
+
+            modelBuilder.Entity<AccionAdministracion>()
+                .HasOne(a => a.Afectado)
+                .WithMany()
+                .HasForeignKey(a => a.AfectadoId)
+                .OnDelete(DeleteBehavior.Cascade); // puede quedar
+
+            modelBuilder.Entity<AccionAdministracion>()
+                .HasOne(a => a.Realizador)
+                .WithMany()
+                .HasForeignKey(a => a.RealizadorId)
+                .OnDelete(DeleteBehavior.NoAction); // este evita el error
+        }
+
     }
 }

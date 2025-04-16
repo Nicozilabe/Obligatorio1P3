@@ -8,10 +8,12 @@ namespace Web.Controllers
     public class UsuariosController : Controller
     {
         public ILogin CULogin { get; set; }
+        public IRegistroEmpleado CuRegistroEmpleado { get; set; }
 
-        public UsuariosController(ILogin cULogin)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado)
         {
             CULogin = cULogin;
+            CuRegistroEmpleado = cUregistroEmpleado;
         }
 
 
@@ -33,9 +35,40 @@ namespace Web.Controllers
                 HttpContext.Session.SetInt32("LogeadoId", user.Id);
                 HttpContext.Session.SetString("LogeadoRol", user.Rol);
                 ViewBag.ErrorMessage = (user.Nombre+user.Apellido+user.Email+user.Rol+user.Id);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex) { 
                 ViewBag.ErrorMessage = ex.Message;
+            }
+            return View();
+        }
+
+        public ActionResult Registro()
+        {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador") { 
+                ViewBag.IdAdmin = HttpContext.Session.GetInt32("LogeadoId");
+                return View();
+            }
+            else
+            {    
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+           
+            
+        }
+
+        [HttpPost]
+        public ActionResult Registro(RegistroEmpleadoDTO datos)
+        {
+            ViewBag.IdAdmin = HttpContext.Session.GetInt32("LogeadoId");
+            try
+            {
+                datos.Validar();
+                UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
+                ViewBag.ErrorInfo = "Usuario creado exitosamente.";
+            }
+            catch (Exception ex) { 
+                ViewBag.ErrorInfo = ex.Message;
             }
             return View();
         }

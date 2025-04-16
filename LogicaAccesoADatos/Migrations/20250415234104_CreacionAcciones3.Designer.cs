@@ -4,6 +4,7 @@ using LogicaAccesoADatos.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoADatos.Migrations
 {
     [DbContext(typeof(EmpresaContext))]
-    partial class EmpresaContextModelSnapshot : ModelSnapshot
+    [Migration("20250415234104_CreacionAcciones3")]
+    partial class CreacionAcciones3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace LogicaAccesoADatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Acciones", (string)null);
+                    b.ToTable("Acciones");
 
                     b.HasDiscriminator().HasValue("Accion");
 
@@ -59,7 +62,7 @@ namespace LogicaAccesoADatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("Usuarios");
 
                     b.HasDiscriminator().HasValue("Usuario");
 
@@ -109,7 +112,7 @@ namespace LogicaAccesoADatos.Migrations
 
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Acciones.Accion", b =>
                 {
-                    b.OwnsOne("LogicaNegocio.EntidadesDominio.Acciones.Accion.Fecha#LogicaNegocio.ValueObjects.FechaAccion", "Fecha", b1 =>
+                    b.OwnsOne("LogicaNegocio.ValueObjects.FechaAccion", "Fecha", b1 =>
                         {
                             b1.Property<int>("AccionId")
                                 .HasColumnType("int");
@@ -119,7 +122,7 @@ namespace LogicaAccesoADatos.Migrations
 
                             b1.HasKey("AccionId");
 
-                            b1.ToTable("Acciones", (string)null);
+                            b1.ToTable("Acciones");
 
                             b1.WithOwner()
                                 .HasForeignKey("AccionId");
@@ -131,7 +134,7 @@ namespace LogicaAccesoADatos.Migrations
 
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Usuarios.Usuario", b =>
                 {
-                    b.OwnsOne("LogicaNegocio.EntidadesDominio.Usuarios.Usuario.Email#LogicaNegocio.ValueObjects.Usuario.UsuarioEmail", "Email", b1 =>
+                    b.OwnsOne("LogicaNegocio.ValueObjects.Usuario.UsuarioEmail", "Email", b1 =>
                         {
                             b1.Property<int>("UsuarioId")
                                 .HasColumnType("int");
@@ -142,13 +145,13 @@ namespace LogicaAccesoADatos.Migrations
 
                             b1.HasKey("UsuarioId");
 
-                            b1.ToTable("Usuarios", (string)null);
+                            b1.ToTable("Usuarios");
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
                         });
 
-                    b.OwnsOne("LogicaNegocio.EntidadesDominio.Usuarios.Usuario.Nombre#LogicaNegocio.ValueObjects.Usuario.UsuarioNombre", "Nombre", b1 =>
+                    b.OwnsOne("LogicaNegocio.ValueObjects.Usuario.UsuarioNombre", "Nombre", b1 =>
                         {
                             b1.Property<int>("UsuarioId")
                                 .HasColumnType("int");
@@ -163,13 +166,13 @@ namespace LogicaAccesoADatos.Migrations
 
                             b1.HasKey("UsuarioId");
 
-                            b1.ToTable("Usuarios", (string)null);
+                            b1.ToTable("Usuarios");
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
                         });
 
-                    b.OwnsOne("LogicaNegocio.EntidadesDominio.Usuarios.Usuario.Password#LogicaNegocio.ValueObjects.Usuario.UsuarioPassword", "Password", b1 =>
+                    b.OwnsOne("LogicaNegocio.ValueObjects.Usuario.UsuarioPassword", "Password", b1 =>
                         {
                             b1.Property<int>("UsuarioId")
                                 .HasColumnType("int");
@@ -180,7 +183,7 @@ namespace LogicaAccesoADatos.Migrations
 
                             b1.HasKey("UsuarioId");
 
-                            b1.ToTable("Usuarios", (string)null);
+                            b1.ToTable("Usuarios");
 
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
