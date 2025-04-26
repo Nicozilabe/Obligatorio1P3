@@ -9,11 +9,13 @@ namespace Web.Controllers
     {
         public ILogin CULogin { get; set; }
         public IRegistroEmpleado CuRegistroEmpleado { get; set; }
+        public IListarEmpleados CUListarEmpleados { get; set; }
 
-        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados)
         {
             CULogin = cULogin;
             CuRegistroEmpleado = cUregistroEmpleado;
+            CUListarEmpleados = cUListarEmpleados;
         }
 
 
@@ -139,6 +141,11 @@ namespace Web.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Empleados()
+        {
+            return View(CUListarEmpleados.ListarTodosLosEmpleados());
         }
     }
 }

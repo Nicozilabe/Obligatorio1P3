@@ -19,14 +19,19 @@ namespace LogicaNegocio.EntidadesDominio.Usuarios
 
         public UsuarioEmail Email { get; set; }
         public UsuarioPassword Password { get; set; }
+        public bool Activo { get; set; }
 
-        public Usuario() { }
+        public Usuario() { 
+            Activo = true;
+        }
 
         public Usuario(UsuarioNombre nombre, UsuarioEmail email, UsuarioPassword password) { 
             Nombre = nombre;
             Email = email;
             Password = password;
+            Activo = true;
             Validar();
+            
         }
         public virtual void Validar()
         {

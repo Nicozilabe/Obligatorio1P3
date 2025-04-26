@@ -57,7 +57,7 @@ namespace LogicaAccesoADatos.Repos
 
         public List<Empleado> FindAll()
         {
-            throw new NotImplementedException();
+            return Context.Empleados.ToList();
         }
 
         public Empleado? FindByEmail(string email)

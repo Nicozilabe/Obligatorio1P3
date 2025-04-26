@@ -10,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.Mapeadores
 {
-    public class MappersUsuario
+    public class MappersEmpleado
     {
-        public static Usuario ToUsuario(UsuarioDTO dto) {
+        public static Usuario ToUsuario(UsuarioDTO dto)
+        {
             Usuario ret = null;
-            if(dto.Rol == "Cliente")
+            if (dto.Rol == "Cliente")
             {
                 ret = new Cliente();
-            } 
-            else if(dto.Rol == "Administrador")
+            }
+            else if (dto.Rol == "Administrador")
             {
                 ret = new Administrador();
-            } 
-            else if(dto.Rol == "Empleado")
+            }
+            else if (dto.Rol == "Empleado")
             {
                 ret = new Empleado();
             }
@@ -34,9 +35,11 @@ namespace LogicaAplicacion.Mapeadores
             return ret;
         }
 
-        public static UsuarioDTO ToUsuarioDTO(Usuario usuario) { 
+        public static UsuarioDTO ToUsuarioDTO(Usuario usuario)
+        {
             UsuarioDTO ret = null;
-            if (usuario != null) {
+            if (usuario != null)
+            {
                 ret = new UsuarioDTO();
                 if (usuario is Administrador)
                 {
@@ -46,8 +49,8 @@ namespace LogicaAplicacion.Mapeadores
                 {
                     ret.Rol = "Cliente";
                 }
-                else if (usuario is Empleado) 
-                { 
+                else if (usuario is Empleado)
+                {
                     ret.Rol = "Empleado";
                 }
                 else
@@ -59,17 +62,16 @@ namespace LogicaAplicacion.Mapeadores
                 ret.Apellido = usuario.Nombre.Apellido;
                 ret.Email = usuario.Email.Email;
                 ret.Activo = usuario.Activo;
-
             }
             return ret;
         }
 
-        public static List<UsuarioDTO> ToListaUsuarioDTO(List<Usuario> usuarios)
+        public static List<UsuarioDTO> ToListaUsuarioDTO(List<Empleado> empleados)
         {
             List<UsuarioDTO> DTOs = new List<UsuarioDTO>();
-            foreach (Usuario usuario in usuarios)
+            foreach (Empleado empleado in empleados)
             {
-                UsuarioDTO dto = ToUsuarioDTO(usuario);
+                UsuarioDTO dto = ToUsuarioDTO(empleado);
                 DTOs.Add(dto);
             }
             return DTOs;
