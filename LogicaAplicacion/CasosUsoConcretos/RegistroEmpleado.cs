@@ -60,7 +60,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
                 throw new DatosInvalidosException("Eror al crear el empleado");
             }
 
-            Accion accion = new AccionAdministracion(creadoCast,realizador,TipoAccionAdministracion.Registro,new LogicaNegocio.ValueObjects.FechaAccion(new DateTime()));
+            Accion accion = new AccionAdministracion(creadoCast,realizador,TipoAccionAdministracion.Registro,new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
             RepoAcciones.Add(accion);
             return MappersUsuario.ToUsuarioDTO(creado);
 
