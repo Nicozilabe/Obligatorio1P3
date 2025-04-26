@@ -27,6 +27,7 @@ namespace Web
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<IRegistroEmpleado, RegistroEmpleado>();
             builder.Services.AddScoped<IListarEmpleados, ListarEmpleados>();
+            builder.Services.AddScoped<IObtenerEmpleado, ObtenerEmpleado>();
 
             //DB
             builder.Services.AddDbContext<EmpresaContext>(options =>

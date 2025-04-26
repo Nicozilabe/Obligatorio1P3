@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -10,18 +11,22 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUsoConcretos
 {
-    public class ListarEmpleados : IListarEmpleados
+    public class ObtenerEmpleado : IObtenerEmpleado
     {
         IRepositorioEmpleados repo {  get; set; }
 
-        public ListarEmpleados(IRepositorioEmpleados repo)
+        public ObtenerEmpleado (IRepositorioEmpleados repo)
         {
             this.repo = repo;
         }
 
-        public List<EmpleadoDTO> ListarTodosLosEmpleados()
+        public EmpleadoDTO FindById(int id)
         {
-            return MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
+            if(id == null || id <= 0)
+            {
+                throw new DatosInvalidosException("Id no valido.");
+            }
+            return MappersEmpleado.ToEmpleadoDTO(repo.FindById(id));
         }
     }
 }

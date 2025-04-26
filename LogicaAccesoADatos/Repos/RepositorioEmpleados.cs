@@ -52,7 +52,8 @@ namespace LogicaAccesoADatos.Repos
 
         public Empleado FindById(int id)
         {
-            throw new NotImplementedException();
+            Empleado buscado = Context.Empleados.Where(Empleado => Empleado.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public List<Empleado> FindAll()

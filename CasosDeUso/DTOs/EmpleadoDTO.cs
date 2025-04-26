@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CasosDeUso.DTOs
 {
-    internal class EmpleadoDTO
+    public class EmpleadoDTO
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
         public String Rol { get; set; }
+        public bool Activo {  get; set; }
     }
 }

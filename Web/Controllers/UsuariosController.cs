@@ -10,12 +10,14 @@ namespace Web.Controllers
         public ILogin CULogin { get; set; }
         public IRegistroEmpleado CuRegistroEmpleado { get; set; }
         public IListarEmpleados CUListarEmpleados { get; set; }
+        public IObtenerEmpleado CUObtenerEmpleado { get; set; }
 
-        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados, IObtenerEmpleado cUObtenerEmpleado)
         {
             CULogin = cULogin;
             CuRegistroEmpleado = cUregistroEmpleado;
             CUListarEmpleados = cUListarEmpleados;
+            CUObtenerEmpleado = cUObtenerEmpleado;
         }
 
 
@@ -146,6 +148,20 @@ namespace Web.Controllers
         public ActionResult Empleados()
         {
             return View(CUListarEmpleados.ListarTodosLosEmpleados());
+        }
+
+        public ActionResult EditarEmpleado(int id)
+        {
+            EmpleadoDTO emp = null;
+            try
+            {
+                emp = CUObtenerEmpleado.FindById(id);
+            }
+            catch(Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View(emp);
         }
     }
 }

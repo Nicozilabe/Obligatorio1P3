@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CasosDeUso.InterfacesCasosUso
 {
-    public interface IListarEmpleados
+    public interface IObtenerEmpleado
     {
-        public List<EmpleadoDTO> ListarTodosLosEmpleados();
+        public EmpleadoDTO FindById(int id);
     }
 }

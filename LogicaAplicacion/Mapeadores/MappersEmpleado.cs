@@ -12,14 +12,10 @@ namespace LogicaAplicacion.Mapeadores
 {
     public class MappersEmpleado
     {
-        public static Usuario ToUsuario(UsuarioDTO dto)
+        public static Empleado ToEmpleado(EmpleadoDTO dto)
         {
-            Usuario ret = null;
-            if (dto.Rol == "Cliente")
-            {
-                ret = new Cliente();
-            }
-            else if (dto.Rol == "Administrador")
+            Empleado ret = null;
+            if (dto.Rol == "Administrador")
             {
                 ret = new Administrador();
             }
@@ -35,21 +31,17 @@ namespace LogicaAplicacion.Mapeadores
             return ret;
         }
 
-        public static UsuarioDTO ToUsuarioDTO(Usuario usuario)
+        public static EmpleadoDTO ToEmpleadoDTO(Empleado empleado)
         {
-            UsuarioDTO ret = null;
-            if (usuario != null)
+            EmpleadoDTO ret = null;
+            if (empleado != null)
             {
-                ret = new UsuarioDTO();
-                if (usuario is Administrador)
+                ret = new EmpleadoDTO();
+                if (empleado is Administrador)
                 {
                     ret.Rol = "Administrador";
                 }
-                else if (usuario is Cliente)
-                {
-                    ret.Rol = "Cliente";
-                }
-                else if (usuario is Empleado)
+                else if (empleado is Empleado)
                 {
                     ret.Rol = "Empleado";
                 }
@@ -57,21 +49,21 @@ namespace LogicaAplicacion.Mapeadores
                 {
                     throw new DatosInvalidosException("Rol usuario to DTO Inválido");
                 }
-                ret.Id = usuario.Id;
-                ret.Nombre = usuario.Nombre.Nombre;
-                ret.Apellido = usuario.Nombre.Apellido;
-                ret.Email = usuario.Email.Email;
-                ret.Activo = usuario.Activo;
+                ret.Id = empleado.Id;
+                ret.Nombre = empleado.Nombre.Nombre;
+                ret.Apellido = empleado.Nombre.Apellido;
+                ret.Email = empleado.Email.Email;
+                ret.Activo = empleado.Activo;
             }
             return ret;
         }
 
-        public static List<UsuarioDTO> ToListaUsuarioDTO(List<Empleado> empleados)
+        public static List<EmpleadoDTO> ToListaEmpleadoDTO(List<Empleado> empleados)
         {
-            List<UsuarioDTO> DTOs = new List<UsuarioDTO>();
+            List<EmpleadoDTO> DTOs = new List<EmpleadoDTO>();
             foreach (Empleado empleado in empleados)
             {
-                UsuarioDTO dto = ToUsuarioDTO(empleado);
+                EmpleadoDTO dto = ToEmpleadoDTO(empleado);
                 DTOs.Add(dto);
             }
             return DTOs;
