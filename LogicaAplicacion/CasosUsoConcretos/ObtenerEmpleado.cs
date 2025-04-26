@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -21,6 +22,10 @@ namespace LogicaAplicacion.CasosUsoConcretos
 
         public EmpleadoDTO FindById(int id)
         {
+            if(id == null || id <= 0)
+            {
+                throw new DatosInvalidosException("Id no valido.");
+            }
             return MappersEmpleado.ToEmpleadoDTO(repo.FindById(id));
         }
     }
