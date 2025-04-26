@@ -9,6 +9,6 @@ namespace CasosDeUso.InterfacesCasosUso
 {
     public interface IListarEmpleados
     {
-        public List<UsuarioDTO> ListarTodosLosEmpleados();
+        public List<EmpleadoDTO> ListarTodosLosEmpleados();
     }
 }

@@ -19,9 +19,9 @@ namespace LogicaAplicacion.CasosUsoConcretos
             this.repo = repo;
         }
 
-        public List<UsuarioDTO> ListarTodosLosEmpleados()
+        public List<EmpleadoDTO> ListarTodosLosEmpleados()
         {
-            return MappersEmpleado.ToListaUsuarioDTO(repo.FindAll());
+            return MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
         }
     }
 }
