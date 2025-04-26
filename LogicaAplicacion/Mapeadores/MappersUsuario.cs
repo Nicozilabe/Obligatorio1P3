@@ -30,6 +30,7 @@ namespace LogicaAplicacion.Mapeadores
             ret.Nombre = new UsuarioNombre(dto.Nombre, dto.Apellido);
             ret.Email = new UsuarioEmail(dto.Email);
             ret.Password = null;
+            ret.Activo = dto.Activo;
             return ret;
         }
 
@@ -57,6 +58,8 @@ namespace LogicaAplicacion.Mapeadores
                 ret.Nombre = usuario.Nombre.Nombre;
                 ret.Apellido = usuario.Nombre.Apellido;
                 ret.Email = usuario.Email.Email;
+                ret.Activo = usuario.Activo;
+
             }
             return ret;
         }
