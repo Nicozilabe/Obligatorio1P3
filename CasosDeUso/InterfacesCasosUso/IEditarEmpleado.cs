@@ -9,6 +9,6 @@ namespace CasosDeUso.InterfacesCasosUso
 {
     public interface IEditarEmpleado
     {
-        public void EditarEmpleado(UsuarioDTO dto);
+        public void EditarEmpleado(EmpleadoDTO dto);
     }
 }
