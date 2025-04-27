@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.EntidadesDominio.Usuarios
 {
-    
+    [Index(nameof(Email.Email), IsUnique = true)]
     public abstract class Usuario
     {
         public int Id { get; set; }
