@@ -16,6 +16,7 @@ namespace CasosDeUso.DTOs
         public string Email { get; set; }
         public String Rol { get; set; }
         public bool Activo {  get; set; }
+        public string Password { get; set; }
 
         public void Validar()
         {
@@ -42,6 +43,14 @@ namespace CasosDeUso.DTOs
             if (Email.Length > 32)
             {
                 throw new DatosInvalidosException("El email debe tener menos de 32 letras");
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                throw new DatosInvalidosException("La contraseña no puede quedar vacio.");
+            }
+            if (Password.Length > 32)
+            {
+                throw new DatosInvalidosException("La contraseña debe tener menos de 32 letras");
             }
             if (Rol != "Empleado" && Rol != "Administrador")
             {
