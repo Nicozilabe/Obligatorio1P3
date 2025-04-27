@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,13 +12,15 @@ namespace Web.Controllers
         public IRegistroEmpleado CuRegistroEmpleado { get; set; }
         public IListarEmpleados CUListarEmpleados { get; set; }
         public IObtenerEmpleado CUObtenerEmpleado { get; set; }
+        public IEditarEmpleado CUEditarEmpleado { get; set; }
 
-        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados, IObtenerEmpleado cUObtenerEmpleado)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados, IObtenerEmpleado cUObtenerEmpleado, IEditarEmpleado cUEditarEmpleado)
         {
             CULogin = cULogin;
             CuRegistroEmpleado = cUregistroEmpleado;
             CUListarEmpleados = cUListarEmpleados;
             CUObtenerEmpleado = cUObtenerEmpleado;
+            CUEditarEmpleado = cUEditarEmpleado;
         }
 
 
@@ -162,6 +165,22 @@ namespace Web.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
             return View(emp);
+        }
+
+        [HttpPost]
+        public ActionResult EditarEmpleado(EmpleadoDTO dto)
+        {
+            try
+            {
+                dto.Validar();
+                CUEditarEmpleado.EditarEmpleado(dto);
+                ViewBag.ErrorMessage = "Empleado editado correctamente";
+            }
+            catch(Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View(CUObtenerEmpleado.FindById(dto.Id));
         }
     }
 }
