@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.EntidadesDominio.Acciones;
 using LogicaNegocio.EntidadesDominio.Usuarios;
+using LogicaNegocio.ValueObjects.Usuario;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,18 @@ namespace LogicaAccesoADatos.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); // opcional, pero recomendado
+
+            modelBuilder.Entity<Usuario>()
+            .Property(u => u.Email)
+            .HasConversion(
+            email => email.Email,
+            Email => new UsuarioEmail(Email)
+            );
+
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
 
             modelBuilder.Entity<AccionAdministracion>()
                 .HasOne(a => a.Afectado)

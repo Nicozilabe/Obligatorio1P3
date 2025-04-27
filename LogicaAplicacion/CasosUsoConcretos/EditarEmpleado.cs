@@ -1,5 +1,7 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using LogicaAplicacion.Mapeadores;
+using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,16 @@ namespace LogicaAplicacion.CasosUsoConcretos
 {
     public class EditarEmpleado : IEditarEmpleado
     {
-        void IEditarEmpleado.EditarEmpleado(UsuarioDTO dto)
+        public IRepositorioEmpleados repo { get; set; }
+
+        public EditarEmpleado(IRepositorioEmpleados repo)
         {
-            throw new NotImplementedException();
+            this.repo = repo;
+        }
+
+        void IEditarEmpleado.EditarEmpleado(EmpleadoDTO dto)
+        {
+            repo.Update(MappersEmpleado.ToEmpleado(dto));
         }
     }
 }

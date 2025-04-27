@@ -2,12 +2,14 @@
 using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace LogicaAccesoADatos.Repos
 {
@@ -47,7 +49,27 @@ namespace LogicaAccesoADatos.Repos
 
         public void Update(Empleado obj)
         {
-            throw new NotImplementedException();
+            if(obj == null)
+            {
+                throw new DatosInvalidosException("");
+            }
+            obj.Validar();
+            Empleado aEditar = FindById(obj.Id);
+
+            if (aEditar.Nombre.Nombre != obj.Nombre.Nombre || aEditar.Activo != obj.Activo || aEditar.Email.Email != obj.Email.Email)
+            {
+                if(aEditar.Email.Email != obj.Email.Email)
+                {
+                    Empleado buscado = FindByEmail(obj.Email.Email);
+                    if(buscado != null)
+                    {
+                        throw new DatosInvalidosException("El Email a editar ya existe.");
+                    }
+                }
+            }
+            Context.Entry(aEditar).State = EntityState.Detached;
+            Context.Empleados.Update(obj); 
+            Context.SaveChanges();
         }
 
         public Empleado FindById(int id)
@@ -63,7 +85,7 @@ namespace LogicaAccesoADatos.Repos
 
         public Empleado? FindByEmail(string email)
         {
-            Empleado? buscado = Context.Empleados.Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
+            Empleado? buscado = Context.Empleados.AsEnumerable().Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
             return buscado;
         }
        
