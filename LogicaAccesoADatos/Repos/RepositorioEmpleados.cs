@@ -85,7 +85,7 @@ namespace LogicaAccesoADatos.Repos
 
         public Empleado? FindByEmail(string email)
         {
-            Empleado? buscado = Context.Empleados.Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
+            Empleado? buscado = Context.Empleados.AsEnumerable().Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
             return buscado;
         }
        
