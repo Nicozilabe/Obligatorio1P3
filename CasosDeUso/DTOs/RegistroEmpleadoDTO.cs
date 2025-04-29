@@ -20,24 +20,45 @@ namespace CasosDeUso.DTOs
 
         public void Validar()
         {
-            if(Rol != "Empleado" && Rol != "Administrador" && Rol != "Cliente") {
-                throw new DatosInvalidosException("Tipo Usuario no válido");
-            }
-
-            if (string.IsNullOrEmpty(Nombre) || Nombre.Length > 32)
+            if (string.IsNullOrEmpty(Nombre))
             {
-                throw new DatosInvalidosException("Nombre no válido DTO->Usuario");
+                throw new DatosInvalidosException("El nombre no puede quedar vacio. DTO->Usuario");
             }
-            if (string.IsNullOrEmpty(Email) || Email.Length > 32)
+            if (Nombre.Length > 32)
             {
-                throw new DatosInvalidosException("Nombre no válido DTO->Usuario");
+                throw new DatosInvalidosException("El nombre debe tener menos de 32 letras. DTO->Usuario");
             }
-            if (string.IsNullOrEmpty(Pass) || Pass.Length > 32)
+            if (string.IsNullOrEmpty(Apellido))
             {
-                throw new DatosInvalidosException("Nombre no válido DTO->Usuario");
+                throw new DatosInvalidosException("El apellido no puede quedar vacio. DTO->Usuario");
             }
-            if (IdRealizador < 0) {
-                throw new DatosInvalidosException("Id Realizador no válido");
+            if (Apellido.Length > 32)
+            {
+                throw new DatosInvalidosException("El apellido debe tener menos de 32 letras. DTO->Usuario");
+            }
+            if (string.IsNullOrEmpty(Email))
+            {
+                throw new DatosInvalidosException("El email no puede quedar vacio. DTO->Usuario");
+            }
+            if (Email.Length > 32)
+            {
+                throw new DatosInvalidosException("El email debe tener menos de 32 letras. DTO->Usuario");
+            }
+            if (string.IsNullOrEmpty(Pass))
+            {
+                throw new DatosInvalidosException("La contraseña no puede quedar vacio. DTO->Usuario");
+            }
+            if (Pass.Length > 32)
+            {
+                throw new DatosInvalidosException("La contraseña debe tener menos de 32 letras. DTO->Usuario");
+            }
+            if (Rol != "Empleado" && Rol != "Administrador")
+            {
+                throw new DatosInvalidosException("Tipo Usuario no válido. DTO->Usuario");
+            }
+            if (IdRealizador < 0)
+            {
+                throw new DatosInvalidosException("Id Realizador no válido. DTO->Usuario");
             }
         }
 
