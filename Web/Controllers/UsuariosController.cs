@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using LogicaAplicacion.CasosUsoConcretos;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +14,16 @@ namespace Web.Controllers
         public IListarEmpleados CUListarEmpleados { get; set; }
         public IObtenerEmpleado CUObtenerEmpleado { get; set; }
         public IEditarEmpleado CUEditarEmpleado { get; set; }
+        public IBajaEmpleado CUBajaEmpleado { get; set; }
 
-        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados, IObtenerEmpleado cUObtenerEmpleado, IEditarEmpleado cUEditarEmpleado)
+        public UsuariosController(ILogin cULogin, IRegistroEmpleado cUregistroEmpleado, IListarEmpleados cUListarEmpleados, IObtenerEmpleado cUObtenerEmpleado, IEditarEmpleado cUEditarEmpleado, IBajaEmpleado cUBajaEmpleado)
         {
             CULogin = cULogin;
             CuRegistroEmpleado = cUregistroEmpleado;
             CUListarEmpleados = cUListarEmpleados;
             CUObtenerEmpleado = cUObtenerEmpleado;
             CUEditarEmpleado = cUEditarEmpleado;
+            CUBajaEmpleado = cUBajaEmpleado;
         }
 
 
@@ -30,9 +33,9 @@ namespace Web.Controllers
         {
             return View();
         }
-         public ActionResult Login() {
-            return View(); 
-         }
+        public ActionResult Login() {
+           return View(); 
+        }
         
         [HttpPost]
         public ActionResult Login(LoginDTO datos)
@@ -181,6 +184,27 @@ namespace Web.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
             return View(CUObtenerEmpleado.FindById(dto.Id));
+        }
+
+        public ActionResult BajaEmpleado(int id)
+        {
+            EmpleadoDTO dto = CUObtenerEmpleado.FindById(id);
+            return View(dto);
+
+        }
+
+        [HttpPost]
+        public ActionResult BajaEmpleado(EmpleadoDTO dto, bool confirmacion)
+        {
+            try
+            {
+                CUBajaEmpleado.BajaEmpleado(dto.Id);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "No se pudo realizar la baja del empleado.";
+            }
+            return View(dto);
         }
     }
 }
