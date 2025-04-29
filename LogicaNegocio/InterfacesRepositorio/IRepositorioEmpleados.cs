@@ -10,5 +10,7 @@ namespace LogicaNegocio.InterfacesRepositorio
     public interface IRepositorioEmpleados : IRepositorio<Empleado>
     {
         Empleado FindByEmail(string email);
+
+        public Administrador VerificarAdministrador(int id);
     }
 }

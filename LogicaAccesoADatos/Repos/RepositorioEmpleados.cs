@@ -44,7 +44,13 @@ namespace LogicaAccesoADatos.Repos
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Empleado aBorrar = FindById(id);
+            if (aBorrar == null)
+            {
+                throw new DatosInvalidosException("No hay un Empleado para borrar aqui");
+            }
+            Context.Empleados.Remove(aBorrar);
+            Context.SaveChanges();
         }
 
         public void Update(Empleado obj)
@@ -88,7 +94,22 @@ namespace LogicaAccesoADatos.Repos
             Empleado? buscado = Context.Empleados.AsEnumerable().Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
             return buscado;
         }
-       
-        
+        public Administrador VerificarAdministrador(int id)
+        {
+            Administrador a = null;
+            try
+            {
+                a = Context.Empleados.OfType<Administrador>().SingleOrDefault(a => a.Id == id);
+            }
+            catch (Exception ex) 
+            {
+                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un administrador.");
+            }
+            if (a == null)
+            {
+                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un administrador.");
+            }
+            return a;
+        }
     }
 }
