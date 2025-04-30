@@ -9,5 +9,6 @@ namespace LogicaNegocio.Enums
     public enum TipoAccionAdministracion
     {
         Registro,
+        Baja,
     }
 }
