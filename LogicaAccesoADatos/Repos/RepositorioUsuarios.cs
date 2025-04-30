@@ -60,7 +60,13 @@ namespace LogicaAccesoADatos.Repos
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Usuario aBorrar = FindById(id);
+            if (aBorrar == null)
+            {
+                throw new DatosInvalidosException("No hay un Empleado para borrar aqui");
+            }
+            Context.Usuarios.Remove(aBorrar);
+            Context.SaveChanges();
         }
 
         public void Update(Usuario obj)

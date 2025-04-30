@@ -13,7 +13,7 @@ using System.Transactions;
 
 namespace LogicaAccesoADatos.Repos
 {
-    public class RepositorioEmpleados:IRepositorioEmpleados
+    public class RepositorioEmpleados: IRepositorioEmpleados
     {
         public EmpresaContext Context { get; set; }
 
@@ -34,9 +34,9 @@ namespace LogicaAccesoADatos.Repos
 
             Empleado buscado = FindByEmail(obj.Email.Email);
 
-            if(buscado != null)
+            if (buscado != null)
             {
-                throw new DatosInvalidosException("El Usuario ya existe"); 
+                throw new DatosInvalidosException("El Usuario ya existe");
             }
             Context.Empleados.Add(obj);
             Context.SaveChanges();
