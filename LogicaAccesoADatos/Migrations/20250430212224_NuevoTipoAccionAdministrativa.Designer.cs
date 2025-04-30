@@ -4,6 +4,7 @@ using LogicaAccesoADatos.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoADatos.Migrations
 {
     [DbContext(typeof(EmpresaContext))]
-    partial class EmpresaContextModelSnapshot : ModelSnapshot
+    [Migration("20250430212224_NuevoTipoAccionAdministrativa")]
+    partial class NuevoTipoAccionAdministrativa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,7 @@ namespace LogicaAccesoADatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.EntidadesDominio.Acciones.Accion");
 
-                    b.Property<int?>("AfectadoId")
+                    b.Property<int>("AfectadoId")
                         .HasColumnType("int");
 
                     b.Property<int>("RealizadorId")
@@ -191,7 +194,8 @@ namespace LogicaAccesoADatos.Migrations
                     b.HasOne("LogicaNegocio.EntidadesDominio.Usuarios.Empleado", "Afectado")
                         .WithMany()
                         .HasForeignKey("AfectadoId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("LogicaNegocio.EntidadesDominio.Usuarios.Administrador", "Realizador")
                         .WithMany()

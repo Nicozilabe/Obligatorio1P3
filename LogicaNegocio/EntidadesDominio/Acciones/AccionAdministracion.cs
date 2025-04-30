@@ -15,8 +15,8 @@ namespace LogicaNegocio.EntidadesDominio.Acciones
     {
 
         public int RealizadorId { get; set; }
-        public int AfectadoId { get; set; }
-        public Empleado Afectado { get; set; }
+        public int? AfectadoId { get; set; }
+        public Empleado? Afectado { get; set; }
 
 
         public Administrador Realizador { get; set; }
@@ -35,9 +35,6 @@ namespace LogicaNegocio.EntidadesDominio.Acciones
             base.Validar();
             if(TipoAccion == null){
                 throw new DatosInvalidosException("Tipo acción no válida");
-            }
-            if (Afectado == null) {
-                throw new DatosInvalidosException("Usuario afectado no válido");
             }
             if (Realizador == null) {
                 throw new DatosInvalidosException("Usuario Realizador no válido");

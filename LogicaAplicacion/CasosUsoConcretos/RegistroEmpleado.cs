@@ -33,6 +33,10 @@ namespace LogicaAplicacion.CasosUsoConcretos
         {
 
             datos.Validar();
+            if (datos.IdRealizador == null)
+            {
+                throw new DataMisalignedException("El id del realizador no puede ser nulo");
+            }
             Administrador realizador = RepoEmpleados.VerificarAdministrador(datos.IdRealizador);
             RepoUsuarios.Add(MappersRegistro.ToUsuario(datos));
             Usuario creado = RepoUsuarios.FindByEmail(datos.Email);
@@ -48,6 +52,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
             }
 
             Accion accion = new AccionAdministracion(creadoCast,realizador,TipoAccionAdministracion.Registro,new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
+            accion.Validar();
             RepoAcciones.Add(accion);
             return MappersUsuario.ToUsuarioDTO(creado);
 

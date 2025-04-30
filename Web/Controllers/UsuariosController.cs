@@ -26,28 +26,25 @@ namespace Web.Controllers
             CUBajaEmpleado = cUBajaEmpleado;
         }
 
-
-
-        // GET: UsuariosController
-        public ActionResult Index()
+  
+        public ActionResult Login()
         {
             return View();
         }
-        public ActionResult Login() {
-           return View(); 
-        }
-        
+
         [HttpPost]
         public ActionResult Login(LoginDTO datos)
         {
-            try{
+            try
+            {
                 UsuarioDTO user = CULogin.RealizarLogin(datos);
                 HttpContext.Session.SetInt32("LogeadoId", user.Id);
                 HttpContext.Session.SetString("LogeadoRol", user.Rol);
-                ViewBag.ErrorMessage = (user.Nombre+user.Apellido+user.Email+user.Rol+user.Id);
+                ViewBag.ErrorMessage = (user.Nombre + user.Apellido + user.Email + user.Rol + user.Id);
                 return RedirectToAction("Index", "Home");
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 ViewBag.ErrorMessage = ex.Message;
             }
             return View();
@@ -55,16 +52,17 @@ namespace Web.Controllers
 
         public ActionResult Registro()
         {
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador") { 
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            {
                 ViewBag.IdAdmin = HttpContext.Session.GetInt32("LogeadoId");
                 return View();
             }
             else
-            {    
+            {
                 return RedirectToAction("NoAutorizado", "Auth");
             }
-           
-            
+
+
         }
 
         [HttpPost]
@@ -77,97 +75,55 @@ namespace Web.Controllers
                 UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
                 ViewBag.ErrorInfo = "Usuario creado exitosamente.";
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 ViewBag.ErrorInfo = ex.Message;
             }
             return View();
         }
-        // GET: UsuariosController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: UsuariosController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: UsuariosController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: UsuariosController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UsuariosController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UsuariosController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UsuariosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         public ActionResult Empleados()
         {
-            return View(CUListarEmpleados.ListarTodosLosEmpleados());
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            {
+                
+                return View(CUListarEmpleados.ListarTodosLosEmpleados());
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+
         }
 
         public ActionResult EditarEmpleado(int id)
         {
-            EmpleadoDTO emp = null;
-            try
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                emp = CUObtenerEmpleado.FindById(id);
+              
+                EmpleadoDTO emp = null;
+                try
+                {
+                    emp = CUObtenerEmpleado.FindById(id);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+
+                return View(emp);
+
+
             }
-            catch(Exception ex)
+            else
             {
-                ViewBag.ErrorMessage = ex.Message;
+                return RedirectToAction("NoAutorizado", "Auth");
             }
-            return View(emp);
+
         }
 
         [HttpPost]
@@ -175,11 +131,12 @@ namespace Web.Controllers
         {
             try
             {
+                int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
                 dto.Validar();
                 CUEditarEmpleado.EditarEmpleado(dto);
                 ViewBag.ErrorMessage = "Empleado editado correctamente";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
             }
@@ -188,23 +145,45 @@ namespace Web.Controllers
 
         public ActionResult BajaEmpleado(int id)
         {
-            EmpleadoDTO dto = CUObtenerEmpleado.FindById(id);
-            return View(dto);
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            {
+                
+                EmpleadoDTO dto = CUObtenerEmpleado.FindById(id);
+                return View(dto);
+
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+
+
 
         }
 
         [HttpPost]
         public ActionResult BajaEmpleado(EmpleadoDTO dto, bool confirmacion)
         {
-            try
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                CUBajaEmpleado.BajaEmpleado(dto.Id);
+                int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
+                try
+                {
+                    CUBajaEmpleado.RelizarBaja(dto.Id, IdRealizador);
+                }
+                catch (Exception ex)
+                {
+                    //ViewBag.ErrorMessage = "No se pudo realizar la baja del empleado.";
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                return View(dto);
             }
-            catch (Exception ex)
+            else
             {
-                ViewBag.ErrorMessage = "No se pudo realizar la baja del empleado.";
+                return RedirectToAction("NoAutorizado", "Auth");
             }
-            return View(dto);
+
+
         }
     }
 }

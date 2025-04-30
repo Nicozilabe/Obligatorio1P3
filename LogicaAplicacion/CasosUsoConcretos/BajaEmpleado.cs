@@ -1,6 +1,9 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
 using LogicaAplicacion.Mapeadores;
+using LogicaNegocio.EntidadesDominio.Acciones;
+using LogicaNegocio.EntidadesDominio.Usuarios;
+using LogicaNegocio.Enums;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -13,14 +16,25 @@ namespace LogicaAplicacion.CasosUsoConcretos
     public class BajaEmpleado : IBajaEmpleado
     {
         public IRepositorioEmpleados repo { get; set; }
+        public IRepositorioAcciones repoAcciones { get; set; }
 
-        public BajaEmpleado(IRepositorioEmpleados repo)
+        public BajaEmpleado(IRepositorioEmpleados repo, IRepositorioAcciones repositorioAcciones)
         {
             this.repo = repo;
+            this.repoAcciones = repositorioAcciones;
         }
 
-        void IBajaEmpleado.BajaEmpleado(int id)
+        public void RelizarBaja(int id, int? idRealizador)
         {
+            if (idRealizador == null)
+            {
+                throw new DataMisalignedException("El id del realizador no puede ser nulo");
+            }
+
+            Administrador realizador = repo.VerificarAdministrador((int)idRealizador);
+            AccionAdministracion accion = new AccionAdministracion(repo.FindById(id), realizador, TipoAccionAdministracion.Baja, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
+            accion.Validar();
+            repoAcciones.Add(accion);
             repo.Remove(id);
         }
     }
