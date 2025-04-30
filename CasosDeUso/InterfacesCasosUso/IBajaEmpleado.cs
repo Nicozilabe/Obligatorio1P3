@@ -9,6 +9,6 @@ namespace CasosDeUso.InterfacesCasosUso
 {
     public interface IBajaEmpleado
     {
-        public void BajaEmpleado(int id);
+        public void RelizarBaja(int id, int? idRealizador);
     }
 }
