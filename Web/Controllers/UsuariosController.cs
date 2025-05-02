@@ -26,7 +26,7 @@ namespace Web.Controllers
             CUBajaEmpleado = cUBajaEmpleado;
         }
 
-  
+
         public ActionResult Login()
         {
             return View();
@@ -89,7 +89,7 @@ namespace Web.Controllers
         {
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                
+
                 return View(CUListarEmpleados.ListarTodosLosEmpleados());
             }
             else
@@ -104,7 +104,7 @@ namespace Web.Controllers
 
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-              
+
                 EmpleadoDTO emp = null;
                 try
                 {
@@ -129,25 +129,35 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult EditarEmpleado(EmpleadoDTO dto)
         {
-            try
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
-                dto.Validar();
-                CUEditarEmpleado.EditarEmpleado(dto);
-                ViewBag.ErrorMessage = "Empleado editado correctamente";
+                try
+                {
+                    int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
+                    dto.Validar();
+                    CUEditarEmpleado.EditarEmpleado(dto, IdRealizador);
+                    ViewBag.ErrorMessage = "Empleado editado correctamente";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                return View(CUObtenerEmpleado.FindById(dto.Id));
+
+
             }
-            catch (Exception ex)
+            else
             {
-                ViewBag.ErrorMessage = ex.Message;
+                return RedirectToAction("NoAutorizado", "Auth");
             }
-            return View(CUObtenerEmpleado.FindById(dto.Id));
+
         }
 
         public ActionResult BajaEmpleado(int id)
         {
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                
+
                 EmpleadoDTO dto = CUObtenerEmpleado.FindById(id);
                 return View(dto);
 
