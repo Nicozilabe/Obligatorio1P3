@@ -1,5 +1,7 @@
 ﻿using CasosDeUso.DTOs;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
+using Humanizer;
 using LogicaAplicacion.CasosUsoConcretos;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.AspNetCore.Http;
@@ -42,10 +44,13 @@ namespace Web.Controllers
                 HttpContext.Session.SetString("LogeadoRol", user.Rol);
                 ViewBag.ErrorMessage = (user.Nombre + user.Apellido + user.Email + user.Rol + user.Id);
                 return RedirectToAction("Index", "Home");
+            }catch(DatosInvalidosException ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = ex.Message;
+                ViewBag.ErrorMessage = "Ocurrió un error inesperado al iniciar sesión.";
             }
             return View();
         }
@@ -74,10 +79,13 @@ namespace Web.Controllers
                 datos.Validar();
                 UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
                 ViewBag.ErrorInfo = "Usuario creado exitosamente.";
+            }catch (DatosInvalidosException ex)
+            {
+                ViewBag.ErrorInfo = ex.Message;
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorInfo = ex.Message;
+                ViewBag.ErrorInfo = "Ocurrió un error inesperado al registrar el usuario.";
             }
             return View();
         }
@@ -110,9 +118,13 @@ namespace Web.Controllers
                 {
                     emp = CUObtenerEmpleado.FindById(id);
                 }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorInfo = ex.Message;
+                }
                 catch (Exception ex)
                 {
-                    ViewBag.ErrorMessage = ex.Message;
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
                 }
 
                 return View(emp);
@@ -138,10 +150,15 @@ namespace Web.Controllers
                     CUEditarEmpleado.EditarEmpleado(dto, IdRealizador);
                     ViewBag.ErrorMessage = "Empleado editado correctamente";
                 }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorInfo = ex.Message;
+                }
                 catch (Exception ex)
                 {
-                    ViewBag.ErrorMessage = ex.Message;
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
                 }
+
                 return View(CUObtenerEmpleado.FindById(dto.Id));
 
 
@@ -155,12 +172,23 @@ namespace Web.Controllers
 
         public ActionResult BajaEmpleado(int id)
         {
+  
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-
-                EmpleadoDTO dto = CUObtenerEmpleado.FindById(id);
+                EmpleadoDTO dto = null;
+                try
+                {
+                     dto = CUObtenerEmpleado.FindById(id);
+                    
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorInfo = ex.Message;
+                }catch (Exception ex)
+                {
+                    ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
+                }
                 return View(dto);
-
             }
             else
             {
@@ -181,10 +209,13 @@ namespace Web.Controllers
                 {
                     CUBajaEmpleado.RelizarBaja(dto.Id, IdRealizador);
                 }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorInfo = ex.Message;
+                }
                 catch (Exception ex)
                 {
-                    //ViewBag.ErrorMessage = "No se pudo realizar la baja del empleado.";
-                    ViewBag.ErrorMessage = ex.Message;
+                    ViewBag.ErrorMessage = "Ocurrió un error al eliminar el usuario.";
                 }
                 return View(dto);
             }
