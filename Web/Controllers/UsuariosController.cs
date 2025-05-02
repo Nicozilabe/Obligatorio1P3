@@ -172,27 +172,35 @@ namespace Web.Controllers
 
         public ActionResult BajaEmpleado(int id, bool confirmacion)
         {
-  
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            if (confirmacion)
             {
-                EmpleadoDTO dto = null;
-                try
+                if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
                 {
-                     dto = CUObtenerEmpleado.FindById(id);
-                    
+                    EmpleadoDTO dto = null;
+                    try
+                    {
+                        dto = CUObtenerEmpleado.FindById(id);
+
+                    }
+                    catch (DatosInvalidosException ex)
+                    {
+                        ViewBag.ErrorInfo = ex.Message;
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
+                    }
+                    return View(dto);
                 }
-                catch (DatosInvalidosException ex)
+                else
                 {
-                    ViewBag.ErrorInfo = ex.Message;
-                }catch (Exception ex)
-                {
-                    ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
+                    return RedirectToAction("NoAutorizado", "Auth");
                 }
-                return View(dto);
             }
             else
             {
-                return RedirectToAction("NoAutorizado", "Auth");
+                ViewBag.ErrorInfo = "Debe confirmar la acción para que se realice.";
+                return View(CUObtenerEmpleado.FindById(id));
             }
 
 
