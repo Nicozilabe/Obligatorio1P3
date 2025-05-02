@@ -1,5 +1,6 @@
 ﻿using ExcepcionesPropias;
 using LogicaNegocio.InterfacesDominio;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObjects
 {
+    [Owned]
     public record Ciudad: IValidable
     {
         public string Nombre { get; init; }

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Mapeadores\qxdcnob5.oz2~" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CasosDeUso\CasosDeUso.csproj" />
     <ProjectReference Include="..\LogicaNegocio\LogicaNegocio.csproj" />
   </ItemGroup>
