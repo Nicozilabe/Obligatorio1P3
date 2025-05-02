@@ -1,7 +1,7 @@
 using CasosDeUso.InterfacesCasosUso;
 using LogicaAccesoADatos.EF;
 using LogicaAccesoADatos.Repos;
-using LogicaAplicacion.CasosUsoConcretos;
+using LogicaAplicacion.CasosUsoConcretos.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 
