@@ -21,6 +21,6 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             Direccion = direccion;
         }
 
-        }
+        
     }
 }

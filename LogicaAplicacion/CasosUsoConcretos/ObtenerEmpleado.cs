@@ -1,4 +1,4 @@
-﻿using CasosDeUso.DTOs;
+﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;

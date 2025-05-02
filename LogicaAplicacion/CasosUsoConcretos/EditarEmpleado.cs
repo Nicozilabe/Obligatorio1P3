@@ -1,4 +1,4 @@
-﻿using CasosDeUso.DTOs;
+﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.EntidadesDominio.Acciones;
@@ -31,7 +31,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
 
             Administrador realizador = repo.VerificarAdministrador((int)idRealizador);
 
-            AccionAdministracion accion = new AccionAdministracion(repo.FindById(dto.Id),realizador,TipoAccionAdministracion.Modificación, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now);
+            AccionAdministracion accion = new AccionAdministracion(repo.FindById(dto.Id),realizador,TipoAccionAdministracion.Modificación, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
 
             repo.Update(MappersEmpleado.ToEmpleado(dto));
         }
