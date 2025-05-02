@@ -1,4 +1,4 @@
-﻿using CasosDeUso.DTOs;
+﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
@@ -10,13 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosUsoConcretos
+namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
 {
-    public class Login:ILogin
+    public class Login : ILogin
     {
         public IRepositorioUsuarios Repo { get; set; }
 
-        public Login(IRepositorioUsuarios repo) {  Repo = repo; }
+        public Login(IRepositorioUsuarios repo) { Repo = repo; }
 
         public UsuarioDTO? RealizarLogin(LoginDTO datos)
         {
@@ -34,7 +34,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
                     {
                         throw new PermisosException("El usuario no cuenta con los permisos para iniciar sesión.");
                     }
-                        
+
                 }
                 else
                 {
@@ -42,8 +42,8 @@ namespace LogicaAplicacion.CasosUsoConcretos
                 }
             }
             else
-            {     
-                    throw new DatosInvalidosException("Email o Contraseña no válidos");   
+            {
+                throw new DatosInvalidosException("Email o Contraseña no válidos");
             }
             return ret;
         }

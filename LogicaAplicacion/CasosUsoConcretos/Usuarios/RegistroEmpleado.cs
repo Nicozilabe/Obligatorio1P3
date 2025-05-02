@@ -1,4 +1,4 @@
-﻿using CasosDeUso.DTOs;
+﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores;
@@ -12,9 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosUsoConcretos
+namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
 {
-    public class RegistroEmpleado:IRegistroEmpleado
+    public class RegistroEmpleado : IRegistroEmpleado
     {
         public IRepositorioUsuarios RepoUsuarios { get; set; }
         public IRepositorioAcciones RepoAcciones { get; set; }
@@ -42,7 +42,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
             Usuario creado = RepoUsuarios.FindByEmail(datos.Email);
             Empleado creadoCast = null;
 
-            if(creado is Empleado c)
+            if (creado is Empleado c)
             {
                 creadoCast = c;
             }
@@ -51,7 +51,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
                 throw new DatosInvalidosException("Eror al crear el empleado");
             }
 
-            Accion accion = new AccionAdministracion(creadoCast,realizador,TipoAccionAdministracion.Registro,new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
+            Accion accion = new AccionAdministracion(creadoCast, realizador, TipoAccionAdministracion.Registro, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
             accion.Validar();
             RepoAcciones.Add(accion);
             return MappersUsuario.ToUsuarioDTO(creado);

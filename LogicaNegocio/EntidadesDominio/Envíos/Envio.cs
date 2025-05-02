@@ -5,6 +5,7 @@ using LogicaNegocio.InterfacesDominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,10 +16,25 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public int Id { get; set; }
         public int Tracking { get; set; }
         public Empleado EmpleadoResponable { get; set; }
-        public Cliente Cliente { get; set; }
+        public string Cliente { get; set; }
         public double Peso { get; set; }
         public TipoEstadoEnvio EstadoEnvio { get; set; }
         public TipoSeguimiento Seguimiento { get; set; }
+
+        private static int ultimoTrack = 1;
+
+        public Envio()
+        {
+           
+        }
+        public Envio(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento)
+        {
+            EmpleadoResponable = empleadoResponable;
+            Cliente = cliente;
+            Peso = peso;
+            EstadoEnvio = estadoEnvio;
+            Seguimiento = seguimiento;
+        }
 
         public virtual void Validar()
         {
@@ -46,6 +62,12 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             {
                 throw new DatosInvalidosException("Seguimiento-Encío no válido");
             }
+
+            
+        }
+        public void generarTrack()
+        {
+            Tracking = ultimoTrack++;
         }
     }
 }

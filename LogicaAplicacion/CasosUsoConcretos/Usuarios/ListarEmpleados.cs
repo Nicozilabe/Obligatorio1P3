@@ -1,4 +1,4 @@
-﻿using CasosDeUso.DTOs;
+﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using LogicaAplicacion.Mapeadores;
 using LogicaNegocio.InterfacesRepositorio;
@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosUsoConcretos
+namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
 {
     public class ListarEmpleados : IListarEmpleados
     {
-        IRepositorioEmpleados repo {  get; set; }
+        IRepositorioEmpleados repo { get; set; }
 
         public ListarEmpleados(IRepositorioEmpleados repo)
         {

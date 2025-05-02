@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.EntidadesDominio.Acciones;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.ValueObjects.Usuario;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace LogicaAccesoADatos.EF
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Accion> Acciones { get; set; }
         public DbSet<AccionAdministracion> AccionesAdministracion { get; set; }
+        public DbSet<Agencia> Agencias { get; set; }
 
 
 

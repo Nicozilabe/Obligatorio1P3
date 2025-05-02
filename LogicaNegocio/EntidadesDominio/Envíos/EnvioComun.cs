@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+using LogicaNegocio.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +12,11 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
     {
         public Agencia Agencia { get; set; }
 
-        public EnvioComun(Agencia agencia)
+        public EnvioComun( Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento, Agencia agencia):base( empleadoResponable,  cliente,  peso,  estadoEnvio,  seguimiento)
         {
             Agencia = agencia;
         }
+
         public EnvioComun() { }
     }
 }

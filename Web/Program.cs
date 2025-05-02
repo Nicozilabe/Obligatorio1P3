@@ -1,7 +1,8 @@
 using CasosDeUso.InterfacesCasosUso;
 using LogicaAccesoADatos.EF;
 using LogicaAccesoADatos.Repos;
-using LogicaAplicacion.CasosUsoConcretos;
+using LogicaAplicacion.CasosUsoConcretos.Envios;
+using LogicaAplicacion.CasosUsoConcretos.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,7 @@ namespace Web
             builder.Services.AddScoped<IObtenerEmpleado, ObtenerEmpleado>();
             builder.Services.AddScoped<IEditarEmpleado, EditarEmpleado>();
             builder.Services.AddScoped<IBajaEmpleado, BajaEmpleado>();
+            builder.Services.AddScoped<IObtenerAgencias, ObtenerAgencias>();
 
             //DB
             builder.Services.AddDbContext<EmpresaContext>(options =>

@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.CasosUsoConcretos
+namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
 {
     public class BajaEmpleado : IBajaEmpleado
     {
@@ -21,7 +21,7 @@ namespace LogicaAplicacion.CasosUsoConcretos
         public BajaEmpleado(IRepositorioEmpleados repo, IRepositorioAcciones repositorioAcciones)
         {
             this.repo = repo;
-            this.repoAcciones = repositorioAcciones;
+            repoAcciones = repositorioAcciones;
         }
 
         public void RelizarBaja(int id, int? idRealizador)

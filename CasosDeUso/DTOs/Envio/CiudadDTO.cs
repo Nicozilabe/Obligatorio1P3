@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasosDeUso.DTOs
+namespace CasosDeUso.DTOs.Envio
 {
-    public class LoginDTO
+    public class CiudadDTO
     {
-        public string Email { get; set; }
-        public string Pass { get; set; }
+        public string Nombre { get; init; }
+
+
     }
 }

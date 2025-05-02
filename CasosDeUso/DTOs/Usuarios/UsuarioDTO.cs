@@ -1,4 +1,5 @@
-﻿using CasosDeUso.InterfacesCasosUso;
+﻿using CasosDeUso.Enums;
+using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasosDeUso.DTOs
+namespace CasosDeUso.DTOs.Usuarios
 {
-    public class EmpleadoDTO:IValidable
+    public class UsuarioDTO : IValidable
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
-        public String Rol { get; set; }
-        public bool Activo {  get; set; }
-        public string Password { get; set; }
+        public string Rol { get; set; }
+        public bool Activo { get; set; }
 
         public void Validar()
         {
@@ -44,15 +44,7 @@ namespace CasosDeUso.DTOs
             {
                 throw new DatosInvalidosException("El email debe tener menos de 32 letras");
             }
-            if (string.IsNullOrEmpty(Password))
-            {
-                throw new DatosInvalidosException("La contraseña no puede quedar vacio.");
-            }
-            if (Password.Length > 32)
-            {
-                throw new DatosInvalidosException("La contraseña debe tener menos de 32 letras");
-            }
-            if (Rol != "Empleado" && Rol != "Administrador")
+            if (Rol != "Empleado" && Rol != "Administrador" && Rol != "Cliente")
             {
                 throw new DatosInvalidosException("Tipo Usuario no válido");
             }

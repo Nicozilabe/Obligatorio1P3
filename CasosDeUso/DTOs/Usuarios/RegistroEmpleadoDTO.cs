@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasosDeUso.DTOs
+namespace CasosDeUso.DTOs.Usuarios
 {
-    public class RegistroEmpleadoDTO:IValidable
+    public class RegistroEmpleadoDTO : IValidable
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
         public string Rol { get; set; }
-        public string Pass {  get; set; }
+        public string Pass { get; set; }
 
         public int IdRealizador { get; set; }
 
