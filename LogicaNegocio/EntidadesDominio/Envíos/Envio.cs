@@ -2,6 +2,7 @@
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.Enums;
 using LogicaNegocio.InterfacesDominio;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.EntidadesDominio.Envíos
 {
-    public abstract class Envio:IValidable
+    [Index(nameof(Tracking), IsUnique = true)]
+    public abstract class Envio : IValidable
     {
         public int Id { get; set; }
+        
         public int Tracking { get; set; }
         public Empleado EmpleadoResponable { get; set; }
         public string Cliente { get; set; }
