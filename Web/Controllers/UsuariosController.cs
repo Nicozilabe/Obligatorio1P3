@@ -170,37 +170,29 @@ namespace Web.Controllers
 
         }
 
-        public ActionResult BajaEmpleado(int id, bool confirmacion)
+        public ActionResult BajaEmpleado(int id)
         {
-            if (confirmacion)
+  
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-                if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+                EmpleadoDTO dto = null;
+                try
                 {
-                    EmpleadoDTO dto = null;
-                    try
-                    {
-                        dto = CUObtenerEmpleado.FindById(id);
-
-                    }
-                    catch (DatosInvalidosException ex)
-                    {
-                        ViewBag.ErrorInfo = ex.Message;
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
-                    }
-                    return View(dto);
+                     dto = CUObtenerEmpleado.FindById(id);
+                    
                 }
-                else
+                catch (DatosInvalidosException ex)
                 {
-                    return RedirectToAction("NoAutorizado", "Auth");
+                    ViewBag.ErrorInfo = ex.Message;
+                }catch (Exception ex)
+                {
+                    ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
                 }
+                return View(dto);
             }
             else
             {
-                ViewBag.ErrorInfo = "Debe confirmar la acción para que se realice.";
-                return View(CUObtenerEmpleado.FindById(id));
+                return RedirectToAction("NoAutorizado", "Auth");
             }
 
 
@@ -210,28 +202,38 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult BajaEmpleado(EmpleadoDTO dto, bool confirmacion)
         {
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            if (!confirmacion)
             {
-                int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
-                try
-                {
-                    CUBajaEmpleado.RelizarBaja(dto.Id, IdRealizador);
-                }
-                catch (DatosInvalidosException ex)
-                {
-                    ViewBag.ErrorInfo = ex.Message;
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.ErrorMessage = "Ocurrió un error al eliminar el usuario.";
-                }
+
+                ViewBag.ErrorInfo = "Debe confirmar la acción para que se efectue";
                 return View(dto);
+
             }
             else
             {
-                return RedirectToAction("NoAutorizado", "Auth");
-            }
 
+                if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+                {
+                    int? IdRealizador = HttpContext.Session.GetInt32("LogeadoId");
+                    try
+                    {
+                        CUBajaEmpleado.RelizarBaja(dto.Id, IdRealizador);
+                    }
+                    catch (DatosInvalidosException ex)
+                    {
+                        ViewBag.ErrorInfo = ex.Message;
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.ErrorMessage = "Ocurrió un error al eliminar el usuario.";
+                    }
+                    return View(dto);
+                }
+                else
+                {
+                    return RedirectToAction("NoAutorizado", "Auth");
+                }
+            }
 
         }
     }
