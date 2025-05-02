@@ -1,4 +1,6 @@
-﻿using LogicaNegocio.ValueObjects;
+﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+using LogicaNegocio.Enums;
+using LogicaNegocio.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,10 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 
         public EnvioUrgente() { }
 
-        public EnvioUrgente(DireccionPostal direccion)
+        public EnvioUrgente(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento, DireccionPostal direccion) : base(empleadoResponable, cliente, peso, estadoEnvio, seguimiento)
         {
             Direccion = direccion;
+        }
 
         }
     }
