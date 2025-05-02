@@ -9,6 +9,6 @@ namespace CasosDeUso.InterfacesCasosUso
 {
     public interface IObtenerAgencias
     {
-        public IEnumerable<AgenciaDTO> GetAgencias()
+        public IEnumerable<AgenciaDTO> GetAgencias();
     }
 }
