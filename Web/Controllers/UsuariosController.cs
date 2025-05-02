@@ -170,7 +170,7 @@ namespace Web.Controllers
 
         }
 
-        public ActionResult BajaEmpleado(int id)
+        public ActionResult BajaEmpleado(int id, bool confirmacion)
         {
   
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
