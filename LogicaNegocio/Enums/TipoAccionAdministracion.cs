@@ -10,5 +10,6 @@ namespace LogicaNegocio.Enums
     {
         Registro,
         Baja,
+        Modificación,
     }
 }
