@@ -78,14 +78,14 @@ namespace Web.Controllers
             {
                 datos.Validar();
                 UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
-                ViewBag.ErrorInfo = "Usuario creado exitosamente.";
+                ViewBag.ErrorMessage = "Usuario creado exitosamente.";
             }catch (DatosInvalidosException ex)
             {
-                ViewBag.ErrorInfo = ex.Message;
+                ViewBag.ErrorMessage = ex.Message;
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorInfo = "Ocurrió un error inesperado al registrar el usuario.";
+                ViewBag.ErrorMessage = "Ocurrió un error inesperado al registrar el usuario.";
             }
             return View();
         }
@@ -120,7 +120,7 @@ namespace Web.Controllers
                 }
                 catch (DatosInvalidosException ex)
                 {
-                    ViewBag.ErrorInfo = ex.Message;
+                    ViewBag.ErrorMessage = ex.Message;
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +152,7 @@ namespace Web.Controllers
                 }
                 catch (DatosInvalidosException ex)
                 {
-                    ViewBag.ErrorInfo = ex.Message;
+                    ViewBag.ErrorMessage = ex.Message;
                 }
                 catch (Exception ex)
                 {
@@ -183,10 +183,10 @@ namespace Web.Controllers
                 }
                 catch (DatosInvalidosException ex)
                 {
-                    ViewBag.ErrorInfo = ex.Message;
+                    ViewBag.ErrorMessage = ex.Message;
                 }catch (Exception ex)
                 {
-                    ViewBag.ErrorInfo = "Ocurrió un error al recuoerar los datos del usuario";
+                    ViewBag.ErrorMessage = "Ocurrió un error al recuoerar los datos del usuario";
                 }
                 return View(dto);
             }
@@ -205,8 +205,8 @@ namespace Web.Controllers
             if (!confirmacion)
             {
 
-                ViewBag.ErrorInfo = "Debe confirmar la acción para que se efectue";
-                return View(dto);
+                ViewBag.ErrorMessage = "Debe confirmar la acción para que se efectue";
+                return View(CUObtenerEmpleado.FindById(dto.Id));
 
             }
             else
@@ -221,7 +221,7 @@ namespace Web.Controllers
                     }
                     catch (DatosInvalidosException ex)
                     {
-                        ViewBag.ErrorInfo = ex.Message;
+                        ViewBag.ErrorMessage = ex.Message;
                     }
                     catch (Exception ex)
                     {
