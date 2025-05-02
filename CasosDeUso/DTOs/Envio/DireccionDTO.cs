@@ -37,6 +37,6 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Ciudad no válida");
             }
-            Ciudad.Validar();
+        }
         }
     }
