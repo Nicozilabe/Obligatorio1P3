@@ -206,7 +206,7 @@ namespace Web.Controllers
             {
 
                 ViewBag.ErrorInfo = "Debe confirmar la acción para que se efectue";
-                return View(dto);
+                return View(CUObtenerEmpleado.FindById(dto.Id));
 
             }
             else
