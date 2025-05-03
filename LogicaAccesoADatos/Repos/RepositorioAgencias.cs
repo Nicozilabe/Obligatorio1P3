@@ -1,6 +1,7 @@
 ﻿using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace LogicaAccesoADatos.Repos
 
         public List<Agencia> FindAll()
         {
-            return Context.Agencias.ToList();
+            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Direccion.Ciudad).ToList();
         }
 
         public Agencia FindById(int id)
