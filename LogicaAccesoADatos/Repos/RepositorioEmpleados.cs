@@ -111,5 +111,23 @@ namespace LogicaAccesoADatos.Repos
             }
             return a;
         }
+
+        public Empleado VerificarEmpleado(int id)
+        {
+            if (id <= 0)
+            {
+                throw new DatosInvalidosException("El id no puede ser menor o igual a cero.");
+            }
+            Empleado ret = null;
+            try
+            {
+                ret = Context.Empleados.OfType<Empleado>().SingleOrDefault(a => a.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un empleado.");
+            }
+            return ret;
+        }
     }
 }
