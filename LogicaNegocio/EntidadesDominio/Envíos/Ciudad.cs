@@ -12,7 +12,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 
     public class Ciudad : IValidable
     {
-        int Id { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; init; }
 
         public Ciudad(string nombre)

@@ -20,6 +20,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             this.repo = repo;
         }
 
+    
         public EmpleadoDTO FindById(int id)
         {
             if (id == null || id <= 0)

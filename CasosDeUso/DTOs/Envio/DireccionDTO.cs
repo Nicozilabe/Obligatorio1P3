@@ -13,7 +13,7 @@ namespace CasosDeUso.DTOs.Envio
     {
         public string Calle { get; init; }
         public int Numero { get; init; }
-        public int Ciudad { get; init; }
+        public CiudadDTO Ciudad { get; init; }
         public int CodigoPostal { get; init; }
 
         public void Validar()

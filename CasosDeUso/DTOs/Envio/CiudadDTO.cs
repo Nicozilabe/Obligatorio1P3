@@ -8,7 +8,7 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class CiudadDTO
     {   
-        public int id { get; init; }
+        public int Id { get; init; }
         public string Nombre { get; init; }
 
 
