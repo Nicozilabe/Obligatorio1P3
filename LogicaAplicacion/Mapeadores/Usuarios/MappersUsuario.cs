@@ -8,21 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.Mapeadores
+namespace LogicaAplicacion.Mapeadores.Usuarios
 {
     public class MappersUsuario
     {
-        public static Usuario ToUsuario(UsuarioDTO dto) {
+        public static Usuario ToUsuario(UsuarioDTO dto)
+        {
             Usuario ret = null;
-            if(dto.Rol == "Cliente")
+            if (dto.Rol == "Cliente")
             {
                 ret = new Cliente();
-            } 
-            else if(dto.Rol == "Administrador")
+            }
+            else if (dto.Rol == "Administrador")
             {
                 ret = new Administrador();
-            } 
-            else if(dto.Rol == "Empleado")
+            }
+            else if (dto.Rol == "Empleado")
             {
                 ret = new Empleado();
             }
@@ -34,9 +35,11 @@ namespace LogicaAplicacion.Mapeadores
             return ret;
         }
 
-        public static UsuarioDTO ToUsuarioDTO(Usuario usuario) { 
+        public static UsuarioDTO ToUsuarioDTO(Usuario usuario)
+        {
             UsuarioDTO ret = null;
-            if (usuario != null) {
+            if (usuario != null)
+            {
                 ret = new UsuarioDTO();
                 if (usuario is Administrador)
                 {
@@ -46,8 +49,8 @@ namespace LogicaAplicacion.Mapeadores
                 {
                     ret.Rol = "Cliente";
                 }
-                else if (usuario is Empleado) 
-                { 
+                else if (usuario is Empleado)
+                {
                     ret.Rol = "Empleado";
                 }
                 else

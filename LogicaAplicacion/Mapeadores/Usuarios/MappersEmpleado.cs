@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.Mapeadores
+namespace LogicaAplicacion.Mapeadores.Usuarios
 {
     public class MappersEmpleado
     {
