@@ -1,5 +1,6 @@
 ﻿using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,7 +33,8 @@ namespace LogicaAccesoADatos.Repos
 
         public Agencia FindById(int id)
         {
-            throw new NotImplementedException();
+            Agencia buscado = Context.Agencias.Where(Agencia => Agencia.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public void Remove(int id)
