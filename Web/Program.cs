@@ -33,6 +33,9 @@ namespace Web
             builder.Services.AddScoped<IBajaEmpleado, BajaEmpleado>();
             builder.Services.AddScoped<IObtenerAgencias, ObtenerAgencias>();
             builder.Services.AddScoped<IRepositorioAgencias, RepositorioAgencias>();
+            builder.Services.AddScoped<IObtenerCiudades, ObtenerCiudades>();
+            builder.Services.AddScoped<IRepositorioCiudades, RepositorioCiudades>();
+
 
             //DB
             builder.Services.AddDbContext<EmpresaContext>(options =>
