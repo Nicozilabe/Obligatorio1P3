@@ -20,6 +20,7 @@ namespace LogicaAccesoADatos.EF
         public DbSet<Accion> Acciones { get; set; }
         public DbSet<AccionAdministracion> AccionesAdministracion { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
 
 
 
