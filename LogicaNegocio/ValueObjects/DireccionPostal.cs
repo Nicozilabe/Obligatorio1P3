@@ -1,4 +1,5 @@
 ﻿using ExcepcionesPropias;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.Enums;
 using LogicaNegocio.InterfacesDominio;
 using Microsoft.EntityFrameworkCore;

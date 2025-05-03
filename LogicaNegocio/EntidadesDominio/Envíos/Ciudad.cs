@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.ValueObjects
+namespace LogicaNegocio.EntidadesDominio.Envíos
 {
-    [Owned]
-    public record Ciudad: IValidable
+
+    public class Ciudad : IValidable
     {
+        int Id { get; set; }
         public string Nombre { get; init; }
 
         public Ciudad(string nombre)
@@ -21,12 +22,13 @@ namespace LogicaNegocio.ValueObjects
         }
         public Ciudad() { }
 
-        public void Validar() {
+        public void Validar()
+        {
             if (string.IsNullOrEmpty(Nombre))
             {
                 throw new DatosInvalidosException("Nombre-Ciudad no válido");
             }
-            if(Nombre.Length > 32)
+            if (Nombre.Length > 32)
             {
                 throw new DatosInvalidosException("Nombre-Ciudad debe ser un string de 1 a 32 caracteres");
             }
