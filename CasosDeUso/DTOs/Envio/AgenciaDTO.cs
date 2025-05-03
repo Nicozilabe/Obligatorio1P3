@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,25 @@ namespace CasosDeUso.DTOs.Envio
         public string Nombre { get; set; }
         public DireccionDTO Direccion { get; set; }
         public UbicacionDTO Ubicacion { get; set; }
+
         public void Validar()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(Nombre))
+            {
+                throw new DatosInvalidosException("El Nombre-Agencia no puede quedar vacio.");
+            }
+            if (Nombre.Length > 32)
+            {
+                throw new DatosInvalidosException("El Nombre-Agencia debe tener menos de 32 letras");
+            }
+            if (Direccion == null)
+            {
+                throw new DatosInvalidosException("Direccion no válida");
+            }
+            if (Ubicacion == null)
+            {
+                throw new DatosInvalidosException("Ubicacion no válida");
+            }
         }
     }
 }
