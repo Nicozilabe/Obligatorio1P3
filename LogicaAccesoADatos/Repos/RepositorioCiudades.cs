@@ -1,5 +1,6 @@
 ﻿using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace LogicaAccesoADatos.Repos
 
         public Ciudad FindById(int id)
         {
-            throw new NotImplementedException();
+            Ciudad buscado = Context.Ciudades.Where(Ciudad => Ciudad.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public void Remove(int id)
