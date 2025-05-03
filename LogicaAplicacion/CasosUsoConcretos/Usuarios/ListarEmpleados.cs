@@ -1,6 +1,6 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
-using LogicaAplicacion.Mapeadores;
+using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;

@@ -218,6 +218,7 @@ namespace Web.Controllers
                     try
                     {
                         CUBajaEmpleado.RelizarBaja(dto.Id, IdRealizador);
+                        ViewBag.ErrorMessage = "Empleado dado de baja correctamente";
                     }
                     catch (DatosInvalidosException ex)
                     {

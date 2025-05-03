@@ -1,7 +1,6 @@
 ﻿using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.InterfacesRepositorio;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +9,24 @@ using System.Threading.Tasks;
 
 namespace LogicaAccesoADatos.Repos
 {
-    public class RepositorioAgencias : IRepositorioAgencias
+    public class RepositorioCiudades : IRepositorioCiudades
     {
         public EmpresaContext Context { get; set; }
-
-        public RepositorioAgencias(EmpresaContext context)
+        public RepositorioCiudades(EmpresaContext context)
         {
-
             Context = context;
-
         }
-        public void Add(Agencia obj)
+        public void Add(Ciudad obj)
         {
             throw new NotImplementedException();
         }
 
-        public List<Agencia> FindAll()
+        public List<Ciudad> FindAll()
         {
-            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Direccion.Ciudad).ToList();
+            return Context.Ciudades.ToList();
         }
 
-        public Agencia FindById(int id)
+        public Ciudad FindById(int id)
         {
             throw new NotImplementedException();
         }
@@ -40,9 +36,11 @@ namespace LogicaAccesoADatos.Repos
             throw new NotImplementedException();
         }
 
-        public void Update(Agencia obj)
+        public void Update(Ciudad obj)
         {
             throw new NotImplementedException();
         }
     }
+
+
 }

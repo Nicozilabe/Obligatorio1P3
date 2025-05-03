@@ -10,7 +10,7 @@ namespace CasosDeUso.DTOs.Usuarios
 {
     public class EmpleadoDTO : IValidable
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }

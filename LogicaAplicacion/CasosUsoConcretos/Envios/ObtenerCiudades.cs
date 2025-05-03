@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUsoConcretos.Envios
 {
-    public class ObtenerAgencias:IObtenerAgencias
+    public class ObtenerCiudades: IObtenerCiudades
     {
-        public IRepositorioAgencias repo { get; set; }
+        IRepositorioCiudades repo { get; set; }
 
-        public ObtenerAgencias(IRepositorioAgencias repo)
+        public ObtenerCiudades(IRepositorioCiudades repo)
         {
             this.repo = repo;
         }
-
-        public IEnumerable<AgenciaDTO> GetAgencias() { 
-        
-                return MapperAgencia.ToListDTO(repo.FindAll());
+        public IEnumerable<CiudadDTO> GetCiudades()
+        {
+            return MapperCiudad.ToListDTO(repo.FindAll());
         }
     }
+
 }

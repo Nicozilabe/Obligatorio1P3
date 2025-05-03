@@ -11,7 +11,7 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class EnvioDTO : IValidable
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public int Tracking { get; set; }
         public EmpleadoDTO EmpleadoResponable { get; set; }
         public string EmailCliente { get; set; }
@@ -28,14 +28,14 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Tipo de envio no válido");
             }
-            if (TipoEnvio == "comun")
-            {
-                Agencia.Validar();
-            }
-            else
-            {
-                direccion.Validar();
-            }
+            //if (TipoEnvio == "comun")
+            //{
+            //    Agencia.Validar();
+            //}
+            //else
+            //{
+            //    direccion.Validar();
+            //}
         }
     }
 }

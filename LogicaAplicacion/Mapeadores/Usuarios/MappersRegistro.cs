@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaAplicacion.Mapeadores
+namespace LogicaAplicacion.Mapeadores.Usuarios
 {
     public class MappersRegistro
     {
@@ -33,7 +33,7 @@ namespace LogicaAplicacion.Mapeadores
 
             ret.Nombre = new UsuarioNombre(dto.Nombre, dto.Apellido);
             ret.Email = new UsuarioEmail(dto.Email);
-            ret.Password =new UsuarioPassword(dto.Pass);
+            ret.Password = new UsuarioPassword(dto.Pass);
             return ret;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
-using LogicaAplicacion.Mapeadores;
+using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace CasosDeUso.DTOs.Envio
 {
     public class CiudadDTO
-    {
-        public string Nombre { get; init; }
+    {   
+        public int Id { get; init; }
+        public string Nombre { get; set; }
 
 
     }

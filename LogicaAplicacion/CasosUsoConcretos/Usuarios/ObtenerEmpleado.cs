@@ -1,7 +1,7 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
-using LogicaAplicacion.Mapeadores;
+using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             this.repo = repo;
         }
 
+    
         public EmpleadoDTO FindById(int id)
         {
             if (id == null || id <= 0)
