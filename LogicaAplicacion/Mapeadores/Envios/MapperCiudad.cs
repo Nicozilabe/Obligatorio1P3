@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.DTOs.Envio;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
 {
     public class MapperCiudad
     {
-        public static CiudadDTO ToDTO(LogicaNegocio.EntidadesDominio.Envíos.Ciudad c)
+        public static CiudadDTO ToDTO(Ciudad c)
         {
             //faltan validaciones
             CiudadDTO ret = new CiudadDTO
@@ -21,7 +22,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             return ret;
         }
 
-        public static List<CiudadDTO> ToListDTO(List<LogicaNegocio.EntidadesDominio.Envíos.Ciudad> ciudades)
+        public static IEnumerable<CiudadDTO> ToListDTO(IEnumerable<Ciudad> ciudades)
         {
             List<CiudadDTO> ret = new List<CiudadDTO>();
             foreach (var ciudad in ciudades)

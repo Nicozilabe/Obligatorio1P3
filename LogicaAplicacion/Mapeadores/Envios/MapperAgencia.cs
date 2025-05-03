@@ -14,6 +14,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
         {
 
             //faltan validaciones
+            
             AgenciaDTO ret = new AgenciaDTO
             {
                 Id = a.Id,
@@ -27,7 +28,12 @@ namespace LogicaAplicacion.Mapeadores.Envios
         }
         public static List<AgenciaDTO> ToListDTO(List<Agencia> agencias)
         {
-            throw new NotImplementedException();
+           List<AgenciaDTO> ret = new List<AgenciaDTO>();
+            foreach (var agencia in agencias)
+            {
+                ret.Add(ToDTO(agencia));
+            }
+            return ret;
         }
 
     }
