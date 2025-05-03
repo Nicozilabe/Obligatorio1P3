@@ -55,11 +55,14 @@
             @Html.DisplayFor(model => model.Password)
         </dd>
     </dl>
-    <div>
-        <label for="checkConfir">Entiendo que esta accion puede treaer consecuencias graves.</label>
-        <input id="checkConfir" type="checkbox" name="confirmacion"/>
-    </div>
+
     <form asp-action="BajaEmpleado">
+        
+        <div>
+            <label for="checkConfir">Entiendo que esta accion puede treaer consecuencias graves.</label>
+            <input id="confirmacion" type="checkbox" name="confirmacion" value="true" />
+        </div>
+
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Empleados">Back to List</a>
     </form>
