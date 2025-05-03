@@ -20,11 +20,16 @@ namespace Web
             //Mine
             builder.Services.AddSession();
 
-
             //Inyecciones
+
+            //Repositorios
             builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
             builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
             builder.Services.AddScoped<IRepositorioAcciones, RepositorioAcciones>();
+            builder.Services.AddScoped<IRepositorioAgencias, RepositorioAgencias>();
+            builder.Services.AddScoped<IRepositorioCiudades, RepositorioCiudades>();
+
+            //Casos de uso que miedo.
             builder.Services.AddScoped<ILogin, Login>();
             builder.Services.AddScoped<IRegistroEmpleado, RegistroEmpleado>();
             builder.Services.AddScoped<IListarEmpleados, ListarEmpleados>();
@@ -32,9 +37,7 @@ namespace Web
             builder.Services.AddScoped<IEditarEmpleado, EditarEmpleado>();
             builder.Services.AddScoped<IBajaEmpleado, BajaEmpleado>();
             builder.Services.AddScoped<IObtenerAgencias, ObtenerAgencias>();
-            builder.Services.AddScoped<IRepositorioAgencias, RepositorioAgencias>();
             builder.Services.AddScoped<IObtenerCiudades, ObtenerCiudades>();
-            builder.Services.AddScoped<IRepositorioCiudades, RepositorioCiudades>();
 
 
             //DB
