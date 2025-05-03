@@ -28,14 +28,14 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Tipo de envio no válido");
             }
-            if (TipoEnvio == "comun")
-            {
-                Agencia.Validar();
-            }
-            else
-            {
-                direccion.Validar();
-            }
+            //if (TipoEnvio == "comun")
+            //{
+            //    Agencia.Validar();
+            //}
+            //else
+            //{
+            //    direccion.Validar();
+            //}
         }
     }
 }
