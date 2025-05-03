@@ -11,7 +11,7 @@ namespace CasosDeUso.DTOs.Usuarios
 {
     public class UsuarioDTO : IValidable
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
