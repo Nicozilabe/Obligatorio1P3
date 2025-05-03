@@ -14,5 +14,7 @@ namespace CasosDeUso.DTOs.Envio
         public string TipoEnvio { get; set; }
         public AgenciaDTO? Agencia { get; set; }
         public DireccionDTO? direccion { get; set; }
+
+
     }
 }

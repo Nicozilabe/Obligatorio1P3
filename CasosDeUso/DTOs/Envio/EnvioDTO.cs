@@ -11,7 +11,7 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class EnvioDTO : IValidable
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public int Tracking { get; set; }
         public EmpleadoDTO EmpleadoResponable { get; set; }
         public string EmailCliente { get; set; }

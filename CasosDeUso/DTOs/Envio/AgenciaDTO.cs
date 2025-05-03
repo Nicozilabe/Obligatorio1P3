@@ -9,7 +9,7 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class AgenciaDTO : IValidable
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Nombre { get; set; }
         public DireccionDTO Direccion { get; set; }
         public UbicacionDTO Ubicacion { get; set; }
