@@ -11,10 +11,11 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class DireccionDTO : IValidable
     {
-        public string Calle { get; init; }
-        public int Numero { get; init; }
-        public CiudadDTO Ciudad { get; init; }
-        public int CodigoPostal { get; init; }
+        public string Calle { get; set; }
+        public int Numero { get; set; }
+        public CiudadDTO? Ciudad { get; set; }
+       
+        public int CodigoPostal { get; set; }
 
         public void Validar()
         {
