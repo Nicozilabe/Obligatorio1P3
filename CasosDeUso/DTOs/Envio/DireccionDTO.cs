@@ -13,8 +13,9 @@ namespace CasosDeUso.DTOs.Envio
     {
         public string Calle { get; init; }
         public int Numero { get; init; }
-        public CiudadDTO Ciudad { get; init; }
+        public int Ciudad { get; init; }
         public int CodigoPostal { get; init; }
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(Calle))
@@ -38,5 +39,5 @@ namespace CasosDeUso.DTOs.Envio
                 throw new DatosInvalidosException("Ciudad no válida");
             }
         }
-        }
     }
+}
