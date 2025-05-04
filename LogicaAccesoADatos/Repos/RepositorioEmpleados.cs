@@ -103,11 +103,11 @@ namespace LogicaAccesoADatos.Repos
             }
             catch (Exception ex) 
             {
-                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un administrador.");
+                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
             }
             if (a == null)
             {
-                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un administrador.");
+                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
             }
             return a;
         }
@@ -125,7 +125,7 @@ namespace LogicaAccesoADatos.Repos
             }
             catch (Exception ex)
             {
-                throw new DatosInvalidosException("La acción solicitada debe ser realizada por un empleado.");
+                throw new PermisosException("La acción solicitada debe ser realizada por un empleado.");
             }
             return ret;
         }

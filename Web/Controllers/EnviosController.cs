@@ -99,6 +99,10 @@ namespace Web.Controllers
                 {
                     ViewBag.ErrorMessage = ex.Message;
                 }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
                 catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = "Ha ocurrido un error inesperado";
