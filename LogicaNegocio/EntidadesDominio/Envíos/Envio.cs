@@ -22,8 +22,10 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public Empleado EmpleadoResponable { get; set; }
         public string Cliente { get; set; }
         public double Peso { get; set; }
+
+        public IEnumerable<ComentarioEnvio> Comentarios { get; set; } = new List<ComentarioEnvio>();
         public TipoEstadoEnvio EstadoEnvio { get; set; }
-        public TipoSeguimiento Seguimiento { get; set; }
+        //public TipoSeguimiento Seguimiento { get; set; }
 
         private static int ultimoTrack = 1;
 
@@ -31,13 +33,13 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         {
            
         }
-        public Envio(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento)
+        public Envio(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio)
         {
             EmpleadoResponable = empleadoResponable;
             Cliente = cliente;
             Peso = peso;
             EstadoEnvio = estadoEnvio;
-            Seguimiento = seguimiento;
+            
         }
 
         public virtual void Validar()
@@ -62,10 +64,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             {
                 throw new DatosInvalidosException("Estado Envío no válido");
             }
-            if (Seguimiento == null)
-            {
-                throw new DatosInvalidosException("Seguimiento-Encío no válido");
-            }
+
 
             
         }

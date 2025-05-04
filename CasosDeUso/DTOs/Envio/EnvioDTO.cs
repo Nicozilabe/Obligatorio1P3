@@ -11,13 +11,16 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class EnvioDTO : IValidable
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public int Tracking { get; set; }
         public EmpleadoDTO EmpleadoResponable { get; set; }
         public string EmailCliente { get; set; }
         public double Peso { get; set; }
         public string EstadoEnvio { get; set; }
-        public string Seguimiento { get; set; }
+
+        public CiudadDTO Ciudad { get; set; }
+
+        public IEnumerable<ComentarioEnvioDTO> Comentarios { get; set; }
         public string TipoEnvio { get; set; }
         public AgenciaDTO? Agencia { get; set; }
         public DireccionDTO? direccion { get; set; }
@@ -55,14 +58,6 @@ namespace CasosDeUso.DTOs.Envio
             if (EstadoEnvio.Length > 32)
             {
                 throw new DatosInvalidosException("El EstadoEnvio-Envio debe contener menos de 32 caracteres.");
-            }
-            if (string.IsNullOrEmpty(Seguimiento))
-            {
-                throw new DatosInvalidosException("El Seguimiento-Envio no puede quedar vacio.");
-            }
-            if (Seguimiento.Length > 32)
-            {
-                throw new DatosInvalidosException("El Seguimiento-Envio debe contener menos de 32 caracteres.");
             }
             if (Agencia == null)
             {

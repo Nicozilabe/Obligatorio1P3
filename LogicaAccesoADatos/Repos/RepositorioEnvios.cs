@@ -2,7 +2,9 @@
 using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.EntidadesDominio.Usuarios;
+using LogicaNegocio.Enums;
 using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +53,14 @@ namespace LogicaAccesoADatos.Repos
         public void Update(Envio obj)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Envio> FindAllLightActivos()
+        {
+            List<Envio> ret = new List<Envio>();
+            ret.AddRange(Context.EnviosComunes.Include(a => a.Agencia).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
+            ret.AddRange(Context.EnviosUrgentes.Include(a => a.Direccion).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
+            return ret;
         }
     }
 }

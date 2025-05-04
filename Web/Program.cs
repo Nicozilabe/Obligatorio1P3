@@ -41,6 +41,7 @@ namespace Web
             builder.Services.AddScoped<IObtenerAgencias, ObtenerAgencias>();
             builder.Services.AddScoped<IObtenerCiudades, ObtenerCiudades>();
             builder.Services.AddScoped<IAltaEnvio, AltaEnvio>();
+            builder.Services.AddScoped<IObtenerEnvio, ObtenerEnvio>();
 
 
             //DB

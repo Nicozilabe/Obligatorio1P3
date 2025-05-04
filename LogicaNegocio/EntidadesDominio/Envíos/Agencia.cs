@@ -48,5 +48,10 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
                 throw new DatosInvalidosException("Ubicación-Agencia no válida");
             }
         }
+
+        public override string ToString()
+        {
+            return $"Nombre: {Nombre}";
+        }
     }
 }
