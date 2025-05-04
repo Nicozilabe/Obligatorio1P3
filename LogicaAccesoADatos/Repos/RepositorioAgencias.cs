@@ -1,5 +1,6 @@
 ﻿using LogicaAccesoADatos.EF;
 using LogicaNegocio.EntidadesDominio.Envíos;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,12 +28,13 @@ namespace LogicaAccesoADatos.Repos
 
         public List<Agencia> FindAll()
         {
-            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Direccion.Ciudad).ToList();
+            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Ciudad).ToList();
         }
 
         public Agencia FindById(int id)
         {
-            throw new NotImplementedException();
+            Agencia buscado = Context.Agencias.Where(Agencia => Agencia.Id == id).SingleOrDefault();
+            return buscado;
         }
 
         public void Remove(int id)

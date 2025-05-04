@@ -11,12 +11,13 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class RegistroEnvioDTO: IValidable
     {
-        public int IdEmpleadoResponable { get; set; }
+        public int? IdEmpleadoResponable { get; set; }
         public string EmailCliente { get; set; }
         public double Peso { get; set; }
         public string TipoEnvio { get; set; }
-        public AgenciaDTO? Agencia { get; set; }
+        public int? IdAgencia { get; set; }
         public DireccionDTO? direccion { get; set; }
+        public int IdCiudad { get; set; }
 
         public void Validar()
         {
@@ -44,13 +45,20 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("El tipo envio no puede estar vacio");
             }
-            if (TipoEnvio != "C" || TipoEnvio != "U")
+            if (TipoEnvio != "C" && TipoEnvio != "U")
             {
                 throw new DatosInvalidosException("El Tipo unicamente puede ser Comun o Urgente.");
             }
             if (TipoEnvio == "C")
             {
-                Agencia.Validar();
+                if (IdAgencia == null)
+                {
+                    throw new DatosInvalidosException("El Id de la agencia no puede quedar vacio");
+                }
+                if(IdAgencia < 0)
+                {
+                    throw new DatosInvalidosException("El Id de la agencia no puede ser menor a 0");
+                }
             }
             if (TipoEnvio == "U")
             {

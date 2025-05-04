@@ -14,6 +14,10 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public int Id { get; set; }
         public string Nombre { get; set; }
         public DireccionPostal Direccion { get; set; }
+        //se tuvo que separar por el querer tener ciudades como clases
+        public int? CiudadId { get; set; }
+        public Ciudad Ciudad { get; set; }
+
         public Ubicacion Ubicacion { get; set; }
 
         public Agencia() { }

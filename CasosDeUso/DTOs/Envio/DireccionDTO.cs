@@ -13,7 +13,6 @@ namespace CasosDeUso.DTOs.Envio
     {
         public string Calle { get; set; }
         public int Numero { get; set; }
-        public CiudadDTO? Ciudad { get; set; }
        
         public int CodigoPostal { get; set; }
 
@@ -35,10 +34,10 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Número-Dirección Debe ser un valor entre 1 y 99999");
             }
-            if (Ciudad == null)
-            {
-                throw new DatosInvalidosException("Ciudad no válida");
-            }
+            //if (Ciudad == null)
+            //{
+            //    throw new DatosInvalidosException("Ciudad no válida");
+            //}
         }
     }
 }
