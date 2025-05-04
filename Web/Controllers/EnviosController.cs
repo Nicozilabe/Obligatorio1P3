@@ -16,7 +16,7 @@ namespace Web.Controllers
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades,IAltaEnvio cUAltaEnvio)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
@@ -26,8 +26,9 @@ namespace Web.Controllers
 
 
         public IActionResult AltaEnvio()
+
         {
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || true)
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
 
                 IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
@@ -58,48 +59,58 @@ namespace Web.Controllers
         public IActionResult AltaEnvio(RegistroEnvioViewModel model)
         {
 
-            IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
-            IEnumerable<CiudadDTO> ciudades = CUObtenerCiudades.GetCiudades();
-
-
-
-
-            RegistroEnvioViewModel model2 = new RegistroEnvioViewModel
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
-                direccion = new DireccionDTO(),
-                Agencias = agencias,
-                Ciudades = ciudades,
-                EmailCliente = "",
-                Peso = 0,
-                TipoEnvio = "",
-                IdAgencia = 0
-            };
+
+                IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
+                IEnumerable<CiudadDTO> ciudades = CUObtenerCiudades.GetCiudades();
 
 
 
-            RegistroEnvioDTO reg = new RegistroEnvioDTO
-            {
-                IdEmpleadoResponable = HttpContext.Session.GetInt32("LogeadoId"),
-                EmailCliente = model.EmailCliente,
-                Peso = model.Peso,
-                TipoEnvio = model.TipoEnvio,
-                IdAgencia = model.IdAgencia,
-                IdCiudad = model.IdCiudad,
-                direccion = model.direccion
-            };
-            try
-            {
-                CUAltaEnvio.RegistroEnvio(reg);
+
+                RegistroEnvioViewModel model2 = new RegistroEnvioViewModel
+                {
+                    direccion = new DireccionDTO(),
+                    Agencias = agencias,
+                    Ciudades = ciudades,
+                    EmailCliente = "",
+                    Peso = 0,
+                    TipoEnvio = "",
+                    IdAgencia = 0
+                };
+
+
+
+                RegistroEnvioDTO reg = new RegistroEnvioDTO
+                {
+                    IdEmpleadoResponable = HttpContext.Session.GetInt32("LogeadoId"),
+                    EmailCliente = model.EmailCliente,
+                    Peso = model.Peso,
+                    TipoEnvio = model.TipoEnvio,
+                    IdAgencia = model.IdAgencia,
+                    IdCiudad = model.IdCiudad,
+                    direccion = model.direccion
+                };
+                try
+                {
+                    CUAltaEnvio.RegistroEnvio(reg);
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ha ocurrido un error inesperado";
+                }
+                return View(model2);
             }
-            catch(DatosInvalidosException ex)
+            else
             {
-                ViewBag.ErrorMessage = ex.Message;
+                return RedirectToAction("NoAutorizado", "Auth");
             }
-            catch (Exception ex)
-            {
-                ViewBag.ErrorMessage = "Ha ocurrido un error inesperado";
-            }
-            return View(model2);
+
+
         }
     }
 }
