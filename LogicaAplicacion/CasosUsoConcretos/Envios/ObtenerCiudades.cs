@@ -23,7 +23,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         {
             IEnumerable<CiudadDTO> ciudades = MapperCiudad.ToListDTO(repo.FindAll());
 
-            if (ciudades == null)
+            if (ciudades == null || ciudades.Count() == 0)
             {
                 throw new DatosInvalidosException("No se encontraron ciudades");
             }
