@@ -26,7 +26,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         {
             IEnumerable<EnvioLigthDTO> envios = MapperEnvio.ToListEnvioLigthDTO(repoEnvios.FindAllLightActivos());
 
-            if(envios == null)
+            if(envios == null || envios.Count() == 0)
             {
                 throw new DatosInvalidosException("No se encontraron envios activos.");
             }

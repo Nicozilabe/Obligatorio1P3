@@ -24,7 +24,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
         {
             IEnumerable<EmpleadoDTO> empleados = MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
 
-            if (empleados == null)
+            if (empleados == null || empleados.Count() == 0)
             {
                 throw new DatosInvalidosException("No se encontraron empleados");
             }

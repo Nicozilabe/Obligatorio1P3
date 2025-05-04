@@ -23,7 +23,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         public IEnumerable<AgenciaDTO> GetAgencias() 
         { 
             IEnumerable<AgenciaDTO> agencias = MapperAgencia.ToListDTO(repo.FindAll());
-            if (agencias == null)
+            if (agencias == null || agencias.Count() == 0)
             {
                 throw new DatosInvalidosException("No se encontraron agencias");
             }
