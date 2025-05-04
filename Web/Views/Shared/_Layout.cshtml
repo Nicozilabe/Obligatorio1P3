@@ -33,9 +33,14 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Empleados">Empleados</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Envios" asp-action="AltaEnvio">AltaEnvio</a>
+                            </li>
                         }else if(lrol == "Empleado")
                         {
-
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Envios" asp-action="AltaEnvio">AltaEnvio</a>
+                            </li>
                         }else if(lrol == "Cliente")
                         {
 
