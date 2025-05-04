@@ -43,7 +43,8 @@ namespace LogicaNegocio.ValueObjects
             {
                 throw new DatosInvalidosException("Número-Dirección Debe ser un valor entre 1 y 99999");
             }
-           
+
+            
         }
     }
 }

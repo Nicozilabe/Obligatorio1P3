@@ -20,7 +20,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 
         public EnvioUrgente() { }
 
-        public EnvioUrgente(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento, DireccionPostal direccion) : base(empleadoResponable, cliente, peso, estadoEnvio, seguimiento)
+        public EnvioUrgente(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento, DireccionPostal direccion) : base(empleadoResponable, cliente, peso, estadoEnvio)
         {
             Direccion = direccion;
         }
