@@ -72,6 +72,28 @@
             </form>
         </div>
     </div>
+    <script>
+        let tipo = document.querySelector("#TipoEnvio").value;
+
+        if (tipo === "C") {
+            document.querySelector("#divComun").style.display = "block";
+            document.querySelector("#divUrgente").style.display = "none";
+        } else {
+            document.querySelector("#divComun").style.display = "none";
+            document.querySelector("#divUrgente").style.display = "Block";
+        }
+        document.querySelector("#TipoEnvio").addEventListener("change", (e) => {
+            var tipoEnvio = e.target.value;
+            if (tipoEnvio === "C") {
+                document.querySelector("#divComun").style.display = "block";
+                document.querySelector("#divUrgente").style.display = "none";
+            } else {
+                document.querySelector("#divComun").style.display = "none";
+                document.querySelector("#divUrgente").style.display = "Block";
+            }
+        });
+    </script>
+
 }
 
 <h2>
@@ -84,28 +106,8 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        Model.Ciudades = Model.Ciudades;
-        <script>
-           let tipo = document.querySelector("#TipoEnvio").value;
-
-           if (tipo === "C") {
-                document.querySelector("#divComun").style.display = "block";
-                document.querySelector("#divUrgente").style.display = "none";
-            } else {
-                document.querySelector("#divComun").style.display = "none";
-                document.querySelector("#divUrgente").style.display = "Block";
-            }
-            document.querySelector("#TipoEnvio").addEventListener("change", (e) => {
-                var tipoEnvio = e.target.value;
-                if (tipoEnvio === "C") {
-                    document.querySelector("#divComun").style.display = "block";
-                    document.querySelector("#divUrgente").style.display = "none";
-                } else {
-                    document.querySelector("#divComun").style.display = "none";
-                    document.querySelector("#divUrgente").style.display = "Block";
-                }
-            });
-        </script>
+        
+        
 
     }
 }
