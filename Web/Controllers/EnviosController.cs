@@ -32,7 +32,7 @@ namespace Web.Controllers
                 IEnumerable<EnvioLigthDTO> envios = null;
                 try
                 {
-                    envios = CUObtenerEnvios.getEnviosLight();
+                    envios = CUObtenerEnvios.getEnviosLightActivos();
                 }
                 catch (DatosInvalidosException ex)
                 {
@@ -125,6 +125,7 @@ namespace Web.Controllers
                 try
                 {
                     CUAltaEnvio.RegistroEnvio(reg);
+                    ViewBag.ErrorMessage = "Envío registrado correctamente.";
                 }
                 catch (DatosInvalidosException ex)
                 {
