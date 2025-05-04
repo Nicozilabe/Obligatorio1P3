@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Envios" asp-action="Activos">Envios Activos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Logout">Cerrar Sesion</a>
+                            </li>
                         }else if(lrol == "Empleado")
                         {
                             <li class="nav-item">
@@ -46,6 +49,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Envios" asp-action="AltaEnvio">AltaEnvio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Logout">Cerrar Sesion</a>
                             </li>
                         }else if(lrol == "Cliente")
                         {

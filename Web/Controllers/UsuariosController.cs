@@ -261,7 +261,22 @@ namespace Web.Controllers
                     return RedirectToAction("NoAutorizado", "Auth");
                 }
             }
+        }
 
+        public IActionResult Logout()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Logout(int? logue)
+        {
+            if (HttpContext.Session.GetInt32("LogeadoId") == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            HttpContext.Session.Clear();
+            int? log = HttpContext.Session.GetInt32("LogeadoId");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
