@@ -29,7 +29,7 @@ namespace LogicaAccesoADatos.Repos
             {
                 throw new DatosInvalidosException("Envío no válido para el alta.");
             }
-            obj.Tracking=GetLastTracking();
+            obj.Tracking=(GetLastTracking()+1);
             obj.FechaRegistroEnvio = DateTime.Now;
             //Validamos el Envío acá porque es el que genera el tracking(Para que no se desface la variable o se pierda)
             obj.Validar();
