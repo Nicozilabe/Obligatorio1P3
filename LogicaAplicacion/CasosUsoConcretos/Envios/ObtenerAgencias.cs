@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -24,7 +25,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             IEnumerable<AgenciaDTO> agencias = MapperAgencia.ToListDTO(repo.FindAll());
             if (agencias == null)
             {
-                throw new Exception("No se encontraron agencias");
+                throw new DatosInvalidosException("No se encontraron agencias");
             }
 
             return agencias;
