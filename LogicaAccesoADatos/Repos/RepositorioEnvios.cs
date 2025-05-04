@@ -52,5 +52,10 @@ namespace LogicaAccesoADatos.Repos
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Envio> FindAllLight()
+        {
+            return Context.Envios.ToList();
+        }
     }
 }
