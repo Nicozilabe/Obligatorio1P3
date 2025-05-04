@@ -1,9 +1,12 @@
 ﻿using CasosDeUso.DTOs.Envio;
+using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
+using LogicaAplicacion.CasosUsoConcretos.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Web.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Controllers
 {
@@ -25,7 +28,8 @@ namespace Web.Controllers
             CUObtenerEnvios = cUObtenerEnvios;
         }
 
-        public IActionResult Activos() {
+        public IActionResult Activos()
+        {
 
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
@@ -62,24 +66,37 @@ namespace Web.Controllers
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
 
-                IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
-                IEnumerable<CiudadDTO> ciudades = CUObtenerCiudades.GetCiudades();
-
-
-
-
-                RegistroEnvioViewModel model = new RegistroEnvioViewModel
+                try
                 {
-                    direccion = new DireccionDTO(),
-                    Agencias = agencias,
-                    Ciudades = ciudades,
-                    EmailCliente = "",
-                    Peso = 0,
-                    TipoEnvio = "",
-                    IdAgencia = 0
-                };
+                    IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
+                    IEnumerable<CiudadDTO> ciudades = CUObtenerCiudades.GetCiudades();
+                    RegistroEnvioViewModel model = new RegistroEnvioViewModel
+                    {
+                        direccion = new DireccionDTO(),
+                        Agencias = agencias,
+                        Ciudades = ciudades,
+                        EmailCliente = "",
+                        Peso = 0,
+                        TipoEnvio = "",
+                        IdAgencia = 0
+                    };
 
-                return View(model);
+                    return View(model);
+
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al registrar el usuario.";
+                }
+                return View();
             }
             else
             {
@@ -96,9 +113,6 @@ namespace Web.Controllers
                 IEnumerable<AgenciaDTO> agencias = CUObtenerAgencias.GetAgencias();
                 IEnumerable<CiudadDTO> ciudades = CUObtenerCiudades.GetCiudades();
 
-
-
-
                 RegistroEnvioViewModel model2 = new RegistroEnvioViewModel
                 {
                     direccion = new DireccionDTO(),
@@ -109,8 +123,6 @@ namespace Web.Controllers
                     TipoEnvio = "",
                     IdAgencia = 0
                 };
-
-
 
                 RegistroEnvioDTO reg = new RegistroEnvioDTO
                 {
@@ -124,6 +136,7 @@ namespace Web.Controllers
                 };
                 try
                 {
+                    reg.Validar();
                     CUAltaEnvio.RegistroEnvio(reg);
                     ViewBag.ErrorMessage = "Envío registrado correctamente.";
                 }
