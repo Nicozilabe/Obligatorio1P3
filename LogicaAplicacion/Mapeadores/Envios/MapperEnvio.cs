@@ -86,7 +86,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.Peso = e.Peso;
             ret.EmailCliente = e.Cliente;
             ret.EstadoEnvio = e.EstadoEnvio.ToString();
-
+            ret.TipoEnvio = e.GetType().Name;
             if (e is EnvioComun)
             {
                 EnvioComun ec = (EnvioComun)e;
