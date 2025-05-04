@@ -20,7 +20,14 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         }
         public IEnumerable<CiudadDTO> GetCiudades()
         {
-            return MapperCiudad.ToListDTO(repo.FindAll());
+            IEnumerable<CiudadDTO> ciudades = MapperCiudad.ToListDTO(repo.FindAll());
+
+            if (ciudades == null)
+            {
+                throw new Exception("No se encontraron ciudades");
+            }
+
+            return ciudades;
         }
     }
 

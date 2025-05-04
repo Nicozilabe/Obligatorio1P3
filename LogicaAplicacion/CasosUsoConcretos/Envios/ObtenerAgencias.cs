@@ -19,9 +19,15 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             this.repo = repo;
         }
 
-        public IEnumerable<AgenciaDTO> GetAgencias() { 
-        
-                return MapperAgencia.ToListDTO(repo.FindAll());
+        public IEnumerable<AgenciaDTO> GetAgencias() 
+        { 
+            IEnumerable<AgenciaDTO> agencias = MapperAgencia.ToListDTO(repo.FindAll());
+            if (agencias == null)
+            {
+                throw new Exception("No se encontraron agencias");
+            }
+
+            return agencias;
         }
     }
 }

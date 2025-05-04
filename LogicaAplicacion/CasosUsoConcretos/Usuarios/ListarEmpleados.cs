@@ -19,9 +19,16 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             this.repo = repo;
         }
 
-        public List<EmpleadoDTO> ListarTodosLosEmpleados()
+        public IEnumerable<EmpleadoDTO> ListarTodosLosEmpleados()
         {
-            return MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
+            IEnumerable<EmpleadoDTO> empleados = MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
+
+            if (empleados == null)
+            {
+                throw new Exception("No se encontraron empleados");
+            }
+
+            return empleados;
         }
     }
 }
