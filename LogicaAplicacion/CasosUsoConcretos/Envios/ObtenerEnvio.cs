@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -27,7 +28,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
 
             if(envios == null)
             {
-                throw new Exception("No se encontraron envios activos.");
+                throw new DatosInvalidosException("No se encontraron envios activos.");
             }
             return envios;
         }

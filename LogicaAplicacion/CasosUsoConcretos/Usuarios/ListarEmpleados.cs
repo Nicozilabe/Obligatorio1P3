@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -25,7 +26,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
 
             if (empleados == null)
             {
-                throw new Exception("No se encontraron empleados");
+                throw new DatosInvalidosException("No se encontraron empleados");
             }
 
             return empleados;

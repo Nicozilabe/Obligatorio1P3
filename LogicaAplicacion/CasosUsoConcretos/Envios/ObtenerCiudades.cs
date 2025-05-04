@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -24,7 +25,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
 
             if (ciudades == null)
             {
-                throw new Exception("No se encontraron ciudades");
+                throw new DatosInvalidosException("No se encontraron ciudades");
             }
 
             return ciudades;
