@@ -16,7 +16,6 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
     public abstract class Envio : IValidable
     {
         public int Id { get; set; }
-
         public DateTime FechaRegistroEnvio { get; set; }
         public int Tracking { get; set; }
         public int? EmpleadoResponableId { get; set; }
@@ -30,44 +29,46 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 
         private static int ultimoTrack = 1;
 
-        public Envio()
-        {
-           
-        }
+        public Envio() { }
+
         public Envio(Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio)
         {
             EmpleadoResponable = empleadoResponable;
             Cliente = cliente;
             Peso = peso;
             EstadoEnvio = estadoEnvio;
-            
         }
 
         public virtual void Validar()
         {
-           if(Peso < 0)
+            if (Tracking <= 0 || Tracking > 99999 || Tracking == null)
             {
-                throw new DatosInvalidosException("Peso-Envío no válido");
+                throw new DatosInvalidosException("Tracking debe ser un valor entre 1 y 99999");
             }
-            if (Tracking < 0)
+            if (EmpleadoResponable == null)
             {
-                throw new DatosInvalidosException("Tracking-Envío no válido");
+                throw new DatosInvalidosException("Empleado Responable no válida");
             }
-            if( EmpleadoResponable == null)
+            if (string.IsNullOrEmpty(Cliente))
             {
-                throw new DatosInvalidosException("Empleado-Envío no válido");
+                throw new DatosInvalidosException("El Cliente no puede quedar vacio.");
             }
-            if (Cliente == null)
+            if (Cliente.Length > 32)
             {
-                throw new DatosInvalidosException("Cliente-Envío no válido");
+                throw new DatosInvalidosException("El Cliente debe tener menos de 32 letras");
+            }
+            if (Peso <= 0 || Peso == null)
+            {
+                throw new DatosInvalidosException("El Peso-Envio debe ser un valor mayor a 0");
             }
             if (EstadoEnvio == null)
             {
-                throw new DatosInvalidosException("Estado Envío no válido");
+                throw new DatosInvalidosException("Estado Envio Responable no válida");
             }
-
-
-            
+            if (FechaRegistroEnvio == null)
+            {
+                throw new DatosInvalidosException("Fecha de registro no válida");
+            }
         }
         public void generarTracking()
         {
