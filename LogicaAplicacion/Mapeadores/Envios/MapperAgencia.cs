@@ -20,13 +20,14 @@ namespace LogicaAplicacion.Mapeadores.Envios
                 Id = a.Id,
                 Nombre = a.Nombre,
                 Direccion = MapperDireccion.ToDTO(a.Direccion),
-                Ubicacion = MapperUbicacion.ToDTO(a.Ubicacion)
+                Ubicacion = MapperUbicacion.ToDTO(a.Ubicacion),
+                Ciudad = MapperCiudad.ToDTO(a.Ciudad),
             };
 
             return ret;
 
         }
-        public static List<AgenciaDTO> ToListDTO(List<Agencia> agencias)
+        public static IEnumerable<AgenciaDTO> ToListDTO(List<Agencia> agencias)
         {
            List<AgenciaDTO> ret = new List<AgenciaDTO>();
             foreach (var agencia in agencias)
@@ -35,6 +36,8 @@ namespace LogicaAplicacion.Mapeadores.Envios
             }
             return ret;
         }
+
+        
 
     }
 }

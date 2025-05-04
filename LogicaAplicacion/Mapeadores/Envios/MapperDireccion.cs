@@ -1,4 +1,5 @@
 ﻿using CasosDeUso.DTOs.Envio;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,19 @@ namespace LogicaAplicacion.Mapeadores.Envios
             {
                 Calle = d.Calle,
                 Numero = d.Numero,
-                Ciudad = MapperCiudad.ToDTO(d.Ciudad),
             };
 
             return ret;
         }
+        public static DireccionPostal ToDireccion(DireccionDTO dto)
+        {
+            DireccionPostal ret = new DireccionPostal
+            {
+                Calle = dto.Calle,
+                Numero = dto.Numero,
+            };
+            return ret;
 
+        }
     }
 }
