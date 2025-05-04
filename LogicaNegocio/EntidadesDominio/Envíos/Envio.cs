@@ -27,7 +27,6 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public TipoEstadoEnvio EstadoEnvio { get; set; }
         //public TipoSeguimiento Seguimiento { get; set; }
 
-        private static int ultimoTrack = 1;
 
         public Envio() { }
 
@@ -69,10 +68,6 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             {
                 throw new DatosInvalidosException("Fecha de registro no válida");
             }
-        }
-        public void generarTracking()
-        {
-            Tracking = ultimoTrack++;
         }
     }
 }
