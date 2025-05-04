@@ -16,7 +16,8 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
     public abstract class Envio : IValidable
     {
         public int Id { get; set; }
-        
+
+        public DateTime FechaRegistroEnvio { get; set; }
         public int Tracking { get; set; }
         public int? EmpleadoResponableId { get; set; }
         public Empleado EmpleadoResponable { get; set; }
