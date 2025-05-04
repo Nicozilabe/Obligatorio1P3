@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.EntidadesDominio.Usuarios;
+﻿using ExcepcionesPropias;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.Enums;
 using LogicaNegocio.ValueObjects;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.EntidadesDominio.Envíos
 {
-    public class EnvioUrgente:Envio
+    public class EnvioUrgente : Envio
     {
         //se tuvo que separar por el querer tener ciudades como clases
         public int? CiudadId { get; set; }
@@ -25,6 +26,17 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             Direccion = direccion;
         }
 
-        
+        public void Validar()
+        {
+            base.Validar();
+            if (Ciudad == null)
+            {
+                throw new DatosInvalidosException("Ciduad no válida");
+            }
+            if (Direccion == null)
+            {
+                throw new DatosInvalidosException("Direccion no válida");
+            }
+        }
     }
 }
