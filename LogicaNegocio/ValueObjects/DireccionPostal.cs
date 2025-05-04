@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LogicaNegocio.ValueObjects
 {
@@ -43,8 +44,7 @@ namespace LogicaNegocio.ValueObjects
             {
                 throw new DatosInvalidosException("Número-Dirección Debe ser un valor entre 1 y 99999");
             }
-
-            
+           
         }
     }
 }
