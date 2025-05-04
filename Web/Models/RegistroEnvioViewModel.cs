@@ -7,7 +7,6 @@ namespace Web.Models
         public string EmailCliente { get; set; }
         public double Peso { get; set; }
         public string TipoEnvio { get; set; }
-        public AgenciaDTO Agencia { get; set; }
         public int IdAgencia { get; set; }
         public int IdCiudad { get; set; }
         public DireccionDTO? direccion { get; set; }
