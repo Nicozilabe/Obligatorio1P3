@@ -29,14 +29,22 @@ namespace LogicaAccesoADatos.Repos
             {
                 throw new DatosInvalidosException("Envío no válido para el alta.");
             }
-            obj.generarTracking();
+            obj.Tracking=GetLastTracking();
             obj.FechaRegistroEnvio = DateTime.Now;
             //Validamos el Envío acá porque es el que genera el tracking(Para que no se desface la variable o se pierda)
             obj.Validar();
             Context.Envios.Add(obj);
             Context.SaveChanges();
         }
-
+        public int GetLastTracking()
+        {
+            var lastTracking = Context.Envios.OrderByDescending(e => e.Tracking).FirstOrDefault();
+            if (lastTracking != null)
+            {
+                return lastTracking.Tracking;
+            }
+            return 0; 
+        }
         public List<Envio> FindAll()
         {
             throw new NotImplementedException();
