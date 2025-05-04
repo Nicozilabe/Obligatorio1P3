@@ -23,7 +23,13 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         //Cargar menos a la base con datos que no se van a mostrar
         public IEnumerable<EnvioLigthDTO> getEnviosLightActivos()
         {
-            return MapperEnvio.ToListEnvioLigthDTO(repoEnvios.FindAllLightActivos());
+            IEnumerable<EnvioLigthDTO> envios = MapperEnvio.ToListEnvioLigthDTO(repoEnvios.FindAllLightActivos());
+
+            if(envios == null)
+            {
+                throw new Exception("No se encontraron envios activos.");
+            }
+            return envios;
         }
     }
 }
