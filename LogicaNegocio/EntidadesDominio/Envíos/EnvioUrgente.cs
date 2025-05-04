@@ -11,6 +11,10 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 {
     public class EnvioUrgente:Envio
     {
+        //se tuvo que separar por el querer tener ciudades como clases
+        public int? CiudadId { get; set; }
+        public Ciudad Ciudad { get; set; }
+
         public DireccionPostal Direccion { get; set; }
         public bool EnvioEficiente { get; set; }
 

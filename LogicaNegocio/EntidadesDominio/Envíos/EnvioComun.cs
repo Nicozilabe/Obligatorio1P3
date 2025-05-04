@@ -10,6 +10,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 {
     public class EnvioComun:Envio
     {
+        public int? AgenciaId { get; set; }
         public Agencia Agencia { get; set; }
 
         public EnvioComun( Empleado empleadoResponable, string cliente, double peso, TipoEstadoEnvio estadoEnvio, TipoSeguimiento seguimiento, Agencia agencia):base( empleadoResponable,  cliente,  peso,  estadoEnvio,  seguimiento)

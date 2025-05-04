@@ -18,6 +18,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public int Id { get; set; }
         
         public int Tracking { get; set; }
+        public int? EmpleadoResponableId { get; set; }
         public Empleado EmpleadoResponable { get; set; }
         public string Cliente { get; set; }
         public double Peso { get; set; }
@@ -68,7 +69,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
 
             
         }
-        public void generarTrack()
+        public void generarTracking()
         {
             Tracking = ultimoTrack++;
         }

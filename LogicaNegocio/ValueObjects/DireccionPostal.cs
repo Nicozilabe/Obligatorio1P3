@@ -14,19 +14,16 @@ namespace LogicaNegocio.ValueObjects
     [Owned]
     public record DireccionPostal : IValidable
     {
-
         public string Calle { get; init; }
         public int Numero { get; init; }
-        public Ciudad Ciudad { get; init; }
         public int CodigoPostal { get; init; }
 
         public DireccionPostal() { 
             
         }
-        public DireccionPostal(string calle, int numero, Ciudad ciudad, int cp) {
+        public DireccionPostal(string calle, int numero, int cp) {
             Calle = calle;
             Numero = numero;
-            Ciudad = ciudad;
             CodigoPostal = cp;
             Validar();
         }
@@ -46,10 +43,7 @@ namespace LogicaNegocio.ValueObjects
             {
                 throw new DatosInvalidosException("Número-Dirección Debe ser un valor entre 1 y 99999");
             }
-            if(Ciudad == null)
-            {
-                throw new DatosInvalidosException("Ciudad no válida");
-            }
+           
         }
     }
 }
