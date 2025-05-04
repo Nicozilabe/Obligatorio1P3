@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAccesoADatos.EF
 {
-    public class EmpresaContext:DbContext
+    public class EmpresaContext : DbContext
     {
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -21,10 +21,13 @@ namespace LogicaAccesoADatos.EF
         public DbSet<AccionAdministracion> AccionesAdministracion { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
+        public DbSet<Envio> Envios { get; set; }
+        public DbSet<EnvioComun> EnviosComunes { get; set; }
+        public DbSet<EnvioUrgente> EnviosUrgentes { get; set; }
 
 
 
-        public EmpresaContext(DbContextOptions options): base(options) { }
+        public EmpresaContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,7 +56,41 @@ namespace LogicaAccesoADatos.EF
                 .WithMany()
                 .HasForeignKey(a => a.RealizadorId)
                 .OnDelete(DeleteBehavior.NoAction); // o .Restrict
+
+
+            modelBuilder.Entity<EnvioUrgente>()
+                .HasOne(e => e.Ciudad)
+                .WithMany()
+                .HasForeignKey(e => e.CiudadId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Agencia>()
+                .HasOne(e => e.Ciudad)
+                .WithMany()
+                .HasForeignKey(e => e.CiudadId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            modelBuilder.Entity<EnvioComun>()
+                .HasOne(e => e.Agencia)
+                .WithMany()
+                .HasForeignKey(e => e.AgenciaId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            
+            modelBuilder.Entity<Envio>()
+                .HasOne(e => e.EmpleadoResponable)
+                .WithMany()
+                .HasForeignKey(e => e.EmpleadoResponableId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
         }
+
 
     }
 }
