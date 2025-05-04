@@ -20,6 +20,7 @@ namespace CasosDeUso.DTOs.Envio
 
         public CiudadDTO Ciudad { get; set; }
 
+        public DateTime FechaRegistroEnvio { get; set; }
         public IEnumerable<ComentarioEnvioDTO> Comentarios { get; set; }
         public string TipoEnvio { get; set; }
         public AgenciaDTO? Agencia { get; set; }

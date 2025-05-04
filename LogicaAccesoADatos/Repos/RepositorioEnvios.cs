@@ -30,6 +30,7 @@ namespace LogicaAccesoADatos.Repos
                 throw new DatosInvalidosException("Envío no válido para el alta.");
             }
             obj.generarTracking();
+            obj.FechaRegistroEnvio = DateTime.Now;
             obj.Validar();
             Context.Envios.Add(obj);
             Context.SaveChanges();

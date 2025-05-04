@@ -60,6 +60,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.EmailCliente = e.Cliente;
             ret.EstadoEnvio = e.EstadoEnvio.ToString();
             ret.TipoEnvio = e.GetType().Name;
+            ret.FechaRegistroEnvio = e.FechaRegistroEnvio;
             if (e is EnvioComun)
             {
                 EnvioComun ec = (EnvioComun)e;
@@ -87,6 +88,8 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.EmailCliente = e.Cliente;
             ret.EstadoEnvio = e.EstadoEnvio.ToString();
             ret.TipoEnvio = e.GetType().Name;
+            ret.FechaRegistroEnvio = e.FechaRegistroEnvio;
+            ret.Tracking = e.Tracking;
             if (e is EnvioComun)
             {
                 EnvioComun ec = (EnvioComun)e;
