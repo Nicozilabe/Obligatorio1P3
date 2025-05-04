@@ -44,7 +44,12 @@ namespace Web.Controllers
                 HttpContext.Session.SetString("LogeadoRol", user.Rol);
                 ViewBag.ErrorMessage = (user.Nombre + user.Apellido + user.Email + user.Rol + user.Id);
                 return RedirectToAction("Index", "Home");
-            }catch(DatosInvalidosException ex)
+            }
+            catch (DatosInvalidosException ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            catch (PermisosException ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
             }
@@ -80,6 +85,10 @@ namespace Web.Controllers
                 UsuarioDTO creado = CuRegistroEmpleado.RegistrarEmpleado(datos);
                 ViewBag.ErrorMessage = "Usuario creado exitosamente.";
             }catch (DatosInvalidosException ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            catch (PermisosException ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
             }
@@ -122,6 +131,10 @@ namespace Web.Controllers
                 {
                     ViewBag.ErrorMessage = ex.Message;
                 }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
                 catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
@@ -151,6 +164,10 @@ namespace Web.Controllers
                     ViewBag.ErrorMessage = "Empleado editado correctamente";
                 }
                 catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
                 {
                     ViewBag.ErrorMessage = ex.Message;
                 }
@@ -184,7 +201,12 @@ namespace Web.Controllers
                 catch (DatosInvalidosException ex)
                 {
                     ViewBag.ErrorMessage = ex.Message;
-                }catch (Exception ex)
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = "Ocurrió un error al recuoerar los datos del usuario";
                 }
@@ -221,6 +243,10 @@ namespace Web.Controllers
                         ViewBag.ErrorMessage = "Empleado dado de baja correctamente";
                     }
                     catch (DatosInvalidosException ex)
+                    {
+                        ViewBag.ErrorMessage = ex.Message;
+                    }
+                    catch (PermisosException ex)
                     {
                         ViewBag.ErrorMessage = ex.Message;
                     }
