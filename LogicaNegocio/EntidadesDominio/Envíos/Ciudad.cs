@@ -33,5 +33,9 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
                 throw new DatosInvalidosException("Nombre-Ciudad debe ser un string de 1 a 32 caracteres");
             }
         }
+        public override string ToString()
+        {
+            return $"Nombre: {Nombre}";
+        }
     }
 }
