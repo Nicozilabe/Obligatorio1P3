@@ -14,6 +14,7 @@ namespace CasosDeUso.DTOs.Envio
         public string Nombre { get; set; }
         public DireccionDTO Direccion { get; set; }
         public UbicacionDTO Ubicacion { get; set; }
+        public CiudadDTO Ciudad { get; set; }
 
         public void Validar()
         {
