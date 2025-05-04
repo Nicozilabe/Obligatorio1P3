@@ -34,7 +34,8 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             if(envio.TipoEnvio == "C")
             {
                 Agencia a = repoAgencias.FindById((int)envio.IdAgencia);
-                repo.Add(MapperEnvio.RegistroDTOToEnvioComun(envio, responsable, a));
+                EnvioComun e = MapperEnvio.RegistroDTOToEnvioComun(envio, responsable, a);
+                repo.Add(e);
             }
             else if (envio.TipoEnvio == "U")
             {

@@ -17,7 +17,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
 {
     public class MapperEnvio
     {
-        public static Envio RegistroDTOToEnvioComun(RegistroEnvioDTO dto, Empleado EmpleadoResponsable, Agencia agencia)
+        public static EnvioComun RegistroDTOToEnvioComun(RegistroEnvioDTO dto, Empleado EmpleadoResponsable, Agencia agencia)
         {
             EnvioComun ret = new EnvioComun();
             if (dto == null)
@@ -45,7 +45,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.EmpleadoResponable = EmpleadoResponsable;
             ret.Cliente = dto.EmailCliente;
             ret.Peso = dto.Peso;
-
+            ret.Ciudad = c;
             ret.Direccion = di;
 
             return ret;
