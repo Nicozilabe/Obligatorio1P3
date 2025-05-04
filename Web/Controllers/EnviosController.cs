@@ -12,17 +12,48 @@ namespace Web.Controllers
         public IObtenerAgencias CUObtenerAgencias { get; set; }
         public IObtenerCiudades CUObtenerCiudades { get; set; }
         public IAltaEnvio CUAltaEnvio { get; set; }
+        public IObtenerEnvio CUObtenerEnvios { get; set; }
 
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
             CUAltaEnvio = cUAltaEnvio;
+            CUObtenerEnvios = cUObtenerEnvios;
         }
 
+        public IActionResult Activos() {
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+                IEnumerable<EnvioLigthDTO> envios = null;
+                try
+                {
+                    envios = CUObtenerEnvios.getEnviosLight();
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ha ocurrido un error inesperado";
+                }
+                return View(envios);
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+
+        }
 
 
         public IActionResult AltaEnvio()
