@@ -6,6 +6,7 @@ using LogicaAplicacion.CasosUsoConcretos;
 using LogicaNegocio.InterfacesRepositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Controllers
 {
@@ -106,8 +107,23 @@ namespace Web.Controllers
         {
             if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
             {
-
-                return View(CUListarEmpleados.ListarTodosLosEmpleados());
+                try
+                {
+                    return View(CUListarEmpleados.ListarTodosLosEmpleados());
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error al listar los empleados.";
+                }
+                return View();  
             }
             else
             {
