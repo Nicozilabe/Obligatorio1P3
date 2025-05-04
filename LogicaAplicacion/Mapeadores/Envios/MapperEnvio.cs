@@ -1,5 +1,7 @@
 ﻿using CasosDeUso.DTOs.Envio;
+using CasosDeUso.DTOs.Usuarios;
 using ExcepcionesPropias;
+using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.Enums;
@@ -22,12 +24,12 @@ namespace LogicaAplicacion.Mapeadores.Envios
             {
                 throw new DatosInvalidosException("El DTO de registro de envío no puede ser nulo");
             }
-            
+
             ret.EstadoEnvio = TipoEstadoEnvio.En_Proceso;
             ret.EmpleadoResponable = EmpleadoResponsable;
             ret.Cliente = dto.EmailCliente;
             ret.Peso = dto.Peso;
-            ret.Seguimiento = TipoSeguimiento.En_Preparacion;
+
             ret.Agencia = agencia;
             return ret;
         }
@@ -38,15 +40,79 @@ namespace LogicaAplicacion.Mapeadores.Envios
             {
                 throw new DatosInvalidosException("El DTO de registro de envío no puede ser nulo");
             }
-            
+
             ret.EstadoEnvio = TipoEstadoEnvio.En_Proceso;
             ret.EmpleadoResponable = EmpleadoResponsable;
             ret.Cliente = dto.EmailCliente;
             ret.Peso = dto.Peso;
-            ret.Seguimiento = TipoSeguimiento.En_Preparacion;
+
             ret.Direccion = di;
-            
+
             return ret;
         }
+
+        public static EnvioDTO ToDTO(Envio e)
+        {
+            EnvioDTO ret = new EnvioDTO();
+
+            ret.Id = e.Id;
+            ret.Peso = e.Peso;
+            ret.EmailCliente = e.Cliente;
+            ret.EstadoEnvio = e.EstadoEnvio.ToString();
+            ret.TipoEnvio = e.GetType().Name;
+            if (e is EnvioComun)
+            {
+                EnvioComun ec = (EnvioComun)e;
+                ret.Agencia = MapperAgencia.ToDTO(ec.Agencia);
+            }
+            else if (e is EnvioUrgente)
+            {
+                EnvioUrgente eu = (EnvioUrgente)e;
+                ret.direccion = MapperDireccion.ToDTO(eu.Direccion);
+                ret.Ciudad = MapperCiudad.ToDTO(eu.Ciudad);
+            }
+            ret.EmpleadoResponable = MappersEmpleado.ToEmpleadoDTO(e.EmpleadoResponable);
+            ret.Comentarios = MapperComentarioEnvio.ToListDTO(e.Comentarios);
+            ret.Tracking = e.Tracking;
+            return ret;
+        }
+
+   
+        public static EnvioLigthDTO ToEnvioLigthDTO(Envio e)
+        {
+            EnvioLigthDTO ret = new EnvioLigthDTO();
+
+            ret.Id = e.Id;
+            ret.Peso = e.Peso;
+            ret.EmailCliente = e.Cliente;
+            ret.EstadoEnvio = e.EstadoEnvio.ToString();
+
+            if (e is EnvioComun)
+            {
+                EnvioComun ec = (EnvioComun)e;
+                ret.Destino = ec.Agencia.ToString();
+            }
+            else if (e is EnvioUrgente)
+            {
+                EnvioUrgente eu = (EnvioUrgente)e;
+                string direccion = eu.Direccion.ToString() + " " + eu.Ciudad.ToString();
+                ret.Destino = direccion;
+            }
+            ret.Empleado = MappersEmpleado.ToEmpleadoDTO(e.EmpleadoResponable);
+            return ret;
+        }
+
+        public static IEnumerable<EnvioLigthDTO> ToListEnvioLigthDTO(IEnumerable<Envio> envios)
+        {
+            List<EnvioLigthDTO> DTOs = new List<EnvioLigthDTO>();
+            foreach (Envio e in envios)
+            {
+                EnvioLigthDTO dto = ToEnvioLigthDTO(e);
+                DTOs.Add(dto);
+            }
+            return DTOs;
+        }
+
+
     }
 }
