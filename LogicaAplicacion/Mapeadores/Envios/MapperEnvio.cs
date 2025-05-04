@@ -97,7 +97,11 @@ namespace LogicaAplicacion.Mapeadores.Envios
                 {
                 ret.Destino = ec.Agencia.ToString();
                 }
-                ret.Destino = "No se pudo obtener el destino.";        
+                else
+                {
+                    ret.Destino = "No se pudo obtener el destino.";  
+                }
+                      
             }
             else if (e is EnvioUrgente)
             {
@@ -107,9 +111,11 @@ namespace LogicaAplicacion.Mapeadores.Envios
                     string direccion = eu.Direccion.ToString() + " " + eu.Ciudad.ToString();
                     ret.Destino = direccion;
                 }
-                ret.Destino = "No se pudo obtener el destino.";
-
-
+                else
+                {
+                    ret.Destino = "No se pudo obtener el destino.";
+                }
+                
             }
             ret.Empleado = MappersEmpleado.ToEmpleadoDTO(e.EmpleadoResponable);
             return ret;
