@@ -17,7 +17,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
 {
     public class MapperEnvio
     {
-        public static Envio RegistroDTOToEnvioComun(RegistroEnvioDTO dto, Empleado EmpleadoResponsable, Agencia agencia)
+        public static EnvioComun RegistroDTOToEnvioComun(RegistroEnvioDTO dto, Empleado EmpleadoResponsable, Agencia agencia)
         {
             EnvioComun ret = new EnvioComun();
             if (dto == null)
@@ -45,7 +45,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.EmpleadoResponable = EmpleadoResponsable;
             ret.Cliente = dto.EmailCliente;
             ret.Peso = dto.Peso;
-
+            ret.Ciudad = c;
             ret.Direccion = di;
 
             return ret;
@@ -93,13 +93,23 @@ namespace LogicaAplicacion.Mapeadores.Envios
             if (e is EnvioComun)
             {
                 EnvioComun ec = (EnvioComun)e;
+                if (ec.Agencia != null)
+                {
                 ret.Destino = ec.Agencia.ToString();
+                }
+                ret.Destino = "No se pudo obtener el destino.";        
             }
             else if (e is EnvioUrgente)
             {
                 EnvioUrgente eu = (EnvioUrgente)e;
-                string direccion = eu.Direccion.ToString() + " " + eu.Ciudad.ToString();
-                ret.Destino = direccion;
+                if (eu.Direccion != null && eu.Ciudad != null)
+                {
+                    string direccion = eu.Direccion.ToString() + " " + eu.Ciudad.ToString();
+                    ret.Destino = direccion;
+                }
+                ret.Destino = "No se pudo obtener el destino.";
+
+
             }
             ret.Empleado = MappersEmpleado.ToEmpleadoDTO(e.EmpleadoResponable);
             return ret;
