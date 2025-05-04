@@ -28,7 +28,7 @@ namespace LogicaAccesoADatos.Repos
 
         public List<Agencia> FindAll()
         {
-            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Direccion.Ciudad).ToList();
+            return Context.Agencias.Include(a => a.Ubicacion).Include(a => a.Direccion).Include(a => a.Ciudad).ToList();
         }
 
         public Agencia FindById(int id)
