@@ -80,7 +80,16 @@ namespace LogicaAccesoADatos.Repos
 
         public Empleado FindById(int id)
         {
-            Empleado buscado = Context.Empleados.Where(Empleado => Empleado.Id == id).SingleOrDefault();
+            Empleado buscado = null;
+            try
+            {
+                buscado = Context.Empleados.Where(Empleado => Empleado.Id == id).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new PermisosException("No se encuentra empleado con el id indicado.");
+            }
+
             return buscado;
         }
 
@@ -94,8 +103,12 @@ namespace LogicaAccesoADatos.Repos
             Empleado? buscado = Context.Empleados.AsEnumerable().Where(Empleado => Empleado.Email.Email == email).SingleOrDefault();
             return buscado;
         }
-        public Administrador VerificarAdministrador(int id)
+        public Administrador AdministradorPorID(int id)
         {
+            if (id <= 0)
+            {
+                throw new DatosInvalidosException("El id no puede ser menor o igual a cero.");
+            }
             Administrador a = null;
             try
             {
@@ -103,31 +116,27 @@ namespace LogicaAccesoADatos.Repos
             }
             catch (Exception ex) 
             {
-                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
-            }
-            if (a == null)
-            {
-                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
+                throw new PermisosException("No se encontro administrador con el id indicado.");
             }
             return a;
         }
 
-        public Empleado VerificarEmpleado(int id)
-        {
-            if (id <= 0)
-            {
-                throw new DatosInvalidosException("El id no puede ser menor o igual a cero.");
-            }
-            Empleado ret = null;
-            try
-            {
-                ret = Context.Empleados.OfType<Empleado>().SingleOrDefault(a => a.Id == id);
-            }
-            catch (Exception ex)
-            {
-                throw new PermisosException("La acción solicitada debe ser realizada por un empleado.");
-            }
-            return ret;
-        }
+        //public Empleado EmpleadoPorID(int id)
+        //{
+        //    if (id <= 0)
+        //    {
+        //        throw new DatosInvalidosException("El id no puede ser menor o igual a cero.");
+        //    }
+        //    Empleado ret = null;
+        //    try
+        //    {
+        //        ret = Context.Empleados.OfType<Empleado>().SingleOrDefault(a => a.Id == id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new PermisosException("No se encuentra empleado con el id indicado.");
+        //    }
+        //    return ret;
+        //}
     }
 }
