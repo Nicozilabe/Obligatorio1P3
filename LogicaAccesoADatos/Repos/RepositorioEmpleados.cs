@@ -80,6 +80,10 @@ namespace LogicaAccesoADatos.Repos
 
         public Empleado FindById(int id)
         {
+            if (id <= 0)
+            {
+                throw new DatosInvalidosException("El id no puede ser menor o igual a cero.");
+            }
             Empleado buscado = null;
             try
             {

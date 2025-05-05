@@ -12,6 +12,6 @@ namespace LogicaNegocio.InterfacesRepositorio
         Empleado FindByEmail(string email);
 
         public Administrador AdministradorPorID(int id);
-        public Empleado VerificarEmpleado(int id);
+        //public Empleado VerificarEmpleado(int id);
     }
 }
