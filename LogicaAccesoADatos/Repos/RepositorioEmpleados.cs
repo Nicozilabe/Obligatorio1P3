@@ -91,7 +91,7 @@ namespace LogicaAccesoADatos.Repos
             }
             catch (Exception ex)
             {
-                throw new PermisosException("No se encuentra empleado con el id indicado.");
+                throw new DatosInvalidosException("No se encuentra empleado con el id indicado.");
             }
 
             return buscado;
@@ -120,7 +120,7 @@ namespace LogicaAccesoADatos.Repos
             }
             catch (Exception ex) 
             {
-                throw new PermisosException("No se encontro administrador con el id indicado.");
+                throw new DatosInvalidosException("No se encontro administrador con el id indicado.");
             }
             return a;
         }
