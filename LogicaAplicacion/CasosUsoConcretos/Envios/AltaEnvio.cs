@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.EntidadesDominio.Usuarios;
@@ -28,9 +29,14 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             this.repoCiudades = repoCiudades;
         }
         public void RegistroEnvio(RegistroEnvioDTO envio)
-        {
-            Empleado responsable = repoEmpleados.VerificarEmpleado((int)envio.IdEmpleadoResponable);
+        {   
             envio.Validar();
+            Empleado responsable = repoEmpleados.FindById((int)envio.IdEmpleadoResponable);
+            if (responsable == null)
+            {
+                throw new PermisosException("La acción debe ser ralizada por un empleado");
+            }
+            
             if(envio.TipoEnvio == "C")
             {
                 Agencia a = repoAgencias.FindById((int)envio.IdAgencia);

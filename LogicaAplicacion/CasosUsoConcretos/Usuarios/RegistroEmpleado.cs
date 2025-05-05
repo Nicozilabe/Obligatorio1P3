@@ -37,7 +37,13 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             {
                 throw new DataMisalignedException("El id del realizador no puede ser nulo");
             }
-            Administrador realizador = RepoEmpleados.VerificarAdministrador(datos.IdRealizador);
+            Administrador realizador = RepoEmpleados.AdministradorPorID(datos.IdRealizador);
+            
+            if (realizador == null)
+            {
+                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
+            }
+
             RepoUsuarios.Add(MappersRegistro.ToUsuario(datos));
             Usuario creado = RepoUsuarios.FindByEmail(datos.Email);
             Empleado creadoCast = null;
