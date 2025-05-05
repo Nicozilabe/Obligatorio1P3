@@ -29,13 +29,14 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             this.repoCiudades = repoCiudades;
         }
         public void RegistroEnvio(RegistroEnvioDTO envio)
-        {
+        {   
+            envio.Validar();
             Empleado responsable = repoEmpleados.FindById((int)envio.IdEmpleadoResponable);
             if (responsable == null)
             {
                 throw new PermisosException("La acción debe ser ralizada por un empleado");
             }
-            envio.Validar();
+            
             if(envio.TipoEnvio == "C")
             {
                 Agencia a = repoAgencias.FindById((int)envio.IdAgencia);
