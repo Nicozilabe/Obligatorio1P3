@@ -28,6 +28,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
             {
                 Calle = dto.Calle,
                 Numero = dto.Numero,
+                CodigoPostal = dto.CodigoPostal,
             };
             return ret;
 

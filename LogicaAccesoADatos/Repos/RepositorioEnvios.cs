@@ -69,7 +69,7 @@ namespace LogicaAccesoADatos.Repos
         {
             List<Envio> ret = new List<Envio>();
             ret.AddRange(Context.EnviosComunes.Include(a => a.Agencia).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
-            ret.AddRange(Context.EnviosUrgentes.Include(a => a.Direccion).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
+            ret.AddRange(Context.EnviosUrgentes.Include(a => a.Direccion).Include(a => a.Ciudad).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
             return ret;
         }
     }
