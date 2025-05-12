@@ -194,5 +194,10 @@ namespace Web.Controllers
                 return RedirectToAction("NoAutorizado", "Auth");
             }
         }
+        [HttpPost]
+        public ActionResult FinalizarEnvio(int id, DateTime FechaEntrega)
+        {
+            return View();
+        }
     }
 }
