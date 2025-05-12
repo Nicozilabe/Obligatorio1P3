@@ -35,5 +35,12 @@ namespace CasosDeUso.DTOs.Envio
                 throw new DatosInvalidosException("Ubicacion no válida");
             }
         }
+
+        public override string ToString()
+        {
+            return $"{Nombre}, {Ciudad}, {Direccion}";
+        }
+
+
     }
 }
