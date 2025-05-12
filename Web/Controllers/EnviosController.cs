@@ -159,7 +159,40 @@ namespace Web.Controllers
                 return RedirectToAction("NoAutorizado", "Auth");
             }
 
+            
 
+        }
+        public ActionResult FinalizarEnvio(int id)
+            {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            {
+
+                EnvioDTO env = null;
+                try
+                {
+                    env = CUObtenerEnvios.getByID(id);
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+
+                return View(env);
+
+
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
         }
     }
 }
