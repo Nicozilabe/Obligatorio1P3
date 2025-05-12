@@ -38,5 +38,12 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
                 throw new DatosInvalidosException("Direccion no válida");
             }
         }
+
+        public override void finalizarEnvio(DateTime fecha) { 
+            base.finalizarEnvio(fecha);
+            TimeSpan diferencia = fecha - FechaRegistroEnvio;
+            this.EnvioEficiente = diferencia.TotalHours < 24;
+
+        }
     }
 }
