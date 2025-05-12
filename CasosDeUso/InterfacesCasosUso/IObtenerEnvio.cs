@@ -10,5 +10,6 @@ namespace CasosDeUso.InterfacesCasosUso
     public interface IObtenerEnvio
     {
         public IEnumerable<EnvioLigthDTO> getEnviosLightActivos();
+        public EnvioDTO getByID(int id);
     }
 }

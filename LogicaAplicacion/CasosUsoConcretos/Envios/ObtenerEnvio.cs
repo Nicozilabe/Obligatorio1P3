@@ -25,5 +25,22 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         {
             return MapperEnvio.ToListEnvioLigthDTO(repoEnvios.FindAllLightActivos());
         }
+
+        public EnvioDTO getByID(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("El id no puede ser menor o igual a cero");
+            }
+            var envio = repoEnvios.FindById(id);
+            if (envio == null)
+            {
+                throw new ArgumentException("El envío no existe");
+            }
+            else
+            {
+                return MapperEnvio.ToDTO(envio);
+            }
+        }
     }
 }
