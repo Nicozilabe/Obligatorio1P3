@@ -54,7 +54,21 @@ namespace LogicaAccesoADatos.Repos
 
         public void Update(Envio obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+            {
+                throw new DatosInvalidosException("Error al registrar cambio envio.");
+            }
+            obj.Validar();
+            Envio aEditar = FindById(obj.Id);
+
+            if (aEditar.FechaEntrega == obj.FechaEntrega || aEditar.EstadoEnvio == obj.EstadoEnvio || aEditar.FechaRegistroEnvio == obj.FechaRegistroEnvio || aEditar.Comentarios == obj.Comentarios)
+            {
+                //agregar más validaciones si se necesita
+                throw new DatosInvalidosException("No se han ingresado cambios al envío.");                
+            }
+            Context.Entry(aEditar).State = EntityState.Detached;
+            Context.Envios.Update(obj);
+            Context.SaveChanges();
         }
 
         public IEnumerable<Envio> FindAllLightActivos()
