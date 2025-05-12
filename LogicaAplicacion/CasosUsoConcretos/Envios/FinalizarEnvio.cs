@@ -1,14 +1,8 @@
 ﻿using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
-using LogicaAccesoADatos.Repos;
 using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.Enums;
 using LogicaNegocio.InterfacesRepositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUsoConcretos.Envios
 {
