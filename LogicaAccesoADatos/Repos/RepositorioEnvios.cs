@@ -44,7 +44,20 @@ namespace LogicaAccesoADatos.Repos
 
         public Envio FindById(int id)
         {
-            throw new NotImplementedException();
+            Envio buscado = Context.Envios.Where(e => e.Id == id).SingleOrDefault();
+
+            if ( buscado is EnvioUrgente)
+            {
+                EnvioUrgente ret = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).SingleOrDefault();
+            }
+            if (buscado is EnvioComun)
+            {
+                EnvioComun ret = Context.Envios.OfType<EnvioComun>().Where(e => e.Id == id)
+                    .Include(e => e.Agencia).Include(e => e.Agencia.Direccion)
+                    .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).SingleOrDefault();
+            }
+
+            return buscado;
         }
 
         public void Remove(int id)
