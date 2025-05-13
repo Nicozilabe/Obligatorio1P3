@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -19,9 +20,16 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             this.repo = repo;
         }
 
-        public List<EmpleadoDTO> ListarTodosLosEmpleados()
+        public IEnumerable<EmpleadoDTO> ListarTodosLosEmpleados()
         {
-            return MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
+            IEnumerable<EmpleadoDTO> empleados = MappersEmpleado.ToListaEmpleadoDTO(repo.FindAll());
+
+            if (empleados == null || empleados.Count() == 0)
+            {
+                throw new DatosInvalidosException("No se encontraron empleados");
+            }
+
+            return empleados;
         }
     }
 }
