@@ -51,12 +51,12 @@ namespace LogicaAccesoADatos.Repos
 
             if ( buscado is EnvioUrgente)
             {
-                 urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).SingleOrDefault();
+                 urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).Include(e => e.EmpleadoResponable).SingleOrDefault();
             }
             if (buscado is EnvioComun)
             {
                  comun = Context.Envios.OfType<EnvioComun>().Where(e => e.Id == id)
-                    .Include(e => e.Agencia).Include(e => e.Agencia.Direccion)
+                    .Include(e => e.Agencia).Include(e => e.Agencia.Direccion).Include(e => e.EmpleadoResponable)
                     .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).SingleOrDefault();
             }
 
@@ -89,11 +89,12 @@ namespace LogicaAccesoADatos.Repos
             obj.Validar();
             Envio aEditar = FindById(obj.Id);
 
-            if (aEditar.FechaEntrega == obj.FechaEntrega || aEditar.EstadoEnvio == obj.EstadoEnvio || aEditar.FechaRegistroEnvio == obj.FechaRegistroEnvio || aEditar.Comentarios == obj.Comentarios)
-            {
-                //agregar más validaciones si se necesita
-                throw new DatosInvalidosException("No se han ingresado cambios al envío.");                
-            }
+            //if (aEditar.FechaEntrega == obj.FechaEntrega && aEditar.EstadoEnvio == obj.EstadoEnvio && aEditar.FechaRegistroEnvio == obj.FechaRegistroEnvio &&
+            //    aEditar.Comentarios == obj.Comentarios)
+            //{
+            //    //agregar más validaciones si se necesita
+            //    throw new DatosInvalidosException("No se han ingresado cambios al envío.");                
+            //}
             Context.Entry(aEditar).State = EntityState.Detached;
             Context.Envios.Update(obj);
             Context.SaveChanges();
