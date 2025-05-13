@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.EntidadesDominio.Acciones;
 using LogicaNegocio.EntidadesDominio.Usuarios;
@@ -29,7 +30,12 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
                 throw new DataMisalignedException("El id del realizador no puede ser nulo");
             }
 
-            Administrador realizador = repo.VerificarAdministrador((int)idRealizador);
+            Administrador realizador = repo.AdministradorPorID((int)idRealizador);
+
+            if (realizador == null)
+            {
+                throw new PermisosException("La acción solicitada debe ser realizada por un administrador.");
+            }
 
             AccionAdministracion accion = new AccionAdministracion(repo.FindById(dto.Id), realizador, TipoAccionAdministracion.Modificación, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
 

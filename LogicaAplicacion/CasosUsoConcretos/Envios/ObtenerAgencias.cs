@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -19,9 +20,15 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             this.repo = repo;
         }
 
-        public IEnumerable<AgenciaDTO> GetAgencias() { 
-        
-                return MapperAgencia.ToListDTO(repo.FindAll());
+        public IEnumerable<AgenciaDTO> GetAgencias() 
+        { 
+            IEnumerable<AgenciaDTO> agencias = MapperAgencia.ToListDTO(repo.FindAll());
+            if (agencias == null || agencias.Count() == 0)
+            {
+                throw new DatosInvalidosException("No se encontraron agencias");
+            }
+
+            return agencias;
         }
     }
 }

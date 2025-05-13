@@ -28,7 +28,6 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public TipoEstadoEnvio EstadoEnvio { get; set; }
         //public TipoSeguimiento Seguimiento { get; set; }
 
-        private static int ultimoTrack = 1;
 
         public Envio() { }
 

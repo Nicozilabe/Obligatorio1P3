@@ -47,7 +47,6 @@ namespace LogicaAplicacion.Mapeadores.Envios
             ret.Peso = dto.Peso;
             ret.Ciudad = c;
             ret.Direccion = di;
-
             return ret;
         }
 

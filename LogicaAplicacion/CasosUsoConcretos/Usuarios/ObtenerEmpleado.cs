@@ -27,7 +27,15 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             {
                 throw new DatosInvalidosException("Id no valido.");
             }
-            return MappersEmpleado.ToEmpleadoDTO(repo.FindById(id));
+
+            EmpleadoDTO empleado = MappersEmpleado.ToEmpleadoDTO(repo.FindById(id));
+
+            if (empleado == null)
+            {
+                throw new DatosInvalidosException("No se encontro el empleado.");
+            }
+
+            return empleado;
         }
     }
 }

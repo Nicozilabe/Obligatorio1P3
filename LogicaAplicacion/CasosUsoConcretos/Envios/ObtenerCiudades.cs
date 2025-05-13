@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
@@ -20,7 +21,14 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         }
         public IEnumerable<CiudadDTO> GetCiudades()
         {
-            return MapperCiudad.ToListDTO(repo.FindAll());
+            IEnumerable<CiudadDTO> ciudades = MapperCiudad.ToListDTO(repo.FindAll());
+
+            if (ciudades == null || ciudades.Count() == 0)
+            {
+                throw new DatosInvalidosException("No se encontraron ciudades");
+            }
+
+            return ciudades;
         }
     }
 
