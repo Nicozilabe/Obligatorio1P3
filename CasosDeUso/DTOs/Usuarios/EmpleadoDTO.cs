@@ -57,5 +57,10 @@ namespace CasosDeUso.DTOs.Usuarios
                 throw new DatosInvalidosException("Tipo Usuario no válido");
             }
         }
+
+        public override string ToString()
+        {
+            return $"{Id} {Nombre}, {Apellido}, {Rol}";
+        }
     }
 }
