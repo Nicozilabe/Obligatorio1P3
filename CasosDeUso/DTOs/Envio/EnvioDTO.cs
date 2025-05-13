@@ -26,6 +26,7 @@ namespace CasosDeUso.DTOs.Envio
         public AgenciaDTO? Agencia { get; set; }
         public DireccionDTO? direccion { get; set; }
         public DateTime? FechaEntrega { get; set; }
+        public bool EnvioEficiente { get; set; }
 
         public void Validar()
         {
