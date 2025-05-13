@@ -166,7 +166,7 @@ namespace Web.Controllers
         }
         public ActionResult FinalizarEnvio(int id)
             {
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
 
                 EnvioDTO env = null;
@@ -200,7 +200,7 @@ namespace Web.Controllers
         public ActionResult FinalizarEnvio(int Id, DateTime FechaEntrega)
         {
 
-            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
             {
 
                 if (Id <= 0)
