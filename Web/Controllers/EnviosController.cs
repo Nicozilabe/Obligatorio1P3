@@ -16,16 +16,18 @@ namespace Web.Controllers
         public IObtenerCiudades CUObtenerCiudades { get; set; }
         public IAltaEnvio CUAltaEnvio { get; set; }
         public IObtenerEnvio CUObtenerEnvios { get; set; }
+        public IFinalizarEnvio CUFinalizarEnvio { get; set; }
 
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
             CUAltaEnvio = cUAltaEnvio;
             CUObtenerEnvios = cUObtenerEnvios;
+            CUFinalizarEnvio = cUFinalizarEnvio;
         }
 
         public IActionResult Activos()
@@ -195,9 +197,47 @@ namespace Web.Controllers
             }
         }
         [HttpPost]
-        public ActionResult FinalizarEnvio(int id, DateTime FechaEntrega)
+        public ActionResult FinalizarEnvio(int Id, DateTime FechaEntrega)
         {
-            return View();
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador")
+            {
+
+                if (Id <= 0)
+                {
+                    throw new DatosInvalidosException("El id del envío no es válido");
+                }
+                if (FechaEntrega == null)
+                {
+                    throw new DatosInvalidosException("La fecha no es válida");
+                }
+                try
+                {
+                    CUFinalizarEnvio.finalizarEnvio(Id, FechaEntrega);
+                    ViewBag.ErrorMessage = "Envio finalizado exitosamente.";
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+                return View(CUObtenerEnvios.getByID(Id));
+
+
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+
+
         }
     }
 }
