@@ -22,6 +22,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public Empleado EmpleadoResponable { get; set; }
         public string Cliente { get; set; }
         public double Peso { get; set; }
+        public DateTime? FechaEntrega { get; set; }
 
         public IEnumerable<ComentarioEnvio> Comentarios { get; set; } = new List<ComentarioEnvio>();
         public TipoEstadoEnvio EstadoEnvio { get; set; }
@@ -68,6 +69,16 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             {
                 throw new DatosInvalidosException("Fecha de registro no válida");
             }
+        }
+        public void generarTracking()
+        {
+            Tracking = ultimoTrack++;
+        }
+
+        public virtual void finalizarEnvio(DateTime fecha)
+        {
+            this.EstadoEnvio = TipoEstadoEnvio.Finalizado;
+            this.FechaEntrega = fecha;
         }
     }
 }

@@ -39,5 +39,10 @@ namespace CasosDeUso.DTOs.Envio
             //    throw new DatosInvalidosException("Ciudad no válida");
             //}
         }
+
+        public override string ToString()
+        {
+            return $"{Calle} {Numero}, {CodigoPostal}";
+        }
     }
 }

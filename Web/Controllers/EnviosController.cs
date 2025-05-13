@@ -16,16 +16,18 @@ namespace Web.Controllers
         public IObtenerCiudades CUObtenerCiudades { get; set; }
         public IAltaEnvio CUAltaEnvio { get; set; }
         public IObtenerEnvio CUObtenerEnvios { get; set; }
+        public IFinalizarEnvio CUFinalizarEnvio { get; set; }
 
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
             CUAltaEnvio = cUAltaEnvio;
             CUObtenerEnvios = cUObtenerEnvios;
+            CUFinalizarEnvio = cUFinalizarEnvio;
         }
 
         public IActionResult Activos()
@@ -153,6 +155,82 @@ namespace Web.Controllers
                     ViewBag.ErrorMessage = "Ha ocurrido un error inesperado";
                 }
                 return View(model2);
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+
+            
+
+        }
+        public ActionResult FinalizarEnvio(int id)
+            {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+
+                EnvioDTO env = null;
+                try
+                {
+                    env = CUObtenerEnvios.getByID(id);
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+
+                return View(env);
+
+
+            }
+            else
+            {
+                return RedirectToAction("NoAutorizado", "Auth");
+            }
+        }
+        [HttpPost]
+        public ActionResult FinalizarEnvio(int Id, DateTime FechaEntrega)
+        {
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+
+                if (Id <= 0)
+                {
+                    throw new DatosInvalidosException("El id del envío no es válido");
+                }
+                if (FechaEntrega == null)
+                {
+                    throw new DatosInvalidosException("La fecha no es válida");
+                }
+                try
+                {
+                    CUFinalizarEnvio.finalizarEnvio(Id, FechaEntrega);
+                    ViewBag.ErrorMessage = "Envio finalizado exitosamente.";
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+                return View(CUObtenerEnvios.getByID(Id));
+
+
             }
             else
             {

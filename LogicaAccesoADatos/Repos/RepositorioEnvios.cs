@@ -52,7 +52,35 @@ namespace LogicaAccesoADatos.Repos
 
         public Envio FindById(int id)
         {
-            throw new NotImplementedException();
+            Envio buscado = Context.Envios.Where(e => e.Id == id).SingleOrDefault();
+            EnvioUrgente urgente = null;
+            EnvioComun comun = null;
+
+
+            if ( buscado is EnvioUrgente)
+            {
+                 urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).Include(e => e.EmpleadoResponable).SingleOrDefault();
+            }
+            if (buscado is EnvioComun)
+            {
+                 comun = Context.Envios.OfType<EnvioComun>().Where(e => e.Id == id)
+                    .Include(e => e.Agencia).Include(e => e.Agencia.Direccion).Include(e => e.EmpleadoResponable)
+                    .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).SingleOrDefault();
+            }
+
+            if (urgente != null)
+            {
+                return urgente;
+            }
+            else if (comun != null)
+            {
+                return comun;
+            }
+            else
+            {
+                return buscado;
+            }
+
         }
 
         public void Remove(int id)
@@ -62,7 +90,22 @@ namespace LogicaAccesoADatos.Repos
 
         public void Update(Envio obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+            {
+                throw new DatosInvalidosException("Error al registrar cambio envio.");
+            }
+            obj.Validar();
+            Envio aEditar = FindById(obj.Id);
+
+            //if (aEditar.FechaEntrega == obj.FechaEntrega && aEditar.EstadoEnvio == obj.EstadoEnvio && aEditar.FechaRegistroEnvio == obj.FechaRegistroEnvio &&
+            //    aEditar.Comentarios == obj.Comentarios)
+            //{
+            //    //agregar más validaciones si se necesita
+            //    throw new DatosInvalidosException("No se han ingresado cambios al envío.");                
+            //}
+            Context.Entry(aEditar).State = EntityState.Detached;
+            Context.Envios.Update(obj);
+            Context.SaveChanges();
         }
 
         public IEnumerable<Envio> FindAllLightActivos()

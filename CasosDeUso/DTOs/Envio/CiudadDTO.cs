@@ -24,5 +24,9 @@ namespace CasosDeUso.DTOs.Envio
                 throw new DatosInvalidosException("El nombre-ciudad debe tener menos de 32 letras");
             }
         }
+        public override string ToString()
+        {
+            return $"{Nombre}";
+        }
     }
 }
