@@ -34,10 +34,10 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Tipo de envio no válido");
             }
-            if (Tracking <= 0 || Tracking > 99999 || Tracking == null)
-            {
-                throw new DatosInvalidosException("Tracking debe ser un valor entre 1 y 99999");
-            }
+            //if (Tracking <= 0 || Tracking > 99999 || Tracking == null)
+            //{
+            //    throw new DatosInvalidosException("Tracking debe ser un valor entre 1 y 99999");
+            //}
             if (EmpleadoResponable == null)
             {
                 throw new DatosInvalidosException("Empleado Responable no válida");
