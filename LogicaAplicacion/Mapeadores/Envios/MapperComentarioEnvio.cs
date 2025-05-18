@@ -1,6 +1,7 @@
 ﻿using CasosDeUso.DTOs.Envio;
 using LogicaAplicacion.Mapeadores.Usuarios;
 using LogicaNegocio.EntidadesDominio.Envíos;
+using LogicaNegocio.Enums;
 
 namespace LogicaAplicacion.Mapeadores.Envios
 {
@@ -16,6 +17,19 @@ namespace LogicaAplicacion.Mapeadores.Envios
                 Comentario = comentario.Comentario.ToString(),
                 Empleado = MappersEmpleado.ToEmpleadoDTO(comentario.Empleado),
             };
+            return ret;
+        }
+
+        public static ComentarioEnvio ToComentario(ComentarioEnvioDTO comentarioDTO, int? empleadoId = null)
+        {
+            ComentarioEnvio ret = new ComentarioEnvio
+            {
+                Id = comentarioDTO.Id,
+                Fecha = comentarioDTO.Fecha,
+                Comentario = comentarioDTO.Comentario,
+                EmpleadoId = empleadoId,
+            };
+
             return ret;
         }
 
