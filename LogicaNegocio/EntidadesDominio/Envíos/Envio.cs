@@ -88,6 +88,7 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
             {
                 Comentarios = new List<ComentarioEnvio>();
             }
+            comentario.Envio = this;
             Comentarios.Add(comentario);
         }
     }
