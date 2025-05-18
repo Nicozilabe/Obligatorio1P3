@@ -20,14 +20,13 @@ namespace LogicaAplicacion.Mapeadores.Envios
             return ret;
         }
 
-        public static ComentarioEnvio ToComentario(ComentarioEnvioDTO comentarioDTO, int? empleadoId = null)
+        public static ComentarioEnvio ToComentario(ComentarioEnvioDTO comentarioDTO)
         {
             ComentarioEnvio ret = new ComentarioEnvio
             {
-                Id = comentarioDTO.Id,
                 Fecha = comentarioDTO.Fecha,
                 Comentario = comentarioDTO.Comentario,
-                EmpleadoId = empleadoId,
+                
             };
 
             return ret;
