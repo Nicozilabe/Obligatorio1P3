@@ -24,6 +24,7 @@ namespace LogicaAccesoADatos.EF
         public DbSet<Envio> Envios { get; set; }
         public DbSet<EnvioComun> EnviosComunes { get; set; }
         public DbSet<EnvioUrgente> EnviosUrgentes { get; set; }
+        public DbSet<ComentarioEnvio> Comentarios { get; set; }
 
 
 
