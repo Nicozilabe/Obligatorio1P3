@@ -1,4 +1,12 @@
 
+using CasosDeUso.InterfacesCasosUso;
+using LogicaAccesoADatos.EF;
+using LogicaAccesoADatos.Repos;
+using LogicaAplicacion.CasosUsoConcretos.Envios;
+using LogicaAplicacion.CasosUsoConcretos.Usuarios;
+using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore;
+
 namespace API
 {
     public class Program

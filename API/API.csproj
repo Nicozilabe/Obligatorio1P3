@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\CasosDeUso\CasosDeUso.csproj" />
+    <ProjectReference Include="..\LogicaAccesoADatos\LogicaAccesoADatos.csproj" />
+    <ProjectReference Include="..\LogicaAplicacion\LogicaAplicacion.csproj" />
   </ItemGroup>
 
 </Project>
