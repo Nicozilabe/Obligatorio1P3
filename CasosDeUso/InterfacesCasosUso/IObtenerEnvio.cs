@@ -11,5 +11,6 @@ namespace CasosDeUso.InterfacesCasosUso
     {
         public IEnumerable<EnvioLigthDTO> getEnviosLightActivos();
         public EnvioDTO getByID(int id);
+        public EnvioDTO getByTracking(int tracking);
     }
 }
