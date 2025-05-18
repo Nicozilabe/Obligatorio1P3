@@ -29,7 +29,8 @@ namespace Web
             builder.Services.AddScoped<IRepositorioAgencias, RepositorioAgencias>();
             builder.Services.AddScoped<IRepositorioCiudades, RepositorioCiudades>();
             builder.Services.AddScoped<IRepositorioEnvios, RepositorioEnvios>();
-           
+            builder.Services.AddScoped<IRepositorioComentarios, RepositorioComentarios>();
+
 
             //Casos de uso que miedo.
             builder.Services.AddScoped<ILogin, Login>();
@@ -43,6 +44,7 @@ namespace Web
             builder.Services.AddScoped<IAltaEnvio, AltaEnvio>();
             builder.Services.AddScoped<IObtenerEnvio, ObtenerEnvio>();
             builder.Services.AddScoped<IFinalizarEnvio, FinalizarEnvio>();
+            builder.Services.AddScoped<IComentarioEnvio, ComentariosEnvios>();
 
 
             //DB

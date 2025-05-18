@@ -59,13 +59,13 @@ namespace LogicaAccesoADatos.Repos
 
             if ( buscado is EnvioUrgente)
             {
-                 urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).Include(e => e.EmpleadoResponable).SingleOrDefault();
+                 urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Id == id).Include(e => e.Ciudad).Include(e => e.Direccion).Include(e => e.EmpleadoResponable).Include(e => e.Comentarios).SingleOrDefault();
             }
             if (buscado is EnvioComun)
             {
                  comun = Context.Envios.OfType<EnvioComun>().Where(e => e.Id == id)
                     .Include(e => e.Agencia).Include(e => e.Agencia.Direccion).Include(e => e.EmpleadoResponable)
-                    .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).SingleOrDefault();
+                    .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).Include(e => e.Comentarios).SingleOrDefault();
             }
 
             if (urgente != null)

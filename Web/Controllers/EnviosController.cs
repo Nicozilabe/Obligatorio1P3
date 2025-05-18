@@ -17,17 +17,19 @@ namespace Web.Controllers
         public IAltaEnvio CUAltaEnvio { get; set; }
         public IObtenerEnvio CUObtenerEnvios { get; set; }
         public IFinalizarEnvio CUFinalizarEnvio { get; set; }
+        public IComentarioEnvio CUComentarioEnvio { get; set; }
 
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio, IComentarioEnvio cUComentarioEnvio)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
             CUAltaEnvio = cUAltaEnvio;
             CUObtenerEnvios = cUObtenerEnvios;
             CUFinalizarEnvio = cUFinalizarEnvio;
+            CUComentarioEnvio = cUComentarioEnvio;
         }
 
         public IActionResult Activos()
@@ -238,6 +240,68 @@ namespace Web.Controllers
             }
 
 
+        }
+
+        public ActionResult AgregarComentario(int Id)
+        {   
+            EnvioDTO env = null;
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+                
+                try
+                {
+                    env = CUObtenerEnvios.getByID(Id);
+                    ViewBag.Envio = env;
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+
+                
+
+
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AgregarComentario(ComentarioEnvioDTO datos , int EnvioID)
+        {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+                datos.Validar();
+                try
+                {
+                    datos.EmpleadoId = HttpContext.Session.GetInt32("LogeadoId");
+                    ViewBag.Envio = CUObtenerEnvios.getByID(EnvioID);
+                    CUComentarioEnvio.AgregarComentario(EnvioID, datos);
+                    
+                    ViewBag.ErrorMessage = "Comentario agregado exitosamente.";
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al agregar el comentario.";
+                }
+            }
+            return View();
         }
     }
 }

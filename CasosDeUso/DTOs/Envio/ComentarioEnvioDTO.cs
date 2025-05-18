@@ -1,8 +1,9 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
+using CasosDeUso.InterfacesCasosUso;
 
 namespace CasosDeUso.DTOs.Envio
 {
-    public class ComentarioEnvioDTO
+    public class ComentarioEnvioDTO:IValidable
     {
         public int Id { get; init; }
         public string Comentario { get; set; }
@@ -11,5 +12,16 @@ namespace CasosDeUso.DTOs.Envio
         public int? EmpleadoId { get; set; }
 
         public ComentarioEnvioDTO() { }
+
+        public void Validar()
+        {
+            
+        }
+
+
+        //validar comentario, fecha y empleado id
+
+
+
     }
 }

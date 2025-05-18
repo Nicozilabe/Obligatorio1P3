@@ -4,6 +4,7 @@ using LogicaAccesoADatos.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoADatos.Migrations
 {
     [DbContext(typeof(EmpresaContext))]
-    partial class EmpresaContextModelSnapshot : ModelSnapshot
+    [Migration("20250518184136_CambioComentarioEnvioString")]
+    partial class CambioComentarioEnvioString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace LogicaAccesoADatos.Migrations
                     b.Property<int?>("EmpleadoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EnvioID")
+                    b.Property<int?>("EnvioId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
@@ -108,9 +111,9 @@ namespace LogicaAccesoADatos.Migrations
 
                     b.HasIndex("EmpleadoId");
 
-                    b.HasIndex("EnvioID");
+                    b.HasIndex("EnvioId");
 
-                    b.ToTable("Comentarios");
+                    b.ToTable("ComentarioEnvio");
                 });
 
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Envíos.Envio", b =>
@@ -348,13 +351,11 @@ namespace LogicaAccesoADatos.Migrations
                         .WithMany()
                         .HasForeignKey("EmpleadoId");
 
-                    b.HasOne("LogicaNegocio.EntidadesDominio.Envíos.Envio", "Envio")
+                    b.HasOne("LogicaNegocio.EntidadesDominio.Envíos.Envio", null)
                         .WithMany("Comentarios")
-                        .HasForeignKey("EnvioID");
+                        .HasForeignKey("EnvioId");
 
                     b.Navigation("Empleado");
-
-                    b.Navigation("Envio");
                 });
 
             modelBuilder.Entity("LogicaNegocio.EntidadesDominio.Envíos.Envio", b =>
