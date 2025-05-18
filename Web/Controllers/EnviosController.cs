@@ -239,5 +239,36 @@ namespace Web.Controllers
 
 
         }
+
+        public ActionResult AgregarComentario(int Id)
+        {   
+            EnvioDTO env = null;
+
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+                
+                try
+                {
+                    env = CUObtenerEnvios.getByID(Id);
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al editar el usuario.";
+                }
+
+                
+
+
+            }
+            return View(env);
+        }
     }
 }
