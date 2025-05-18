@@ -252,6 +252,7 @@ namespace Web.Controllers
                 try
                 {
                     env = CUObtenerEnvios.getByID(Id);
+                    ViewBag.Envio = env;
                 }
                 catch (DatosInvalidosException ex)
                 {
@@ -270,7 +271,37 @@ namespace Web.Controllers
 
 
             }
-            return View(env);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AgregarComentario(ComentarioEnvioDTO datos , int EnvioID)
+        {
+            if (HttpContext.Session.GetString("LogeadoRol") == "Administrador" || HttpContext.Session.GetString("LogeadoRol") == "Empleado")
+            {
+                datos.Validar();
+                try
+                {
+                    datos.EmpleadoId = HttpContext.Session.GetInt32("LogeadoId");
+                    ViewBag.Envio = CUObtenerEnvios.getByID(EnvioID);
+                    CUComentarioEnvio.AgregarComentario(EnvioID, datos);
+                    
+                    ViewBag.ErrorMessage = "Comentario agregado exitosamente.";
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (PermisosException ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocurrió un error inesperado al agregar el comentario.";
+                }
+            }
+            return View();
         }
     }
 }
