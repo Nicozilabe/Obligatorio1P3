@@ -207,11 +207,11 @@ namespace Web.Controllers
 
                 if (Id <= 0)
                 {
-                    throw new DatosInvalidosException("El id del envío no es válido");
+                    ViewBag.ErrorMessage= "El id del envío no es válido";
                 }
                 if (FechaEntrega == null)
                 {
-                    throw new DatosInvalidosException("La fecha no es válida");
+                    ViewBag.ErrorMessage ="La fecha no es válida";
                 }
                 try
                 {
@@ -283,8 +283,8 @@ namespace Web.Controllers
                 try
                 {
                     datos.EmpleadoId = HttpContext.Session.GetInt32("LogeadoId");
-                    ViewBag.Envio = CUObtenerEnvios.getByID(EnvioID);
                     CUComentarioEnvio.AgregarComentario(EnvioID, datos);
+                    ViewBag.Envio = CUObtenerEnvios.getByID(EnvioID);
                     
                     ViewBag.ErrorMessage = "Comentario agregado exitosamente.";
                 }
