@@ -72,8 +72,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Finalizar", "FinalizarEnvio", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Agregar Comentario", "AgregarComentario", new { id=item.Id })
+                        @Html.ActionLink("Comentarios", "AgregarComentario", new { id=item.Id })
                     </td>
                 </tr>
             }
