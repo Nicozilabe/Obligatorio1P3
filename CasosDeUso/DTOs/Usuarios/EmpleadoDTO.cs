@@ -23,9 +23,8 @@ namespace CasosDeUso.DTOs.Usuarios
         public string Email { get; set; }
         public string Rol { get; set; }
         public bool Activo { get; set; }
-        [Required(ErrorMessage = "El campo es obligatorio.")]
-        [StringLength(32, ErrorMessage = "Contraseña no puede superar los 32 caracteres.")]
-        public string Password { get; set; }
+        //no required así se puede no cambiar la contraseña
+        public string? Password { get; set; }
 
         public void Validar()
         {
@@ -53,14 +52,14 @@ namespace CasosDeUso.DTOs.Usuarios
             {
                 throw new DatosInvalidosException("El email debe tener menos de 32 letras");
             }
-            if (string.IsNullOrEmpty(Password))
+            if (! string.IsNullOrEmpty(Password))
             {
-                throw new DatosInvalidosException("La contraseña no puede quedar vacio.");
+                if (Password.Length > 32)
+                {
+                    throw new DatosInvalidosException("La contraseña debe tener menos de 32 letras");
+                }
             }
-            if (Password.Length > 32)
-            {
-                throw new DatosInvalidosException("La contraseña debe tener menos de 32 letras");
-            }
+            
             if (Rol != "Empleado" && Rol != "Administrador")
             {
                 throw new DatosInvalidosException("Tipo Usuario no válido");
