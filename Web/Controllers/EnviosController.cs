@@ -17,17 +17,19 @@ namespace Web.Controllers
         public IAltaEnvio CUAltaEnvio { get; set; }
         public IObtenerEnvio CUObtenerEnvios { get; set; }
         public IFinalizarEnvio CUFinalizarEnvio { get; set; }
+        public IComentarioEnvio CUComentarioEnvio { get; set; }
 
 
 
 
-        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio)
+        public EnviosController(IObtenerAgencias cUObtenerAgencias, IObtenerCiudades cUObtenerCiudades, IAltaEnvio cUAltaEnvio, IObtenerEnvio cUObtenerEnvios, IFinalizarEnvio cUFinalizarEnvio, IComentarioEnvio cUComentarioEnvio)
         {
             CUObtenerAgencias = cUObtenerAgencias;
             CUObtenerCiudades = cUObtenerCiudades;
             CUAltaEnvio = cUAltaEnvio;
             CUObtenerEnvios = cUObtenerEnvios;
             CUFinalizarEnvio = cUFinalizarEnvio;
+            CUComentarioEnvio = cUComentarioEnvio;
         }
 
         public IActionResult Activos()

@@ -43,6 +43,7 @@ namespace Web
             builder.Services.AddScoped<IAltaEnvio, AltaEnvio>();
             builder.Services.AddScoped<IObtenerEnvio, ObtenerEnvio>();
             builder.Services.AddScoped<IFinalizarEnvio, FinalizarEnvio>();
+            builder.Services.AddScoped<IComentarioEnvio, ComentariosEnvios>();
 
 
             //DB
