@@ -3,6 +3,7 @@ using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
 using LogicaNegocio.EntidadesDominio.Envíos;
+using LogicaNegocio.EntidadesDominio.Usuarios;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,14 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         IRepositorioEnvios repoEnvios { get; set; }
 
         IRepositorioEmpleados repoEmpleados { get; set; }
+        IRepositorioComentarios repoComentarios { get; set; }
 
-        public ComentariosEnvios(IRepositorioEnvios repoEnvios, IRepositorioEmpleados repoEmpleados)
+
+        public ComentariosEnvios(IRepositorioEnvios repoEnvios, IRepositorioEmpleados repoEmpleados, IRepositorioComentarios repoComentarios)
         {
             this.repoEnvios = repoEnvios;
             this.repoEmpleados = repoEmpleados;
+            this.repoComentarios = repoComentarios;
         }
 
 
@@ -36,11 +40,20 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
 
             ComentarioEnvio c = MapperComentarioEnvio.ToComentario(comentario);
 
-            if (comentario.EmpleadoId != null )
+            if (comentario.EmpleadoId != null)
             {
                 try
                 {
-                    c.Empleado = repoEmpleados.FindById((int)comentario.EmpleadoId);
+                    Empleado e = repoEmpleados.FindById((int)comentario.EmpleadoId);
+                    if (e == null)
+                    {
+                        throw new DatosInvalidosException("El empleado no existe");
+                    }
+                    else
+                    {
+                        c.Empleado = e;
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -52,9 +65,16 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
 
             Envio envio = repoEnvios.FindById(envioId);
 
-            envio.AgregarComentario(c);
+            if (envio == null)
+            {
+                throw new DatosInvalidosException("El envío no existe");
+            }
+            else
+            {
+                c.Envio = envio;
+            }
 
-            repoEnvios.Update(envio);
+            repoComentarios.Add(c);
 
 
         }
