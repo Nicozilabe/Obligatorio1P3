@@ -15,7 +15,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
                 Id = comentario.Id,
                 Fecha = comentario.Fecha,
                 Comentario = comentario.Comentario.ToString(),
-                Empleado = MappersEmpleado.ToEmpleadoDTO(comentario.Empleado),
+                Empleado = MappersEmpleado.ToEmpleadoSeguroDTO(comentario.Empleado),
             };
             return ret;
         }
