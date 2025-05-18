@@ -15,6 +15,8 @@ namespace LogicaNegocio.EntidadesDominio.Envíos
         public DateTime Fecha { get; set; }
         public Empleado Empleado { get; set; }
         public int? EmpleadoId { get; set; }
+        public int? EnvioID { get; set; }
+        public Envio Envio { get; set; }
 
         public ComentarioEnvio() { }
     }
