@@ -2,6 +2,7 @@
 using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,13 @@ namespace CasosDeUso.DTOs.Envio
     public class RegistroEnvioDTO: IValidable
     {
         public int? IdEmpleadoResponable { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Email no puede superar los 32 caracteres.")]
+
         public string EmailCliente { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [Range(0.1, 9999, ErrorMessage = "El peso debe ser mayor a 0.1 y menor que 9999")]
         public double Peso { get; set; }
         public string TipoEnvio { get; set; }
         public int? IdAgencia { get; set; }

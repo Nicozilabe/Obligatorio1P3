@@ -2,6 +2,7 @@
 using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,18 @@ namespace CasosDeUso.DTOs.Usuarios
 {
     public class RegistroEmpleadoDTO : IValidable
     {
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Nombre no puede superar los 32 caracteres.")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Email no puede superar los 32 caracteres.")]
         public string Apellido { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Apellido no puede superar los 32 caracteres.")]
         public string Email { get; set; }
         public string Rol { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Contraseña no puede superar los 32 caracteres.")]
         public string Pass { get; set; }
 
         public int IdRealizador { get; set; }
