@@ -59,10 +59,16 @@ namespace LogicaAccesoADatos.Repos
             {
                 throw new DatosInvalidosException("");
             }
-            obj.Validar();
             Empleado aEditar = FindById(obj.Id);
+            if (obj.Password == null)
+            {
+                obj.Password = aEditar.Password;
+            }
+            obj.Validar();
+            
+            
 
-            if (aEditar.Nombre.Nombre != obj.Nombre.Nombre || aEditar.Activo != obj.Activo || aEditar.Email.Email != obj.Email.Email)
+            if (aEditar.Nombre.Nombre != obj.Nombre.Nombre || aEditar.Activo != obj.Activo || aEditar.Email.Email != obj.Email.Email || aEditar.Password != obj.Password)
             {
                 if(aEditar.Email.Email != obj.Email.Email)
                 {
@@ -73,6 +79,11 @@ namespace LogicaAccesoADatos.Repos
                     }
                 }
             }
+            else
+            {
+                throw new DatosInvalidosException("No se han realizado cambios en el empleado.");
+            }
+            
             Context.Entry(aEditar).State = EntityState.Detached;
             Context.Empleados.Update(obj); 
             Context.SaveChanges();

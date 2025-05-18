@@ -72,7 +72,7 @@ namespace LogicaAplicacion.Mapeadores.Envios
                 ret.Ciudad = MapperCiudad.ToDTO(eu.Ciudad);
                 ret.EnvioEficiente = eu.EnvioEficiente;
             }
-            ret.EmpleadoResponable = MappersEmpleado.ToEmpleadoDTO(e.EmpleadoResponable);
+            ret.EmpleadoResponable = MappersEmpleado.ToEmpleadoSeguroDTO(e.EmpleadoResponable);
             ret.Comentarios = MapperComentarioEnvio.ToListDTO(e.Comentarios);
             ret.Tracking = e.Tracking;
             ret.FechaEntrega = e.FechaEntrega;

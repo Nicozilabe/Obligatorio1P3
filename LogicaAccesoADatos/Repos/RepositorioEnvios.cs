@@ -115,5 +115,37 @@ namespace LogicaAccesoADatos.Repos
             ret.AddRange(Context.EnviosUrgentes.Include(a => a.Direccion).Include(a => a.Ciudad).Where(a => a.EstadoEnvio == TipoEstadoEnvio.En_Proceso).ToList());
             return ret;
         }
+
+        public Envio FindByTracking(int tracking)
+        {
+            Envio buscado = Context.Envios.Where(e => e.Tracking == tracking).SingleOrDefault();
+            EnvioUrgente urgente = null;
+            EnvioComun comun = null;
+
+
+            if (buscado is EnvioUrgente)
+            {
+                urgente = Context.Envios.OfType<EnvioUrgente>().Where(e => e.Tracking == tracking).Include(e => e.Ciudad).Include(e => e.Direccion).Include(e => e.EmpleadoResponable).Include(e => e.Comentarios).SingleOrDefault();
+            }
+            if (buscado is EnvioComun)
+            {
+                comun = Context.Envios.OfType<EnvioComun>().Where(e => e.Tracking == tracking)
+                   .Include(e => e.Agencia).Include(e => e.Agencia.Direccion).Include(e => e.EmpleadoResponable)
+                   .Include(e => e.Agencia.Ubicacion).Include(e => e.Agencia.Ciudad).Include(e => e.Comentarios).SingleOrDefault();
+            }
+
+            if (urgente != null)
+            {
+                return urgente;
+            }
+            else if (comun != null)
+            {
+                return comun;
+            }
+            else
+            {
+                return buscado;
+            }
+        }
     }
 }

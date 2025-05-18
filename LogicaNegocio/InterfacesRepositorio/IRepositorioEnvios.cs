@@ -10,5 +10,6 @@ namespace LogicaNegocio.InterfacesRepositorio
     public interface IRepositorioEnvios:IRepositorio<Envio>
     {
         public IEnumerable<Envio> FindAllLightActivos();
+        public Envio FindByTracking(int tracking);
     }
 }

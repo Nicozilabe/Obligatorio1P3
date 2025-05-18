@@ -2,6 +2,7 @@
 using CasosDeUso.InterfacesCasosUso;
 using ExcepcionesPropias;
 using LogicaAplicacion.Mapeadores.Envios;
+using LogicaNegocio.EntidadesDominio.Envíos;
 using LogicaNegocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
         {
             IEnumerable<EnvioLigthDTO> envios = MapperEnvio.ToListEnvioLigthDTO(repoEnvios.FindAllLightActivos());
 
-            if(envios == null || envios.Count() == 0)
+            if (envios == null || envios.Count() == 0)
             {
                 throw new DatosInvalidosException("No se encontraron envios activos.");
             }
@@ -48,6 +49,18 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             {
                 return MapperEnvio.ToDTO(envio);
             }
+        }
+
+        public EnvioDTO getByTracking(int tracking)
+        {
+            EnvioDTO envio = null;
+
+            Envio en = repoEnvios.FindByTracking(tracking);
+            if (en != null)
+            {
+                envio = MapperEnvio.ToDTO(en);
+            }
+            return envio;
         }
     }
 }

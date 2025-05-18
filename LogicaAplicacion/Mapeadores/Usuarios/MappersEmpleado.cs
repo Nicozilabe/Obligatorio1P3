@@ -26,7 +26,10 @@ namespace LogicaAplicacion.Mapeadores.Usuarios
             ret.Id = dto.Id;
             ret.Nombre = new UsuarioNombre(dto.Nombre, dto.Apellido);
             ret.Email = new UsuarioEmail(dto.Email);
-            ret.Password = new UsuarioPassword(dto.Password);
+            if (dto.Password != null)
+            {
+                ret.Password = new UsuarioPassword(dto.Password);
+            }
             ret.Activo = dto.Activo;
             return ret;
         }
@@ -54,7 +57,7 @@ namespace LogicaAplicacion.Mapeadores.Usuarios
                 ret.Apellido = empleado.Nombre.Apellido;
                 ret.Email = empleado.Email.Email;
                 ret.Activo = empleado.Activo;
-                ret.Password = empleado.Password.Password;
+                ret.Password = null;
             }
             return ret;
         }
@@ -68,6 +71,35 @@ namespace LogicaAplicacion.Mapeadores.Usuarios
                 DTOs.Add(dto);
             }
             return DTOs;
+        }
+
+
+        public static EmpleadoSeguroDTO ToEmpleadoSeguroDTO(Empleado empleado)
+        {
+            EmpleadoSeguroDTO ret = null;
+            if (empleado != null)
+            {
+                ret = new EmpleadoSeguroDTO();
+                if (empleado is Administrador)
+                {
+                    ret.Rol = "Administrador";
+                }
+                else if (empleado is Empleado)
+                {
+                    ret.Rol = "Empleado";
+                }
+                else
+                {
+                    throw new DatosInvalidosException("Rol usuario to DTO Inválido");
+                }
+                ret.Id = empleado.Id;
+                ret.Nombre = empleado.Nombre.Nombre;
+                ret.Apellido = empleado.Nombre.Apellido;
+                ret.Email = empleado.Email.Email;
+                ret.Activo = empleado.Activo;
+                
+            }
+            return ret;
         }
     }
 }

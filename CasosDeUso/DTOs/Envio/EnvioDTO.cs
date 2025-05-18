@@ -13,7 +13,7 @@ namespace CasosDeUso.DTOs.Envio
     {
         public int Id { get; set; }
         public int Tracking { get; set; }
-        public EmpleadoDTO EmpleadoResponable { get; set; }
+        public EmpleadoSeguroDTO EmpleadoResponable { get; set; }
         public string EmailCliente { get; set; }
         public double Peso { get; set; }
         public string EstadoEnvio { get; set; }
