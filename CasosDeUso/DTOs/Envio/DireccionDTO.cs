@@ -20,7 +20,7 @@ namespace CasosDeUso.DTOs.Envio
         [Range(1, 9999, ErrorMessage = "Numero debe ser mayor a 0 y menor que 9999")]
         public int Numero { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [Range(0, 99999, ErrorMessage = "Codigo Postal debe ser mayor a 0 y menor que 99999")]
+        [Range(1, 99999, ErrorMessage = "Codigo Postal debe ser mayor a 0 y menor que 99999")]
         public int CodigoPostal { get; set; }
 
         public void Validar()
