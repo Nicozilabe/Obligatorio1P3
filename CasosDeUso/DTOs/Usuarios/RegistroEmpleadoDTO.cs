@@ -19,6 +19,9 @@ namespace CasosDeUso.DTOs.Usuarios
         public string Apellido { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [StringLength(32, ErrorMessage = "Apellido no puede superar los 32 caracteres.")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
+        [DataType(DataType.EmailAddress)]
+
         public string Email { get; set; }
         public string Rol { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]

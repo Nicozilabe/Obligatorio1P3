@@ -16,7 +16,8 @@ namespace CasosDeUso.DTOs.Envio
 
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [StringLength(32, ErrorMessage = "Email no puede superar los 32 caracteres.")]
-
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
+        [DataType(DataType.EmailAddress)]
         public string EmailCliente { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [Range(0.1, 9999, ErrorMessage = "El peso debe ser mayor a 0.1 y menor que 9999")]
