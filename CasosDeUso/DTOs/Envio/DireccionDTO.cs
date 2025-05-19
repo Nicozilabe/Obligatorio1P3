@@ -2,6 +2,7 @@
 using ExcepcionesPropias;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,15 @@ namespace CasosDeUso.DTOs.Envio
 {
     public class DireccionDTO : IValidable
     {
+
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [StringLength(32, ErrorMessage = "Calle no puede superar los 32 caracteres.")]
         public string Calle { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [Range(1, 9999, ErrorMessage = "Numero debe ser mayor a 0 y menor que 9999")]
         public int Numero { get; set; }
-       
+        [Required(ErrorMessage = "El campo es obligatorio.")]
+        [Range(0, 99999, ErrorMessage = "Codigo Postal debe ser mayor a 0 y menor que 99999")]
         public int CodigoPostal { get; set; }
 
         public void Validar()
