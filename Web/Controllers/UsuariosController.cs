@@ -265,6 +265,9 @@ namespace Web.Controllers
                     catch (PermisosException ex)
                     {
                         ViewBag.ErrorMessage = ex.Message;
+                    }catch(OperacionConflictivaExeption ex)
+                    {
+                        ViewBag.ErrorMessage = ex.Message;
                     }
                     catch (Exception ex)
                     {

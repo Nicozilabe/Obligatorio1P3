@@ -81,7 +81,7 @@
                 }
                 <div class="form-group">
                     <label asp-for="FechaEntrega" class="control-label"></label>
-                    <input asp-for="FechaEntrega" required min="@Model.FechaRegistroEnvio.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+                    <input asp-for="FechaEntrega" required min="@Model.FechaRegistroEnvio.ToString("yyyy-MM-ddTHH:mm")"  class="form-control" />
                     <span asp-validation-for="FechaEntrega" class="text-danger"></span>
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-primary" />

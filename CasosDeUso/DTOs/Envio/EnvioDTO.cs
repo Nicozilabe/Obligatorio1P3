@@ -70,14 +70,27 @@ namespace CasosDeUso.DTOs.Envio
             {
                 throw new DatosInvalidosException("Direccion-Envio no válida");
             }
-            //if (TipoEnvio == "comun")
-            //{
-            //    Agencia.Validar();
-            //}
-            //else
-            //{
-            //    direccion.Validar();
-            //}
-        }
+
+            if (FechaEntrega != null)
+            {
+                if (FechaEntrega < FechaRegistroEnvio)
+                {
+                    throw new DatosInvalidosException("La fecha de entrega no puede ser menor a la fecha de registro");
+
+                }
+                if(FechaEntrega > DateTime.Now)
+                {
+                    throw new DatosInvalidosException("La fecha de entrega no puede ser mayor a la fecha actual");
+                }
+            }
+                //if (TipoEnvio == "comun")
+                //{
+                //    Agencia.Validar();
+                //}
+                //else
+                //{
+                //    direccion.Validar();
+                //}
+            }
     }
 }
