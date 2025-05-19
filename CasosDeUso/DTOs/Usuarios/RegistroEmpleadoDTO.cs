@@ -23,6 +23,7 @@ namespace CasosDeUso.DTOs.Usuarios
         public string Rol { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio.")]
         [StringLength(32, ErrorMessage = "Contraseña no puede superar los 32 caracteres.")]
+        [MinLength(5, ErrorMessage = "El campo debe tener al menos 5 caracteres.")]
         public string Pass { get; set; }
 
         public int IdRealizador { get; set; }
