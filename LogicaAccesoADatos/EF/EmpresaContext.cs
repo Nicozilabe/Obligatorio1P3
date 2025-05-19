@@ -50,13 +50,13 @@ namespace LogicaAccesoADatos.EF
                 .HasOne(a => a.Afectado)
                 .WithMany()
                 .HasForeignKey(a => a.AfectadoId)
-                .OnDelete(DeleteBehavior.NoAction); // puede quedar
+                .OnDelete(DeleteBehavior.SetNull); // puede quedar
 
             modelBuilder.Entity<AccionAdministracion>()
                 .HasOne(a => a.Realizador)
                 .WithMany()
                 .HasForeignKey(a => a.RealizadorId)
-                .OnDelete(DeleteBehavior.NoAction); // o .Restrict
+                .OnDelete(DeleteBehavior.SetNull); // o .Restrict
 
 
             modelBuilder.Entity<EnvioUrgente>()
