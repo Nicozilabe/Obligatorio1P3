@@ -25,6 +25,10 @@ namespace LogicaAplicacion.CasosUsoConcretos.Envios
             {
                 throw new DatosInvalidosException("La fecha no es válida");
             }
+            if (fecha > DateTime.Now)
+            {
+                throw new DatosInvalidosException("La fecha no puede ser mayor a la fecha actual");
+            }
             Envio e = repoEnvio.FindById(idEnvio);
             if (e == null)
             {
