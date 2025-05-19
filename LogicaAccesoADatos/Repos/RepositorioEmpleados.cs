@@ -49,6 +49,13 @@ namespace LogicaAccesoADatos.Repos
             {
                 throw new DatosInvalidosException("No hay un Empleado para borrar aqui");
             }
+            bool hayAccion = Context.AccionesAdministracion.Any(a => a.RealizadorId == id);
+
+            if(hayAccion)
+            {
+                throw new OperacionConflictivaExeption("No se puede eliminar el empleado porque tiene acciones asociadas.");
+            }
+
             Context.Empleados.Remove(aBorrar);
             Context.SaveChanges();
         }
