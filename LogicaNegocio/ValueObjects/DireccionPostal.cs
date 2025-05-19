@@ -46,5 +46,10 @@ namespace LogicaNegocio.ValueObjects
             }
            
         }
+
+        public override string ToString()
+        {
+            return $"{Calle} {Numero}, {CodigoPostal}";
+        }
     }
 }
