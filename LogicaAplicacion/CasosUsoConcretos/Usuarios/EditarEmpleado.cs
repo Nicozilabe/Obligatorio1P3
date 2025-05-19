@@ -17,10 +17,12 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
     public class EditarEmpleado : IEditarEmpleado
     {
         public IRepositorioEmpleados repo { get; set; }
+        public IRepositorioAcciones repoAcciones { get; set; }
 
-        public EditarEmpleado(IRepositorioEmpleados repo)
+        public EditarEmpleado(IRepositorioEmpleados repo, IRepositorioAcciones repoAcciones)
         {
             this.repo = repo;
+            this.repoAcciones = repoAcciones;
         }
 
         void IEditarEmpleado.EditarEmpleado(EmpleadoDTO dto, int? idRealizador)
@@ -38,7 +40,8 @@ namespace LogicaAplicacion.CasosUsoConcretos.Usuarios
             }
 
             AccionAdministracion accion = new AccionAdministracion(repo.FindById(dto.Id), realizador, TipoAccionAdministracion.Modificación, new LogicaNegocio.ValueObjects.FechaAccion(DateTime.Now));
-
+            accion.Validar();
+            repoAcciones.Add(accion);
             repo.Update(MappersEmpleado.ToEmpleado(dto));
         }
     }
