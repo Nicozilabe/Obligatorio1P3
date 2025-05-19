@@ -1,5 +1,6 @@
 ﻿using CasosDeUso.DTOs.Usuarios;
 using CasosDeUso.InterfacesCasosUso;
+using ExcepcionesPropias;
 using System.ComponentModel.DataAnnotations;
 
 namespace CasosDeUso.DTOs.Envio
@@ -18,7 +19,22 @@ namespace CasosDeUso.DTOs.Envio
 
         public void Validar()
         {
-            
+            if (string.IsNullOrEmpty(Comentario))
+            {
+                throw new DatosInvalidosException("El comentario no puede quedar vacio.");
+            }
+            if(Comentario.Length > 32)
+            {
+                throw new DatosInvalidosException("El comentario debe tener menos de 32 letras");
+            }
+            if(Fecha == null)
+            {
+                throw new DatosInvalidosException("La fecha no puede quedar vacia.");
+            }
+            if(EmpleadoId <= 0)
+            {
+                throw new DatosInvalidosException("Id Empleado no válido");
+            }
         }
 
 
